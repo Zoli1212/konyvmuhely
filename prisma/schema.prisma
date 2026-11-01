@@ -1,0 +1,204 @@
+// E-book értékesítő platform adatmodellje.
+// Auth.js (NextAuth v5) Prisma-adapterének kötelező modelljei + a bolt saját modelljei.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// Prisma 7: a kapcsolati URL nem a sémában van.
+// A futásidejű kapcsolatot a PrismaClient driver-adaptere adja (src/lib/prisma.ts),
+// a migrációk URL-je pedig a prisma.config.ts-ben van.
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BookFormat {
+  PDF
+  EPUB
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+// --- Auth.js által megkívánt modellek ---
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts     Account[]
+  sessions     Session[]
+  orders       Order[]
+  entitlements Entitlement[]
+  downloads    DownloadLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// --- A bolt modelljei ---
+
+model Book {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  subtitle    String?
+  author      String
+  /// Rövid ismertető: a kártyákon és a lista nézetben ez látszik.
+  blurb       String  @db.Text
+  /// Hosszabb leírás a könyv oldalán, sortörésekkel tördelve.
+  description String? @db.Text
+
+  /// Ár a pénznem legkisebb egységében (HUF-nál forint, EUR-nál cent).
+  priceMinor Int
+  currency   String @default("huf")
+
+  coverUrl      String?
+  coverPathname String?
+
+  language  String?
+  pageCount Int?
+
+  published Boolean @default(false)
+  featured  Boolean @default(false)
+  sortIndex Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  files        BookFile[]
+  orderItems   OrderItem[]
+  entitlements Entitlement[]
+
+  @@index([published, sortIndex])
+}
+
+model BookFile {
+  id       String     @id @default(cuid())
+  bookId   String
+  format   BookFormat
+  /// Vercel Blob letöltési URL — kitalálhatatlan, de soha nem adjuk ki közvetlenül.
+  url      String     @db.Text
+  pathname String     @db.Text
+  /// A fájl neve, ahogy a vásárló megkapja.
+  fileName String
+
+  sizeBytes Int
+  createdAt DateTime @default(now())
+
+  book      Book          @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  downloads DownloadLog[]
+
+  @@unique([bookId, format])
+}
+
+model Order {
+  id                    String      @id @default(cuid())
+  userId                String
+  stripeSessionId       String      @unique
+  stripePaymentIntentId String?
+  amountMinor           Int
+  currency              String
+  status                OrderStatus @default(PENDING)
+  customerEmail         String?
+  createdAt             DateTime    @default(now())
+  paidAt                DateTime?
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items        OrderItem[]
+  entitlements Entitlement[]
+
+  @@index([userId, createdAt])
+}
+
+model OrderItem {
+  id            String @id @default(cuid())
+  orderId       String
+  bookId        String
+  titleSnapshot String
+  priceMinor    Int
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  book  Book  @relation(fields: [bookId], references: [id])
+
+  @@unique([orderId, bookId])
+}
+
+/// Egy sor = "ez a felhasználó megvásárolta ezt a könyvet". A letöltési jog forrása.
+model Entitlement {
+  id        String   @id @default(cuid())
+  userId    String
+  bookId    String
+  orderId   String?
+  createdAt DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book  Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  order Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, bookId])
+}
+
+model DownloadLog {
+  id         String   @id @default(cuid())
+  userId     String
+  bookFileId String
+  ip         String?
+  userAgent  String?  @db.Text
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookFile BookFile @relation(fields: [bookFileId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}

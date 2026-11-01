@@ -1,0 +1,24 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Környezeti változók – soha ne kerüljenek verziókövetésbe
+.env
+.env.local
+.env*.local
+
+# Prisma által generált kliens
+/src/generated/
+
+# Helyi fejlesztői fájltároló (a Vercel Blob fallbackje)
+/.storage/
+
+# Egyéb
+.DS_Store
+*.log
+.vercel
+.turbo
+next-env.d.ts
+*.tsbuildinfo
