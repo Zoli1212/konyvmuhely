@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import type Stripe from "stripe";
 
 import {
@@ -6,6 +7,7 @@ import {
   revokeRefundedOrder,
 } from "@/lib/checkout";
 import { env } from "@/lib/env";
+import { completePurchase } from "@/lib/post-purchase";
 import { getStripe } from "@/lib/stripe";
 
 /**
@@ -54,7 +56,16 @@ export async function POST(request: Request): Promise<Response> {
       // Card payments land here; delayed methods arrive as the async variant.
       case "checkout.session.completed":
       case "checkout.session.async_payment_succeeded": {
-        await fulfillCheckoutSession(event.data.object);
+        const result = await fulfillCheckoutSession(event.data.object);
+
+        // Stripe wants a prompt 2xx and retries on a slow one. Invoicing talks
+        // to Számlázz.hu and emailing talks to Resend, neither of which belongs
+        // on the critical path of acknowledging a payment - so they run after
+        // the response has gone out.
+        if (result.fulfilled && result.orderId) {
+          const orderId = result.orderId;
+          after(() => completePurchase(orderId));
+        }
         break;
       }
 

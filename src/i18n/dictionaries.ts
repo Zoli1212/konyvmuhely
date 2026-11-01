@@ -210,6 +210,8 @@ const hu = {
       sales: "Eladás",
       actions: "Műveletek",
       view: "Megnézem",
+      invoice: "Számla",
+      retryInvoice: "Újra",
       customer: "Vásárló",
       date: "Dátum",
       amount: "Összeg",
@@ -218,6 +220,14 @@ const hu = {
     status: {
       published: "Kiadva",
       draft: "Vázlat",
+    },
+    invoiceStatus: {
+      PENDING: "Várakozik",
+      PROCESSING: "Folyamatban",
+      ISSUED: "Kiállítva",
+      FAILED: "Hiba",
+      CANCELLED: "Sztornózva",
+      NONE: "—",
     },
     form: {
       basics: "Alapadatok",
@@ -521,6 +531,8 @@ const en: Dictionary = {
       sales: "Sales",
       actions: "Actions",
       view: "View",
+      invoice: "Invoice",
+      retryInvoice: "Retry",
       customer: "Customer",
       date: "Date",
       amount: "Amount",
@@ -529,6 +541,14 @@ const en: Dictionary = {
     status: {
       published: "Published",
       draft: "Draft",
+    },
+    invoiceStatus: {
+      PENDING: "Queued",
+      PROCESSING: "In progress",
+      ISSUED: "Issued",
+      FAILED: "Failed",
+      CANCELLED: "Cancelled",
+      NONE: "—",
     },
     form: {
       basics: "Basics",

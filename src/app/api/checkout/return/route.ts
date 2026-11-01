@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { currentUser } from "@/lib/auth-guard";
@@ -9,6 +9,7 @@ import {
   serializeCart,
 } from "@/lib/cart";
 import { fulfillCheckoutSession } from "@/lib/checkout";
+import { completePurchase } from "@/lib/post-purchase";
 import { routes } from "@/lib/routes";
 import { getStripe } from "@/lib/stripe";
 
@@ -70,7 +71,18 @@ export async function GET(request: Request): Promise<Response> {
     }
 
     const result = await fulfillCheckoutSession(session);
-    if (result.fulfilled) fulfilledBookIds = result.bookIds;
+
+    if (result.fulfilled) {
+      fulfilledBookIds = result.bookIds;
+
+      // Normally the webhook has already done this; both are idempotent, and
+      // doing it here too means a deployment whose webhook is misconfigured
+      // still invoices and emails the buyer.
+      if (result.orderId) {
+        const orderId = result.orderId;
+        after(() => completePurchase(orderId));
+      }
+    }
   } catch {
     // An unreadable session is not worth an error page: the library is the
     // honest answer to "what do I own?".

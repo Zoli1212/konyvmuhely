@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/config";
 import { prisma } from "./prisma";
 import { routes } from "./routes";
 import { siteUrl } from "./env";
+import { ensureInvoiceRecord } from "./invoicing";
 import { getStripe, stripeLocale } from "./stripe";
 
 /**
@@ -106,6 +107,14 @@ export async function startCheckout(params: {
       bookIds: books.map((b) => b.id).join(","),
       locale: params.locale,
     },
+    // A Hungarian invoice needs a name and address, and Stripe Checkout is the
+    // only point in the flow where we can ask for them without building a
+    // second form. Required rather than optional: an order without an address
+    // cannot be invoiced, and NAV will not accept an invented one.
+    billing_address_collection: "required",
+    // Optional for the buyer. A company that gives its adószám gets it on the
+    // invoice; a private person simply leaves it blank.
+    tax_id_collection: { enabled: true },
     // Digital goods: nothing to ship, and the buyer gets an emailed receipt.
     payment_intent_data: {
       metadata: { userId: params.userId },
@@ -189,6 +198,8 @@ export async function fulfillCheckoutSession(
       ? session.payment_intent
       : session.payment_intent?.id ?? null;
 
+  const billing = billingFromSession(session);
+
   const orderId = await prisma.$transaction(async (tx) => {
     const order = await tx.order.upsert({
       where: { stripeSessionId: session.id },
@@ -198,6 +209,7 @@ export async function fulfillCheckoutSession(
         stripePaymentIntentId: paymentIntentId,
         customerEmail: session.customer_details?.email ?? undefined,
         amountMinor: session.amount_total ?? undefined,
+        ...billing,
       },
       create: {
         userId,
@@ -209,6 +221,7 @@ export async function fulfillCheckoutSession(
         status: "PAID",
         paidAt: new Date(),
         customerEmail: session.customer_details?.email ?? null,
+        ...billing,
       },
       select: { id: true },
     });
@@ -235,7 +248,35 @@ export async function fulfillCheckoutSession(
     return order.id;
   });
 
+  // The invoice row is created here, in PENDING, so that whichever path
+  // fulfils the order leaves exactly one thing for the invoicing worker to
+  // claim. Issuing it is deliberately not part of this transaction: a slow
+  // Számlázz.hu must never hold a database transaction open, and must never
+  // be able to roll back a payment that already happened.
+  await ensureInvoiceRecord(orderId);
+
   return { fulfilled: true, orderId, bookIds: books.map((b) => b.id) };
+}
+
+/**
+ * Billing details as Stripe collected them. `address.line2` is folded into one
+ * address line because that is what a Hungarian invoice expects.
+ */
+function billingFromSession(session: Stripe.Checkout.Session) {
+  const details = session.customer_details;
+  const address = details?.address;
+
+  const line = [address?.line1, address?.line2].filter(Boolean).join(", ");
+  const taxId = details?.tax_ids?.find((t) => t.value)?.value ?? null;
+
+  return {
+    billingName: details?.name ?? null,
+    billingCountry: address?.country ?? null,
+    billingZip: address?.postal_code ?? null,
+    billingCity: address?.city ?? null,
+    billingAddress: line.length > 0 ? line : null,
+    billingTaxId: taxId,
+  };
 }
 
 /**
