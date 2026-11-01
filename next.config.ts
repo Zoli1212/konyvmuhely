@@ -3,18 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      // Nyilvános Vercel Blob borítók.
+      // Public Vercel Blob covers.
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
-      // Google-fiókos bejelentkezés profilképei.
+      // Profile pictures from Google sign-in.
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
-  // A pg driver és a Prisma adapter natív Node-ot akar, ne bundle-ölje a szerver build.
+  // The pg driver and the Prisma adapter need real Node modules; keep them
+  // out of the server bundle.
   serverExternalPackages: ["@prisma/adapter-pg", "pg"],
   experimental: {
     serverActions: {
-      // A nagy fájlok nem server actionön mennek át (lásd src/lib/storage.ts),
-      // de a borítóknak a helyi fejlesztői módban kell egy kis ráhagyás.
+      // Book files never travel through a server action (see src/lib/storage.ts),
+      // but the local-disk development driver posts covers to a route handler,
+      // and a little headroom here keeps form submissions comfortable.
       bodySizeLimit: "8mb",
     },
   },

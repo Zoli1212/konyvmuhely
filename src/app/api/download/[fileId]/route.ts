@@ -1,0 +1,110 @@
+import { currentUser } from "@/lib/auth-guard";
+import { prisma } from "@/lib/prisma";
+import { readStoredFile } from "@/lib/storage";
+
+/**
+ * The only way a book file reaches a buyer.
+ *
+ * Book files are stored as *private* blobs, so their URLs are useless on their
+ * own; this route is the gate. It checks the entitlement, then streams the
+ * bytes through without buffering them, so a 150 MB PDF costs almost no heap.
+ */
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const CONTENT_TYPE: Record<"PDF" | "EPUB", string> = {
+  PDF: "application/pdf",
+  EPUB: "application/epub+zip",
+};
+
+/**
+ * Content-Disposition with a non-ASCII file name needs both forms: a stripped
+ * ASCII `filename` for old clients and an RFC 5987 `filename*` for the rest.
+ * Without this, "Gyertya és tükörmágia.pdf" either breaks the header or
+ * arrives mangled.
+ */
+function contentDisposition(fileName: string): string {
+  const ascii = fileName.replace(/[^\x20-\x7e]/g, "_").replace(/["\\]/g, "_");
+  const encoded = encodeURIComponent(fileName);
+  return `attachment; filename="${ascii}"; filename*=UTF-8''${encoded}`;
+}
+
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ fileId: string }> },
+): Promise<Response> {
+  const { fileId } = await params;
+
+  const user = await currentUser();
+  if (!user) {
+    return new Response("Sign in to download.", { status: 401 });
+  }
+
+  const file = await prisma.bookFile.findUnique({
+    where: { id: fileId },
+    select: {
+      id: true,
+      bookId: true,
+      format: true,
+      fileName: true,
+      storage: true,
+      pathname: true,
+      sizeBytes: true,
+    },
+  });
+
+  if (!file) {
+    return new Response("No such file.", { status: 404 });
+  }
+
+  // Admins can download anything, so they can check an upload without buying
+  // their own book. Everyone else needs an entitlement.
+  if (user.role !== "ADMIN") {
+    const entitlement = await prisma.entitlement.findUnique({
+      where: { userId_bookId: { userId: user.id, bookId: file.bookId } },
+      select: { id: true },
+    });
+
+    if (!entitlement) {
+      return new Response("You do not own this book.", { status: 403 });
+    }
+  }
+
+  const stored = await readStoredFile({
+    storage: file.storage,
+    pathname: file.pathname,
+    visibility: "private",
+  });
+
+  if (!stored) {
+    return new Response("The file is missing from storage.", { status: 404 });
+  }
+
+  // Best effort: a logging failure must not cost the buyer their download.
+  try {
+    await prisma.downloadLog.create({
+      data: {
+        userId: user.id,
+        bookFileId: file.id,
+        ip:
+          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+        userAgent: request.headers.get("user-agent")?.slice(0, 500) ?? null,
+      },
+    });
+  } catch {
+    // Ignored on purpose.
+  }
+
+  const headers = new Headers({
+    "Content-Type": CONTENT_TYPE[file.format],
+    "Content-Disposition": contentDisposition(file.fileName),
+    // Never let a shared cache hold on to a paid file.
+    "Cache-Control": "private, no-store, max-age=0",
+    "X-Content-Type-Options": "nosniff",
+  });
+
+  const size = stored.size ?? file.sizeBytes;
+  if (size > 0) headers.set("Content-Length", String(size));
+
+  return new Response(stored.stream, { status: 200, headers });
+}

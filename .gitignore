@@ -4,18 +4,17 @@ out/
 build/
 dist/
 
-# Környezeti változók – soha ne kerüljenek verziókövetésbe
+# Environment variables - never commit these
 .env
 .env.local
 .env*.local
 
-# Prisma által generált kliens
+# Prisma-generated client
 /src/generated/
 
-# Helyi fejlesztői fájltároló (a Vercel Blob fallbackje)
+# Local development file store (the Vercel Blob fallback)
 /.storage/
 
-# Egyéb
 .DS_Store
 *.log
 .vercel

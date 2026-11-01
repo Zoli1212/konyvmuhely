@@ -1,14 +1,15 @@
-// E-book értékesítő platform adatmodellje.
-// Auth.js (NextAuth v5) Prisma-adapterének kötelező modelljei + a bolt saját modelljei.
+// Data model for the bilingual (hu/en) e-book store.
+// Contains the models required by the Auth.js (NextAuth v5) Prisma adapter
+// plus the store's own models.
 
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
 
-// Prisma 7: a kapcsolati URL nem a sémában van.
-// A futásidejű kapcsolatot a PrismaClient driver-adaptere adja (src/lib/prisma.ts),
-// a migrációk URL-je pedig a prisma.config.ts-ben van.
+// Prisma 7 no longer accepts connection URLs in the schema.
+// Runtime connections come from the PrismaClient driver adapter (src/lib/prisma.ts);
+// migration URLs live in prisma.config.ts.
 datasource db {
   provider = "postgresql"
 }
@@ -23,6 +24,13 @@ enum BookFormat {
   EPUB
 }
 
+/// Language of a downloadable file. A book may ship a Hungarian and an English
+/// edition; buying the book grants access to every file attached to it.
+enum FileLocale {
+  HU
+  EN
+}
+
 enum OrderStatus {
   PENDING
   PAID
@@ -30,24 +38,47 @@ enum OrderStatus {
   REFUNDED
 }
 
-// --- Auth.js által megkívánt modellek ---
+/// Lifecycle of the NAV-reported invoice issued through Számlázz.hu.
+/// PROCESSING is a claim: exactly one worker may hold it, which is what stops
+/// two code paths from issuing two invoices for the same order.
+enum InvoiceStatus {
+  PENDING
+  PROCESSING
+  ISSUED
+  FAILED
+  CANCELLED
+}
+
+/// Where an uploaded file physically lives. BLOB is Vercel Blob (production),
+/// LOCAL is the on-disk fallback used for local development.
+enum StorageKind {
+  BLOB
+  LOCAL
+}
+
+// --- Models required by Auth.js ---
 
 model User {
   id            String    @id @default(cuid())
   name          String?
   email         String    @unique
   emailVerified DateTime?
-  image         String?
+  image         String?   @db.Text
+  /// Null for users who only ever signed in with Google.
   passwordHash  String?
   role          Role      @default(USER)
+  /// Preferred store language, remembered across devices once signed in.
+  locale        String    @default("hu")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   accounts     Account[]
   sessions     Session[]
-  orders       Order[]
-  entitlements Entitlement[]
-  downloads    DownloadLog[]
+  orders             Order[]
+  entitlements       Entitlement[]
+  downloads          DownloadLog[]
+  passwordResets     PasswordResetToken[]
+  emailVerifications EmailVerificationToken[]
 }
 
 model Account {
@@ -86,31 +117,45 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// --- A bolt modelljei ---
+// --- Store models ---
 
+/// Text fields come in Hungarian and English pairs. Hungarian is the required
+/// base; the English variants are optional and fall back to Hungarian when
+/// empty (see localizeBook in src/lib/books.ts).
 model Book {
-  id          String  @id @default(cuid())
-  slug        String  @unique
-  title       String
-  subtitle    String?
-  author      String
-  /// Rövid ismertető: a kártyákon és a lista nézetben ez látszik.
-  blurb       String  @db.Text
-  /// Hosszabb leírás a könyv oldalán, sortörésekkel tördelve.
-  description String? @db.Text
+  id     String @id @default(cuid())
+  slug   String @unique
+  author String
 
-  /// Ár a pénznem legkisebb egységében (HUF-nál forint, EUR-nál cent).
+  titleHu String
+  titleEn String?
+
+  subtitleHu String?
+  subtitleEn String?
+
+  /// Short description shown on cards and in list views.
+  blurbHu String  @db.Text
+  blurbEn String? @db.Text
+
+  /// Longer description on the book page. Plain text; blank lines separate paragraphs.
+  descriptionHu String? @db.Text
+  descriptionEn String? @db.Text
+
+  /// Price in the currency's smallest unit, exactly as Stripe expects it.
+  /// See src/lib/money.ts - for HUF this is fillér, so 4990 Ft is stored as 499000.
   priceMinor Int
   currency   String @default("huf")
 
-  coverUrl      String?
-  coverPathname String?
+  coverUrl      String?      @db.Text
+  coverPathname String?      @db.Text
+  coverStorage  StorageKind?
 
-  language  String?
+  /// Shown as a detail on the book page; optional.
   pageCount Int?
 
   published Boolean @default(false)
   featured  Boolean @default(false)
+  /// Manual ordering on the storefront; lower comes first.
   sortIndex Int     @default(0)
 
   createdAt DateTime @default(now())
@@ -124,13 +169,16 @@ model Book {
 }
 
 model BookFile {
-  id       String     @id @default(cuid())
-  bookId   String
-  format   BookFormat
-  /// Vercel Blob letöltési URL — kitalálhatatlan, de soha nem adjuk ki közvetlenül.
-  url      String     @db.Text
-  pathname String     @db.Text
-  /// A fájl neve, ahogy a vásárló megkapja.
+  id         String      @id @default(cuid())
+  bookId     String
+  format     BookFormat
+  fileLocale FileLocale  @default(HU)
+  storage    StorageKind @default(BLOB)
+
+  /// Vercel Blob URL for BLOB storage. Private blobs - never handed to the browser.
+  url      String @db.Text
+  pathname String @db.Text
+  /// File name the buyer receives in the Content-Disposition header.
   fileName String
 
   sizeBytes Int
@@ -139,7 +187,7 @@ model BookFile {
   book      Book          @relation(fields: [bookId], references: [id], onDelete: Cascade)
   downloads DownloadLog[]
 
-  @@unique([bookId, format])
+  @@unique([bookId, format, fileLocale])
 }
 
 model Order {
@@ -154,17 +202,102 @@ model Order {
   createdAt             DateTime    @default(now())
   paidAt                DateTime?
 
+  /// Billing details as Stripe Checkout collected them. Captured on the order
+  /// rather than the user, because an invoice must reflect what was true at
+  /// the moment of sale even if the customer later edits their profile.
+  billingName    String?
+  billingCountry String?
+  billingZip     String?
+  billingCity    String?
+  billingAddress String? @db.Text
+  /// Hungarian adószám or EU VAT number, when the buyer gave one.
+  billingTaxId   String?
+
+  /// Set once the purchase confirmation has gone out, so a webhook replay or a
+  /// second visit to the return URL cannot send the buyer a duplicate.
+  confirmationEmailSentAt DateTime?
+
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   items        OrderItem[]
   entitlements Entitlement[]
+  invoice      Invoice?
 
   @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+/// One invoice per paid order, issued through Számlázz.hu, which is what
+/// reports it to NAV Online Számla. Stripe cannot do this: its own invoices
+/// are not submitted to NAV and are not accepted as Hungarian invoices.
+model Invoice {
+  id      String        @id @default(cuid())
+  orderId String        @unique
+  status  InvoiceStatus @default(PENDING)
+
+  /// Invoice number assigned by Számlázz.hu once issued.
+  number String?
+
+  /// The invoice PDF, stored privately and served through /api/invoice/[orderId].
+  pdfStorage  StorageKind?
+  pdfUrl      String?      @db.Text
+  pdfPathname String?      @db.Text
+
+  /// Amounts in minor units, as they appear on the invoice.
+  netMinor   Int?
+  vatMinor   Int?
+  grossMinor Int?
+  /// Percentage, e.g. 27 for the Hungarian rate on e-books.
+  vatRate    Int  @default(27)
+
+  attempts  Int       @default(0)
+  lastError String?   @db.Text
+  issuedAt  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+}
+
+/// Single-use password reset link. Only the hash is stored, so a leaked
+/// database row cannot be turned back into a working link.
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+/// Single-use email confirmation link. Carries the address it was issued for,
+/// so a pending change cannot confirm a different one.
+model EmailVerificationToken {
+  id        String    @id @default(cuid())
+  userId    String
+  email     String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model OrderItem {
-  id            String @id @default(cuid())
-  orderId       String
-  bookId        String
+  id      String @id @default(cuid())
+  orderId String
+  bookId  String
+  /// Title and price captured at purchase time, so receipts stay accurate
+  /// even if the book is later renamed or repriced.
   titleSnapshot String
   priceMinor    Int
 
@@ -174,7 +307,9 @@ model OrderItem {
   @@unique([orderId, bookId])
 }
 
-/// Egy sor = "ez a felhasználó megvásárolta ezt a könyvet". A letöltési jog forrása.
+/// One row means "this user owns this book". The single source of truth for
+/// download permission. Deliberately separate from Order so that a refund,
+/// a gift or a manual grant can all be expressed.
 model Entitlement {
   id        String   @id @default(cuid())
   userId    String

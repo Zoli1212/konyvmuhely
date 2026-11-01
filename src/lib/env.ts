@@ -1,0 +1,85 @@
+/**
+ * Centralised environment access.
+ *
+ * Values are read lazily through getters so that an unconfigured optional
+ * integration (Stripe, Google, Blob) never breaks an unrelated page at import
+ * time. Anything genuinely required throws a message that names the variable.
+ */
+
+function required(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `Missing environment variable: ${name}. Copy .env.example to .env and fill it in.`,
+    );
+  }
+  return value;
+}
+
+function optional(name: string): string | undefined {
+  const value = process.env[name];
+  return value && value.length > 0 ? value : undefined;
+}
+
+export const env = {
+  get databaseUrl() {
+    return required("DATABASE_URL");
+  },
+
+  get stripeSecretKey() {
+    return optional("STRIPE_SECRET_KEY");
+  },
+  get stripeWebhookSecret() {
+    return optional("STRIPE_WEBHOOK_SECRET");
+  },
+
+  get blobToken() {
+    return optional("BLOB_READ_WRITE_TOKEN");
+  },
+
+  get googleClientId() {
+    return optional("AUTH_GOOGLE_ID");
+  },
+  get googleClientSecret() {
+    return optional("AUTH_GOOGLE_SECRET");
+  },
+
+  get storeName() {
+    return process.env.NEXT_PUBLIC_STORE_NAME || "Könyvműhely";
+  },
+  get storeCurrency() {
+    return (process.env.NEXT_PUBLIC_STORE_CURRENCY || "huf").toLowerCase();
+  },
+
+  get isProduction() {
+    return process.env.NODE_ENV === "production";
+  },
+};
+
+/** True when Google sign-in can actually be offered. */
+export function googleEnabled(): boolean {
+  return Boolean(env.googleClientId && env.googleClientSecret);
+}
+
+/** True when checkout can actually be started. */
+export function stripeEnabled(): boolean {
+  return Boolean(env.stripeSecretKey);
+}
+
+/**
+ * Absolute origin of this deployment, used for Stripe return URLs and
+ * canonical links. NEXT_PUBLIC_SITE_URL wins so a custom domain can override
+ * the generated Vercel URL.
+ */
+export function siteUrl(): string {
+  const explicit = optional("NEXT_PUBLIC_SITE_URL");
+  if (explicit) return explicit.replace(/\/$/, "");
+
+  const production = optional("VERCEL_PROJECT_PRODUCTION_URL");
+  if (production) return `https://${production}`;
+
+  const deployment = optional("VERCEL_URL");
+  if (deployment) return `https://${deployment}`;
+
+  return "http://localhost:3000";
+}
