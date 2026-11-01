@@ -14,8 +14,15 @@ import { env } from "./env";
  * prisma.config.ts.
  */
 function createPrismaClient() {
+  // Read without throwing. `next build` imports this module while collecting
+  // page data, and on Vercel a project is usually created before its database
+  // is attached. Throwing here would fail the build with an error that points
+  // at the wrong thing; an empty string instead lets the build finish and
+  // surfaces the real problem on the first query, where it is actionable.
+  const connectionString = process.env.DATABASE_URL ?? "";
+
   return new PrismaClient({
-    adapter: new PrismaPg({ connectionString: env.databaseUrl }),
+    adapter: new PrismaPg({ connectionString }),
     log: env.isProduction ? ["error"] : ["error", "warn"],
   });
 }
