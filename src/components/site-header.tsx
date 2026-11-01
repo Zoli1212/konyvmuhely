@@ -74,12 +74,13 @@ export function SiteHeader({
               <LibraryIcon className="h-[18px] w-[18px]" />
             </Link>
 
-            <span
+            <Link
+              href={routes.account(locale)}
               title={user.email}
-              className="hidden max-w-[11rem] truncate text-xs text-mute lg:block"
+              className="hidden max-w-[11rem] truncate text-xs text-mute transition-colors hover:text-paper lg:block"
             >
               {user.name || user.email}
-            </span>
+            </Link>
 
             <form action={signOutAction}>
               <input type="hidden" name="locale" value={locale} />

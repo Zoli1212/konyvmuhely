@@ -169,6 +169,22 @@ const hu = {
       "Ehhez az e-mail-címhez Google-fiókos belépés tartozik. Lépj be a Google gombbal.",
   },
 
+  account: {
+    title: "Fiók",
+    lead: "A belépési adataid.",
+    signedInAs: "Belépve mint",
+    changePassword: "Jelszó megváltoztatása",
+    currentPassword: "Jelenlegi jelszó",
+    newPassword: "Új jelszó",
+    newPasswordConfirm: "Új jelszó újra",
+    save: "Jelszó mentése",
+    saved: "A jelszavad megváltozott.",
+    wrongCurrentPassword: "A jelenlegi jelszó nem stimmel.",
+    samePassword: "Az új jelszó nem lehet ugyanaz, mint a régi.",
+    googleOnly:
+      "Ehhez a fiókhoz Google-belépés tartozik, nincs jelszava, amit cserélni lehetne.",
+  },
+
   admin: {
     title: "Kezelőfelület",
     overview: "Áttekintés",
@@ -462,6 +478,22 @@ const en: Dictionary = {
     googleUnavailable: "Google sign-in is not configured in this environment.",
     passwordOnlyGoogle:
       "This email address signs in with Google. Please use the Google button.",
+  },
+
+  account: {
+    title: "Account",
+    lead: "Your sign-in details.",
+    signedInAs: "Signed in as",
+    changePassword: "Change password",
+    currentPassword: "Current password",
+    newPassword: "New password",
+    newPasswordConfirm: "Repeat new password",
+    save: "Save password",
+    saved: "Your password has been changed.",
+    wrongCurrentPassword: "That is not your current password.",
+    samePassword: "The new password must differ from the old one.",
+    googleOnly:
+      "This account signs in with Google and has no password to change.",
   },
 
   admin: {

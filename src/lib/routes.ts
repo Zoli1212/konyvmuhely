@@ -17,6 +17,7 @@ export const routes = {
   book: (locale: Locale, slug: string) => localePath(locale, `/books/${slug}`),
   cart: (locale: Locale) => localePath(locale, "/cart"),
   library: (locale: Locale) => localePath(locale, "/library"),
+  account: (locale: Locale) => localePath(locale, "/account"),
   login: (locale: Locale) => localePath(locale, "/login"),
   register: (locale: Locale) => localePath(locale, "/register"),
   checkoutSuccess: (locale: Locale) => localePath(locale, "/checkout/success"),

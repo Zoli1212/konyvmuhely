@@ -13,3 +13,7 @@ export const emptyAuthState: AuthFormState = { error: null };
 export type BookFormState = { error: string | null; ok?: boolean };
 
 export const emptyBookFormState: BookFormState = { error: null };
+
+export type AccountFormState = { error: string | null; ok: boolean };
+
+export const emptyAccountState: AccountFormState = { error: null, ok: false };
