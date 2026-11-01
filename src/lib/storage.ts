@@ -6,7 +6,7 @@ import { Readable } from "node:stream";
 
 import { del, get, put } from "@vercel/blob";
 
-import { env } from "./env";
+import { blobConfigured, env } from "./env";
 
 /**
  * Two storage drivers behind one interface.
@@ -33,7 +33,7 @@ export const MAX_BOOK_FILE_MB = 200;
 export const MAX_COVER_MB = 8;
 
 export function storageDriver(): StorageDriver {
-  return env.blobToken ? "blob" : "local";
+  return blobConfigured() ? "blob" : "local";
 }
 
 /** True when the deployment cannot possibly write uploads anywhere. */

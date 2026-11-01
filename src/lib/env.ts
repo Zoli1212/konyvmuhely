@@ -36,6 +36,14 @@ export const env = {
   get blobToken() {
     return optional("BLOB_READ_WRITE_TOKEN");
   },
+  /**
+   * Set by Vercel's Blob integration when the store is connected to the
+   * project. Its presence means the SDK can authenticate with the short-lived
+   * OIDC token instead of a long-lived read-write token.
+   */
+  get blobStoreId() {
+    return optional("BLOB_STORE_ID");
+  },
 
   get googleClientId() {
     return optional("AUTH_GOOGLE_ID");
@@ -55,6 +63,24 @@ export const env = {
     return process.env.NODE_ENV === "production";
   },
 };
+
+/**
+ * True when Vercel Blob can be reached at all, by either authentication
+ * route. Connecting a Blob store in the dashboard now provisions
+ * BLOB_STORE_ID and OIDC rather than a read-write token, so checking only for
+ * the token would silently fall back to local disk on a correctly configured
+ * deployment.
+ */
+export function blobConfigured(): boolean {
+  return Boolean(env.blobToken || env.blobStoreId);
+}
+
+/** Which credential the Blob SDK will end up using. For diagnostics. */
+export function blobAuthMode(): "read-write-token" | "oidc" | "none" {
+  if (env.blobToken) return "read-write-token";
+  if (env.blobStoreId) return "oidc";
+  return "none";
+}
 
 /** True when Google sign-in can actually be offered. */
 export function googleEnabled(): boolean {

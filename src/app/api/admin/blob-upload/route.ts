@@ -1,7 +1,7 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 
 import { assertAdmin } from "@/lib/auth-guard";
-import { env } from "@/lib/env";
+import { blobConfigured, env } from "@/lib/env";
 import {
   BOOK_FILE_CONTENT_TYPES,
   COVER_CONTENT_TYPES,
@@ -30,9 +30,9 @@ export async function POST(request: Request): Promise<Response> {
     return new Response("Forbidden.", { status: 403 });
   }
 
-  if (!env.blobToken) {
+  if (!blobConfigured()) {
     return Response.json(
-      { error: "BLOB_READ_WRITE_TOKEN is not set." },
+      { error: "No Blob store is connected (BLOB_READ_WRITE_TOKEN or BLOB_STORE_ID)." },
       { status: 500 },
     );
   }
@@ -43,6 +43,8 @@ export async function POST(request: Request): Promise<Response> {
     const result = await handleUpload({
       body,
       request,
+      // Undefined on purpose when only BLOB_STORE_ID is set: the SDK then
+      // authenticates with the deployment's short-lived OIDC token instead.
       token: env.blobToken,
       onBeforeGenerateToken: async (pathname, clientPayload) => {
         const isCover = pathname.startsWith("covers/");

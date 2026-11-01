@@ -1,3 +1,4 @@
+import { blobAuthMode, blobConfigured } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 
 /**
@@ -27,7 +28,9 @@ export async function GET(): Promise<Response> {
 
   const features = {
     migrations_DIRECT_URL: isSet("DIRECT_URL"),
-    uploads_BLOB_READ_WRITE_TOKEN: isSet("BLOB_READ_WRITE_TOKEN"),
+    uploads: blobConfigured(),
+    uploadsAuthMode: blobAuthMode(),
+    uploads_VERCEL_OIDC_TOKEN: isSet("VERCEL_OIDC_TOKEN"),
     checkout_STRIPE_SECRET_KEY: isSet("STRIPE_SECRET_KEY"),
     fulfilment_STRIPE_WEBHOOK_SECRET: isSet("STRIPE_WEBHOOK_SECRET"),
     googleSignIn: isSet("AUTH_GOOGLE_ID") && isSet("AUTH_GOOGLE_SECRET"),
