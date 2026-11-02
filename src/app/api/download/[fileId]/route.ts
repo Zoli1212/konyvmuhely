@@ -70,11 +70,32 @@ export async function GET(
     }
   }
 
-  const stored = await readStoredFile({
-    storage: file.storage,
-    pathname: file.pathname,
-    visibility: "private",
-  });
+  // A storage failure used to surface as an opaque 500. Buyers still get a
+  // neutral message, but the reason is logged, and an admin - who is the only
+  // person who can act on it - sees it in the response.
+  let stored;
+  try {
+    stored = await readStoredFile({
+      storage: file.storage,
+      pathname: file.pathname,
+      visibility: "private",
+    });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    console.error("download: storage read failed", {
+      fileId: file.id,
+      storage: file.storage,
+      pathname: file.pathname,
+      detail,
+    });
+
+    return new Response(
+      user.role === "ADMIN"
+        ? `Storage read failed: ${detail}`
+        : "This file is temporarily unavailable. Please try again shortly.",
+      { status: 502 },
+    );
+  }
 
   if (!stored) {
     return new Response("The file is missing from storage.", { status: 404 });

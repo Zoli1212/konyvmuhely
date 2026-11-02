@@ -72,6 +72,21 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  /// Billing details, kept so a repeat buyer does not retype them. The
+  /// country is deliberately absent: this shop sells to Hungary only, which
+  /// is enforced by locking the address on the Stripe customer rather than
+  /// hoping the buyer picks the right country.
+  billingName    String?
+  billingZip     String?
+  billingCity    String?
+  billingAddress String? @db.Text
+  /// Hungarian adószám, when the buyer is a company.
+  billingTaxId   String?
+
+  /// Reused across purchases so the locked address does not have to be
+  /// recreated for every checkout.
+  stripeCustomerId String? @unique
+
   accounts     Account[]
   sessions     Session[]
   orders             Order[]
