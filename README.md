@@ -97,6 +97,33 @@ See `.env.example` for the annotated list. The ones that matter:
 | `NEXT_PUBLIC_STORE_CURRENCY` | prices | ISO 4217, lower case. Default `huf`. |
 | `NEXT_PUBLIC_STORE_NAME` | branding | Shown in the header, footer and page titles. |
 
+### VAT: exempt by default
+
+The store ships configured for an **alanyi adómentes** seller — not registered
+for VAT. No VAT appears on the invoice, and Számlázz.hu receives the literal
+VAT code `AAM`, which is what makes it print the legal reference to the
+exemption. Sending `0%` instead is a common mistake and is *not* lawful for an
+exempt seller: it reads as a zero-rated taxable supply, which is a different
+thing.
+
+The exemption has an annual turnover ceiling — 20 million HUF in 2026, rising
+to 22 million from 2027. Crossing it makes you VAT-registered from that point.
+When that happens, flip one variable:
+
+```
+STORE_VAT_MODE="standard"
+STORE_VAT_RATE="27"
+```
+
+27, not 5: Hungary applies the reduced book rate to printed books only. The EU
+directive treats a printed book as goods and an e-book as an electronically
+supplied service, and Hungary has not extended the reduced rate to electronic
+publications. Confirm the current position with your accountant before
+pricing.
+
+In standard mode prices stay gross and are split per line, so the invoice
+totals always equal the sum of their own lines.
+
 ### A note on prices and HUF
 
 Stripe wants amounts in the currency's smallest unit, and HUF has a rule of its
@@ -104,6 +131,9 @@ own: the amount must be an exact multiple of 100 minor units. So **4990 Ft is
 stored as `499000`**, and a price of 4990.50 Ft is rejected with an explanation
 rather than silently rounded. You type the major unit (`4990`) in the admin form;
 `src/lib/money.ts` handles the rest, including zero-decimal currencies like JPY.
+
+Catalogue prices are always what the buyer pays. Under the exemption that is
+also the invoice total; under standard VAT it is the gross.
 
 ---
 

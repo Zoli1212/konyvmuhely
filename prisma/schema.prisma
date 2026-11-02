@@ -246,7 +246,9 @@ model Invoice {
   netMinor   Int?
   vatMinor   Int?
   grossMinor Int?
-  /// Percentage, e.g. 27 for the Hungarian rate on e-books.
+  /// Percentage actually charged: 0 for an alanyi adómentes seller, 27 when
+  /// VAT-registered (the Hungarian rate for e-books). The default only ever
+  /// applies to a row that has not been issued yet.
   vatRate    Int  @default(27)
 
   attempts  Int       @default(0)

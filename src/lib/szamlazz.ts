@@ -1,4 +1,4 @@
-import { splitGross, storeVatRate, sumSplits } from "./vat";
+import { splitGross, storeVatRate, sumSplits, vatCode } from "./vat";
 
 /**
  * Számla Agent client for Számlázz.hu.
@@ -100,6 +100,11 @@ function buildInvoiceXml(
   minorPerMajor: number,
 ): { xml: string; totals: ReturnType<typeof sumSplits> } {
   const rate = storeVatRate();
+  // Not the percentage: an exempt seller sends the literal code `AAM`, which
+  // is what makes Számlázz.hu print the exemption reference the law requires.
+  // Sending `0` instead would read as a zero-rated taxable supply, which is a
+  // different thing and not lawful here.
+  const code = vatCode();
   const splits = input.lines.map((line) => splitGross(line.grossMinor, rate));
   const totals = sumSplits(splits, rate);
   const date = today();
@@ -112,7 +117,7 @@ function buildInvoiceXml(
       <mennyiseg>1</mennyiseg>
       <mennyisegiEgyseg>db</mennyisegiEgyseg>
       <nettoEgysegar>${amount(split.netMinor, minorPerMajor)}</nettoEgysegar>
-      <afakulcs>${rate}</afakulcs>
+      <afakulcs>${esc(code)}</afakulcs>
       <nettoErtek>${amount(split.netMinor, minorPerMajor)}</nettoErtek>
       <afaErtek>${amount(split.vatMinor, minorPerMajor)}</afaErtek>
       <bruttoErtek>${amount(split.grossMinor, minorPerMajor)}</bruttoErtek>
