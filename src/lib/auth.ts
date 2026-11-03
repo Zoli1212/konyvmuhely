@@ -77,6 +77,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     error: "/login",
   },
   callbacks: {
+    /**
+     * Google has already verified the address it hands us, so a user who
+     * signs in that way should never be nagged to confirm it. Auth.js's
+     * Google provider is a plain OIDC provider with no profile mapping, so
+     * `emailVerified` stays null unless it is set here - and this runs for
+     * an existing account linking Google later, not just at creation.
+     */
+    async signIn({ user, account, profile }) {
+      if (
+        account?.provider === "google" &&
+        profile?.email_verified === true &&
+        user.id
+      ) {
+        await prisma.user
+          .updateMany({
+            where: { id: user.id, emailVerified: null },
+            data: { emailVerified: new Date() },
+          })
+          .catch(() => {
+            // Not worth refusing a sign-in over.
+          });
+      }
+      return true;
+    },
+
     async jwt({ token, user }) {
       if (user) {
         token.sub = user.id ?? token.sub;
