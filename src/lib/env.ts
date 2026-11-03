@@ -53,7 +53,7 @@ export const env = {
   },
 
   get storeName() {
-    return process.env.NEXT_PUBLIC_STORE_NAME || "Könyvműhely";
+    return process.env.NEXT_PUBLIC_STORE_NAME || "Buddhista Könyvműhely";
   },
   get storeCurrency() {
     return (process.env.NEXT_PUBLIC_STORE_CURRENCY || "huf").toLowerCase();

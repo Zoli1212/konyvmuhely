@@ -18,9 +18,12 @@ const f = (name: string) => path.join(DIR, name);
 
 const AUTHOR = "Molnár Zoltán";
 const SERIES = "Yogikus könyvtár";
+/** Standard price for the series; an entry may override it. */
 const PRICE = 990;
 
-type Entry = Omit<CatalogueEntry, "author" | "series" | "priceHuf">;
+type Entry = Omit<CatalogueEntry, "author" | "series" | "priceHuf"> & {
+  priceHuf?: number;
+};
 
 const ENTRIES: Entry[] = [
   // ---------- the subtle body ----------
@@ -523,6 +526,9 @@ The volume covers the conceptual, historical and physical groundwork, then the p
     file: f("kvantum_valosag_alapkonyv.pdf"),
     downloadName: "A-kvantum-valosag-alapkonyve.pdf",
     pages: 59,
+    // Five times the length of the other handbooks, and a different kind of
+    // book: priced apart from the series.
+    priceHuf: 1990,
     accent: "lapis",
     mark: "wheel",
     featured: true,
@@ -627,5 +633,5 @@ export const HANDBOOKS: CatalogueEntry[] = ENTRIES.map((entry) => ({
   ...entry,
   author: AUTHOR,
   series: SERIES,
-  priceHuf: PRICE,
+  priceHuf: entry.priceHuf ?? PRICE,
 }));
