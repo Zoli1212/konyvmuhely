@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { SignInForm } from "@/components/auth-forms";
@@ -56,6 +57,15 @@ export default async function LoginPage({
           pending: t.common.loading,
         }}
       />
+
+      <p className="mt-4 text-center">
+        <Link
+          href={routes.forgotPassword(locale)}
+          className="text-sm text-mute transition-colors hover:text-gold-300"
+        >
+          {t.reset.forgotLink}
+        </Link>
+      </p>
     </AuthShell>
   );
 }

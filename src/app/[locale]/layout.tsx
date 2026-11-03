@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
+import { VerifyBanner } from "@/components/verify-banner";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale, localeTags, locales } from "@/i18n/config";
 import { currentUser } from "@/lib/auth-guard";
@@ -89,6 +90,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-screen flex-col">
         <div className="layer-content flex min-h-screen flex-col">
           <SiteHeader locale={locale} user={user} cartCount={cart.length} />
+          {user ? <VerifyBanner userId={user.id} locale={locale} /> : null}
           <main className="flex-1">{children}</main>
           <Footer locale={locale} />
         </div>

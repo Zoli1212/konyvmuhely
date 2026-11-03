@@ -8,6 +8,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { MIN_PASSWORD_LENGTH, hashPassword, signIn, signOut } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { routes } from "@/lib/routes";
+import { sendVerificationEmail } from "./email-verification";
 import type { AuthFormState } from "./form-state";
 
 function localeFrom(formData: FormData): Locale {
@@ -128,14 +129,19 @@ export async function registerWithPassword(
     };
   }
 
-  await prisma.user.create({
+  const created = await prisma.user.create({
     data: {
       name,
       email,
       passwordHash: await hashPassword(password),
       locale,
     },
+    select: { id: true },
   });
+
+  // Best effort: an unreachable mail provider must not cost someone the
+  // account they just created. The banner offers a resend either way.
+  await sendVerificationEmail(created.id).catch(() => false);
 
   try {
     await signIn("credentials", {

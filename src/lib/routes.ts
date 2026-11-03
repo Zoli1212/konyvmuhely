@@ -20,6 +20,9 @@ export const routes = {
   account: (locale: Locale) => localePath(locale, "/account"),
   login: (locale: Locale) => localePath(locale, "/login"),
   register: (locale: Locale) => localePath(locale, "/register"),
+  forgotPassword: (locale: Locale) => localePath(locale, "/forgot-password"),
+  resetPassword: (locale: Locale) => localePath(locale, "/reset-password"),
+  verifyEmail: (locale: Locale) => localePath(locale, "/verify-email"),
   checkoutSuccess: (locale: Locale) => localePath(locale, "/checkout/success"),
   checkoutCancelled: (locale: Locale) => localePath(locale, "/cart?cancelled=1"),
   /**

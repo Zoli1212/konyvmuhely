@@ -169,6 +169,43 @@ const hu = {
       "Ehhez az e-mail-címhez Google-fiókos belépés tartozik. Lépj be a Google gombbal.",
   },
 
+  reset: {
+    forgotLink: "Elfelejtetted a jelszavad?",
+    requestTitle: "Jelszó helyreállítása",
+    requestLead:
+      "Add meg az e-mail-címed, és küldünk egy linket, amivel új jelszót állíthatsz be.",
+    requestButton: "Link küldése",
+    requestSentTitle: "Elküldtük",
+    requestSentLead:
+      "Ha ehhez a címhez tartozik fiók, pár percen belül megérkezik a levél. Nézd meg a spam mappát is.",
+    backToSignIn: "Vissza a belépéshez",
+    setTitle: "Új jelszó beállítása",
+    setLead: "Írd be az új jelszavad kétszer.",
+    setButton: "Jelszó mentése",
+    doneTitle: "Kész",
+    doneLead: "A jelszavad megváltozott. Most már be tudsz lépni vele.",
+    invalidTitle: "Ez a link már nem érvényes",
+    invalidLead:
+      "A helyreállító linkek két óráig élnek, és csak egyszer használhatók. Kérj egy újat.",
+    requestAgain: "Új link kérése",
+    emailOnlyGoogle:
+      "Ehhez a címhez Google-fiókos belépés tartozik, nincs jelszava. Lépj be a Google gombbal.",
+  },
+
+  verify: {
+    bannerText: "Erősítsd meg az e-mail-címed, hogy biztosan megkapd a vásárlásaidat.",
+    bannerAction: "Küldés újra",
+    bannerSent: "Elküldtük a megerősítő levelet.",
+    okTitle: "Megerősítve",
+    okLead: "Köszönjük, az e-mail-címed megerősítve.",
+    alreadyTitle: "Már megerősítve",
+    alreadyLead: "Ez a cím korábban megerősítésre került. Nincs több teendőd.",
+    failTitle: "Ez a link nem érvényes",
+    failLead:
+      "A megerősítő linkek 48 óráig élnek, és csak egyszer használhatók. Kérj újat a fiókodnál.",
+    toAccount: "A fiókom",
+  },
+
   account: {
     title: "Fiók",
     lead: "A belépési adataid.",
@@ -488,6 +525,43 @@ const en: Dictionary = {
     googleUnavailable: "Google sign-in is not configured in this environment.",
     passwordOnlyGoogle:
       "This email address signs in with Google. Please use the Google button.",
+  },
+
+  reset: {
+    forgotLink: "Forgotten your password?",
+    requestTitle: "Reset your password",
+    requestLead:
+      "Enter your email address and we will send you a link to set a new password.",
+    requestButton: "Send the link",
+    requestSentTitle: "Sent",
+    requestSentLead:
+      "If an account exists for that address, the email will arrive within a few minutes. Check your spam folder too.",
+    backToSignIn: "Back to sign in",
+    setTitle: "Set a new password",
+    setLead: "Type your new password twice.",
+    setButton: "Save password",
+    doneTitle: "Done",
+    doneLead: "Your password has been changed. You can sign in with it now.",
+    invalidTitle: "This link is no longer valid",
+    invalidLead:
+      "Reset links last two hours and can be used once. Please request a new one.",
+    requestAgain: "Request a new link",
+    emailOnlyGoogle:
+      "This address signs in with Google and has no password. Please use the Google button.",
+  },
+
+  verify: {
+    bannerText: "Confirm your email address so your purchases reach you.",
+    bannerAction: "Send again",
+    bannerSent: "Confirmation email sent.",
+    okTitle: "Confirmed",
+    okLead: "Thank you, your email address is confirmed.",
+    alreadyTitle: "Already confirmed",
+    alreadyLead: "This address was confirmed earlier. Nothing more to do.",
+    failTitle: "This link is not valid",
+    failLead:
+      "Confirmation links last 48 hours and can be used once. Request a new one from your account.",
+    toAccount: "My account",
   },
 
   account: {
