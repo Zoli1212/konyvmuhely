@@ -53,6 +53,7 @@ const orders = await prisma.order.findMany({
     billingCountry: true,
     billingZip: true,
     billingCity: true,
+    billingTaxId: true,
     confirmationEmailSentAt: true,
     withdrawalConsentAt: true,
     _count: { select: { items: true, entitlements: true } },
@@ -81,7 +82,8 @@ for (const o of orders) {
   console.log(`    buyer:        ${o.customerEmail ?? "—"}`);
   console.log(
     `    billing:      ${o.billingName ?? "—"} · ${o.billingCountry ?? "?"} ` +
-      `${o.billingZip ?? ""} ${o.billingCity ?? ""}`.trimEnd(),
+      `${o.billingZip ?? ""} ${o.billingCity ?? ""}`.trimEnd() +
+      (o.billingTaxId ? `  ·  tax ${o.billingTaxId}` : ""),
   );
   console.log(`    items:        ${o._count.items}   entitlements granted: ${o._count.entitlements}`);
   const inv = o.invoice;
