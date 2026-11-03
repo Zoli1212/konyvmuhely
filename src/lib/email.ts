@@ -1,9 +1,20 @@
 import { Resend } from "resend";
 
 import { env } from "./env";
+import { gmailConfigured, sendViaGmail } from "./email-gmail";
 
 /**
- * Transactional email through Resend.
+ * Transactional email, through either of two senders.
+ *
+ *  - **Gmail API** - mail leaves a Gmail or Workspace mailbox you already
+ *    own. No domain of your own required, which is what makes it usable on
+ *    a vercel.app deployment.
+ *  - **Resend** - needs a verified sending domain, and in exchange gives
+ *    better deliverability and headroom once volume grows.
+ *
+ * Whichever is configured is used; Gmail wins if both are, because it is the
+ * one chosen deliberately when a domain is not in play. The rest of the app
+ * only ever calls sendEmail and does not know which is active.
  *
  * Every send returns a result rather than throwing: these are called from
  * webhooks and server actions where a mail provider hiccup must not undo a
@@ -12,8 +23,19 @@ import { env } from "./env";
 
 let client: Resend | null = null;
 
-export function emailConfigured(): boolean {
+function resendConfigured(): boolean {
   return Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
+}
+
+export function emailConfigured(): boolean {
+  return gmailConfigured() || resendConfigured();
+}
+
+/** Which sender is live. Reported by /api/health. */
+export function emailProvider(): "gmail" | "resend" | "none" {
+  if (gmailConfigured()) return "gmail";
+  if (resendConfigured()) return "resend";
+  return "none";
 }
 
 function getClient(): Resend | null {
@@ -44,11 +66,26 @@ export async function sendEmail(message: {
    */
   idempotencyKey?: string;
 }): Promise<SendResult> {
+  if (gmailConfigured()) {
+    return sendViaGmail({
+      to: message.to,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
+      attachments: message.attachments,
+      replyTo: message.replyTo ?? process.env.STORE_REPLY_TO,
+    });
+  }
+
   const resend = getClient();
   const from = process.env.EMAIL_FROM;
 
   if (!resend || !from) {
-    return { ok: false, error: "Email is not configured (RESEND_API_KEY / EMAIL_FROM)." };
+    return {
+      ok: false,
+      error:
+        "Email is not configured (GMAIL_* for the Gmail API, or RESEND_API_KEY + EMAIL_FROM).",
+    };
   }
 
   try {

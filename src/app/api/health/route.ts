@@ -1,3 +1,4 @@
+import { emailConfigured, emailProvider } from "@/lib/email";
 import { blobAuthMode, blobConfigured } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 
@@ -34,8 +35,8 @@ export async function GET(): Promise<Response> {
     checkout_STRIPE_SECRET_KEY: isSet("STRIPE_SECRET_KEY"),
     fulfilment_STRIPE_WEBHOOK_SECRET: isSet("STRIPE_WEBHOOK_SECRET"),
     googleSignIn: isSet("AUTH_GOOGLE_ID") && isSet("AUTH_GOOGLE_SECRET"),
-    email_RESEND_API_KEY: isSet("RESEND_API_KEY"),
-    email_EMAIL_FROM: isSet("EMAIL_FROM"),
+    email: emailConfigured(),
+    emailProvider: emailProvider(),
     invoicing_SZAMLAZZ_AGENT_KEY: isSet("SZAMLAZZ_AGENT_KEY"),
   };
 
