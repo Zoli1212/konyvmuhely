@@ -41,6 +41,18 @@ export function Footer({ locale }: { locale: Locale }) {
           >
             {t.footer.account}
           </Link>
+          <Link
+            href={routes.terms(locale)}
+            className="text-paper-dim transition-colors hover:text-gold-300"
+          >
+            {t.legal.termsNav}
+          </Link>
+          <Link
+            href={routes.privacy(locale)}
+            className="text-paper-dim transition-colors hover:text-gold-300"
+          >
+            {t.legal.privacyNav}
+          </Link>
         </nav>
       </div>
 

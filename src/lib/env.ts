@@ -65,6 +65,35 @@ export const env = {
 };
 
 /**
+ * The selling company. Hungarian law requires a webshop to publish its
+ * registered name, seat, company registration number and tax number, so
+ * these are read from configuration rather than written into the page -
+ * and anything still missing is rendered as a visible gap instead of being
+ * quietly omitted.
+ */
+export type Company = {
+  name: string;
+  seat: string | null;
+  registrationNumber: string | null;
+  taxNumber: string | null;
+  email: string | null;
+  phone: string | null;
+  representative: string | null;
+};
+
+export function company(): Company {
+  return {
+    name: process.env.COMPANY_NAME || "Carboon-Code Kurzor Kft.",
+    seat: optional("COMPANY_SEAT") ?? null,
+    registrationNumber: optional("COMPANY_REG_NUMBER") ?? null,
+    taxNumber: optional("COMPANY_TAX_NUMBER") ?? null,
+    email: optional("COMPANY_EMAIL") ?? optional("STORE_REPLY_TO") ?? null,
+    phone: optional("COMPANY_PHONE") ?? null,
+    representative: optional("COMPANY_REPRESENTATIVE") ?? null,
+  };
+}
+
+/**
  * True when Vercel Blob can be reached at all, by either authentication
  * route. Connecting a Blob store in the dashboard now provisions
  * BLOB_STORE_ID and OIDC rather than a read-write token, so checking only for

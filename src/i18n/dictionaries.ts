@@ -169,6 +169,26 @@ const hu = {
       "Ehhez az e-mail-címhez Google-fiókos belépés tartozik. Lépj be a Google gombbal.",
   },
 
+  legal: {
+    privacyTitle: "Adatkezelési tájékoztató",
+    termsTitle: "Általános szerződési feltételek",
+    updated: "Utolsó frissítés",
+    privacyNav: "Adatkezelés",
+    termsNav: "ÁSZF",
+    draftWarning:
+      "Ez a tájékoztató a bolt tényleges működése alapján készült, de nem jogi szakvélemény. Éles indulás előtt nézesd át ügyvéddel vagy adatvédelmi szakértővel.",
+    company: {
+      name: "Cégnév",
+      seat: "Székhely",
+      reg: "Cégjegyzékszám",
+      tax: "Adószám",
+      rep: "Képviselő",
+      email: "E-mail",
+      phone: "Telefon",
+      missing: "— hiányzik, pótolni kell",
+    },
+  },
+
   reset: {
     forgotLink: "Elfelejtetted a jelszavad?",
     requestTitle: "Jelszó helyreállítása",
@@ -525,6 +545,26 @@ const en: Dictionary = {
     googleUnavailable: "Google sign-in is not configured in this environment.",
     passwordOnlyGoogle:
       "This email address signs in with Google. Please use the Google button.",
+  },
+
+  legal: {
+    privacyTitle: "Privacy notice",
+    termsTitle: "Terms and conditions",
+    updated: "Last updated",
+    privacyNav: "Privacy",
+    termsNav: "Terms",
+    draftWarning:
+      "This notice describes how the shop actually works, but it is not legal advice. Have it reviewed by a lawyer or a data protection specialist before going live.",
+    company: {
+      name: "Company",
+      seat: "Registered seat",
+      reg: "Company registration number",
+      tax: "Tax number",
+      rep: "Represented by",
+      email: "Email",
+      phone: "Phone",
+      missing: "— missing, must be filled in",
+    },
   },
 
   reset: {

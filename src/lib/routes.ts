@@ -23,6 +23,8 @@ export const routes = {
   forgotPassword: (locale: Locale) => localePath(locale, "/forgot-password"),
   resetPassword: (locale: Locale) => localePath(locale, "/reset-password"),
   verifyEmail: (locale: Locale) => localePath(locale, "/verify-email"),
+  privacy: (locale: Locale) => localePath(locale, "/privacy"),
+  terms: (locale: Locale) => localePath(locale, "/terms"),
   checkoutSuccess: (locale: Locale) => localePath(locale, "/checkout/success"),
   checkoutCancelled: (locale: Locale) => localePath(locale, "/cart?cancelled=1"),
   /**
