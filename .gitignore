@@ -21,3 +21,6 @@ dist/
 .turbo
 next-env.d.ts
 *.tsbuildinfo
+
+# Generated covers (rebuilt by scripts/publish-books.mts)
+/.covers/
