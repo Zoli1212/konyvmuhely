@@ -82,6 +82,16 @@ export type Company = {
   representative: string | null;
 };
 
+/**
+ * Ends a sentence that finishes with a company name.
+ *
+ * Hungarian company forms are abbreviations - Kft., Bt., Zrt. - so the name
+ * already carries a full stop and adding another gives "Kft..".
+ */
+export function endSentence(text: string): string {
+  return text.endsWith(".") ? text : `${text}.`;
+}
+
 export function company(): Company {
   return {
     name: process.env.COMPANY_NAME || "Carbon-Code Kurzor Kft.",

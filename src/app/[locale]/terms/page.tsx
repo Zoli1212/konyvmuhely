@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { LegalPage, type Section } from "@/components/legal-page";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
-import { company, env, siteUrl } from "@/lib/env";
+import { company, endSentence, env, siteUrl } from "@/lib/env";
 import { resolvePage } from "@/lib/page-locale";
 import { storeVatMode } from "@/lib/vat";
 
@@ -31,7 +31,7 @@ export default async function TermsPage({
     {
       heading: "A szolgáltató",
       body: [
-        `A ${env.storeName} webáruház üzemeltetője és a könyvek kiadója a ${seller}. Az oldal címe: ${host}.`,
+        `A ${env.storeName} webáruház üzemeltetője és a könyvek kiadója a ${endSentence(seller)} Az oldal címe: ${host}.`,
         exempt
           ? "A szolgáltató **alanyi adómentes**, így a számlán áfa nem szerepel."
           : "A feltüntetett árak az áfát tartalmazzák.",
@@ -92,7 +92,7 @@ export default async function TermsPage({
     {
       heading: "The seller",
       body: [
-        `${env.storeName} is operated, and the books are published, by ${seller}. The site runs at ${host}.`,
+        `${env.storeName} is operated, and the books are published, by ${endSentence(seller)} The site runs at ${host}.`,
         exempt
           ? "The seller is **exempt from VAT** under the Hungarian small-business exemption, so no VAT appears on the invoice."
           : "Prices shown include VAT.",

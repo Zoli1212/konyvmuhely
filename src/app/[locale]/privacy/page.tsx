@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { LegalPage, type Section } from "@/components/legal-page";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
-import { company, env, siteUrl } from "@/lib/env";
+import { company, endSentence, env, siteUrl } from "@/lib/env";
 import { resolvePage } from "@/lib/page-locale";
 
 export async function generateMetadata({
@@ -98,7 +98,7 @@ export default async function PrivacyPage({
     {
       heading: "Who handles your data",
       body: [
-        `${env.storeName} is operated by ${seller}. The company's identifying details are in the table above. The site runs at ${host}.`,
+        `${env.storeName} is operated by ${endSentence(seller)} The company's identifying details are in the table above. The site runs at ${host}.`,
         "This notice covers what the shop asks of you, why, how long it keeps it, and who else receives it.",
       ],
     },
