@@ -11,9 +11,13 @@ import { blobConfigured, env } from "./env";
 /**
  * Two storage drivers behind one interface.
  *
- *  - `blob`  - Vercel Blob. Covers are public (so <Image> can load them
- *              straight from the CDN); book files are private, so even a
- *              leaked URL is useless without the store token.
+ *  - `blob`  - Vercel Blob. Everything is written as a *private* blob: a
+ *              Blob store created with private access refuses public ones
+ *              outright, and defaulting to private works on either kind of
+ *              store. Covers are therefore served through /api/assets with a
+ *              long immutable cache header rather than straight from the
+ *              Blob CDN - after the first request the edge serves them, so
+ *              the indirection costs one invocation per cover per region.
  *  - `local` - a .storage directory in the project. Only usable while
  *              developing, because Vercel's filesystem is read-only. It
  *              exists so the whole app can be run without a Vercel account.
@@ -76,12 +80,23 @@ export async function storeFile(
 ): Promise<StoredFile> {
   if (storageDriver() === "blob") {
     const result = await put(pathname, body, {
-      access: options.visibility,
+      // Always private - see the note at the top of this file.
+      access: "private",
       contentType: options.contentType,
       addRandomSuffix: true,
       token: env.blobToken,
     });
-    return { storage: "BLOB", url: result.url, pathname: result.pathname };
+
+    return {
+      storage: "BLOB",
+      // A public asset is addressed by our own route, never by the Blob URL,
+      // because a private blob cannot be fetched without the store token.
+      url:
+        options.visibility === "public"
+          ? `/api/assets/${result.pathname}`
+          : result.url,
+      pathname: result.pathname,
+    };
   }
 
   // Blob gets `addRandomSuffix`, and the local driver needs the equivalent for

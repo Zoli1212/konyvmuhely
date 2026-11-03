@@ -229,7 +229,8 @@ export function BookForm({
         file,
         pathname: `covers/${pathPrefix}.${extension}`,
         driver,
-        visibility: "public",
+        // Private like every other blob; /api/assets serves it publicly.
+        visibility: "private",
         onProgress: (percent) => setCover({ kind: "uploading", percent }),
       });
 

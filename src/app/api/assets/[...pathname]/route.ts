@@ -1,13 +1,15 @@
 import { readStoredFile, storageDriver } from "@/lib/storage";
 
 /**
- * Serves cover images from the local development file store.
+ * Serves cover images.
  *
- * On Vercel, covers are public Blob URLs and this route is never used. It
- * exists so the app runs end to end without a Blob token.
+ * Covers are stored as private blobs like everything else, so they cannot be
+ * fetched from the Blob CDN directly; this route is how they reach a browser.
+ * Pathnames carry a random suffix, so the response is marked immutable and
+ * the edge serves it after the first request.
  *
  * Only the covers/ prefix is served. Book files live under books/ in the same
- * directory and must never be reachable without an entitlement check, so the
+ * store and must never be reachable without an entitlement check, so the
  * prefix test below is a security boundary, not a tidiness rule.
  */
 export const runtime = "nodejs";
@@ -25,10 +27,6 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ pathname: string[] }> },
 ): Promise<Response> {
-  if (storageDriver() !== "local") {
-    return new Response("Not found.", { status: 404 });
-  }
-
   const { pathname } = await params;
   const joined = pathname.join("/");
 
@@ -37,9 +35,9 @@ export async function GET(
   }
 
   const stored = await readStoredFile({
-    storage: "LOCAL",
+    storage: storageDriver() === "blob" ? "BLOB" : "LOCAL",
     pathname: joined,
-    visibility: "public",
+    visibility: "private",
   });
 
   if (!stored) {
@@ -50,7 +48,8 @@ export async function GET(
 
   const headers = new Headers({
     "Content-Type": CONTENT_TYPES[extension] ?? "application/octet-stream",
-    "Cache-Control": "public, max-age=3600",
+    // Pathnames carry a random suffix, so a given URL never changes content.
+    "Cache-Control": "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
   });
 
