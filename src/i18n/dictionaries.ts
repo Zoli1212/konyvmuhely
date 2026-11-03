@@ -278,6 +278,17 @@ const hu = {
     samePassword: "Az új jelszó nem lehet ugyanaz, mint a régi.",
     googleOnly:
       "Ehhez a fiókhoz Google-belépés tartozik, nincs jelszava, amit cserélni lehetne.",
+    orders: "Rendeléseim",
+    ordersLead: "Minden vásárlásod és a hozzájuk tartozó számlák.",
+    noOrders: "Még nem vásároltál semmit.",
+    orderInvoice: "Számla letöltése",
+    orderInvoicePending: "A számla készül, hamarosan itt lesz.",
+    orderInvoiceFailed:
+      "A számlát nem sikerült kiállítani. Már tudunk róla, és pótoljuk — írj, ha sürgős.",
+    orderStatusPAID: "Fizetve",
+    orderStatusPENDING: "Fizetésre vár",
+    orderStatusFAILED: "Sikertelen",
+    orderStatusREFUNDED: "Visszatérítve",
   },
 
   admin: {
@@ -694,6 +705,17 @@ const en: Dictionary = {
     samePassword: "The new password must differ from the old one.",
     googleOnly:
       "This account signs in with Google and has no password to change.",
+    orders: "My orders",
+    ordersLead: "Every purchase you have made, with its invoice.",
+    noOrders: "You have not bought anything yet.",
+    orderInvoice: "Download invoice",
+    orderInvoicePending: "The invoice is being prepared and will appear here shortly.",
+    orderInvoiceFailed:
+      "The invoice could not be issued. We know about it and will sort it out — write to us if it is urgent.",
+    orderStatusPAID: "Paid",
+    orderStatusPENDING: "Awaiting payment",
+    orderStatusFAILED: "Failed",
+    orderStatusREFUNDED: "Refunded",
   },
 
   admin: {
