@@ -40,7 +40,9 @@ function CompanyBlock({ labels }: { labels: Record<string, string> }) {
   const c = company();
 
   const rows: [string, string | null][] = [
-    [labels.name, c.name],
+    // Only when it says something the short name does not, which is the
+    // usual case: "Kft." stands in for a dozen words of registered name.
+    [labels.name, c.legalName ?? c.name],
     [labels.seat, c.seat],
     [labels.reg, c.registrationNumber],
     [labels.tax, c.taxNumber],

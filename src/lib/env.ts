@@ -73,6 +73,7 @@ export const env = {
  */
 export type Company = {
   name: string;
+  legalName: string | null;
   seat: string | null;
   registrationNumber: string | null;
   taxNumber: string | null;
@@ -83,7 +84,10 @@ export type Company = {
 
 export function company(): Company {
   return {
-    name: process.env.COMPANY_NAME || "Carboon-Code Kurzor Kft.",
+    name: process.env.COMPANY_NAME || "Carbon-Code Kurzor Kft.",
+    // The registered name in full. Headings read better with the short form,
+    // but the seller block has to carry the name as it stands in the register.
+    legalName: optional("COMPANY_LEGAL_NAME") ?? null,
     seat: optional("COMPANY_SEAT") ?? null,
     registrationNumber: optional("COMPANY_REG_NUMBER") ?? null,
     taxNumber: optional("COMPANY_TAX_NUMBER") ?? null,
