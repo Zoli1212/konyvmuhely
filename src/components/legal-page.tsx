@@ -48,7 +48,6 @@ function CompanyBlock({ labels }: { labels: Record<string, string> }) {
     [labels.tax, c.taxNumber],
     [labels.rep, c.representative],
     [labels.email, c.email],
-    [labels.phone, c.phone],
   ];
 
   return (

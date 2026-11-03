@@ -36,14 +36,14 @@ export function SiteHeader({
         <nav className="ml-2 hidden items-center gap-1 sm:flex">
           <HeaderLink href={routes.books(locale)}>{t.nav.books}</HeaderLink>
           {user ? (
-            <HeaderLink href={routes.orders(locale)}>
-              {t.nav.orders}
-            </HeaderLink>
-          ) : null}
-          {user ? (
-            <HeaderLink href={routes.library(locale)}>
-              {t.nav.library}
-            </HeaderLink>
+            <>
+              <HeaderLink href={routes.library(locale)}>
+                {t.nav.library}
+              </HeaderLink>
+              <HeaderLink href={routes.orders(locale)}>
+                {t.nav.orders}
+              </HeaderLink>
+            </>
           ) : null}
           {user?.role === "ADMIN" ? (
             <HeaderLink href={routes.admin(locale)}>{t.nav.admin}</HeaderLink>
@@ -113,8 +113,10 @@ export function SiteHeader({
       <div className="shell flex items-center gap-1 border-t border-ink-800/60 py-1.5 sm:hidden">
         <HeaderLink href={routes.books(locale)}>{t.nav.books}</HeaderLink>
         {user ? (
-          <HeaderLink href={routes.library(locale)}>{t.nav.library}</HeaderLink>
-          <HeaderLink href={routes.orders(locale)}>{t.nav.orders}</HeaderLink>
+          <>
+            <HeaderLink href={routes.library(locale)}>{t.nav.library}</HeaderLink>
+            <HeaderLink href={routes.orders(locale)}>{t.nav.orders}</HeaderLink>
+          </>
         ) : null}
         {user?.role === "ADMIN" ? (
           <HeaderLink href={routes.admin(locale)}>{t.nav.admin}</HeaderLink>
