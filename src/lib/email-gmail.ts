@@ -1,24 +1,31 @@
 /**
- * Sending through the Gmail API.
+ * Sending through Gmail, by either of the two ways Google allows.
  *
- * The alternative to Resend, and the one that needs no domain of your own:
- * mail leaves from a Gmail or Workspace mailbox you already have, authorised
- * once with a refresh token.
+ * **App password over SMTP** (preferred for a plain @gmail.com account).
+ * An app password is not an OAuth scope, so there is no consent screen, no
+ * verification review, and — the point — **no expiry**. An OAuth app that
+ * requests `gmail.send` while in Testing status has its refresh token
+ * invalidated by Google after seven days, which would stop the shop's email
+ * dead with no warning. App passwords do not do that.
  *
- * Deliberately written against plain fetch rather than the `googleapis`
- * package. That package is tens of megabytes and pulls in every Google API;
- * sending one message needs two HTTP calls, and a serverless function should
- * not carry the rest.
+ * **OAuth over the Gmail API** (for a Google Workspace mailbox). A Workspace
+ * domain can set the OAuth app to Internal, which skips verification and
+ * keeps the refresh token alive indefinitely.
+ *
+ * Whichever is configured is used, app password first. Both send from a
+ * mailbox you already own, so neither needs a domain of your own.
  */
 import { randomUUID } from "node:crypto";
 
+import nodemailer from "nodemailer";
+
 import type { EmailAttachment, SendResult } from "./email";
 
-const TOKEN_URL = "https://oauth2.googleapis.com/token";
-const SEND_URL =
-  "https://gmail.googleapis.com/upload/gmail/v1/users/me/messages/send?uploadType=multipart";
+export function gmailAppPasswordConfigured(): boolean {
+  return Boolean(process.env.GMAIL_APP_PASSWORD && process.env.GMAIL_SENDER);
+}
 
-export function gmailConfigured(): boolean {
+export function gmailOAuthConfigured(): boolean {
   return Boolean(
     process.env.GMAIL_CLIENT_ID &&
       process.env.GMAIL_CLIENT_SECRET &&
@@ -27,27 +34,109 @@ export function gmailConfigured(): boolean {
   );
 }
 
+export function gmailConfigured(): boolean {
+  return gmailAppPasswordConfigured() || gmailOAuthConfigured();
+}
+
+export function gmailMode(): "app-password" | "oauth" | "none" {
+  if (gmailAppPasswordConfigured()) return "app-password";
+  if (gmailOAuthConfigured()) return "oauth";
+  return "none";
+}
+
+type Message = {
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+  attachments?: EmailAttachment[];
+  replyTo?: string;
+};
+
 /**
- * Access tokens last an hour. A warm serverless instance reuses one rather
- * than trading the refresh token on every send, which also keeps us well
- * inside Google's token endpoint limits.
+ * The address Gmail will actually send as. Gmail rewrites the From header to
+ * the authenticated mailbox regardless, so a display name is the only part
+ * we get to choose.
  */
+function fromHeader(): string {
+  const address = process.env.GMAIL_SENDER ?? "";
+  const name = process.env.NEXT_PUBLIC_STORE_NAME;
+  return name ? `${name} <${address}>` : address;
+}
+
+// --- SMTP with an app password ---
+
+/**
+ * One pooled transport per warm instance. Gmail throttles connection setup
+ * far more aggressively than it throttles messages, so reconnecting per send
+ * is what actually gets a sender rate-limited.
+ */
+let transport: nodemailer.Transporter | null = null;
+
+function getTransport(): nodemailer.Transporter {
+  if (!transport) {
+    transport = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.GMAIL_SENDER,
+        // Google shows the app password in groups of four; people paste it
+        // that way, and Gmail rejects it with the spaces still in.
+        pass: (process.env.GMAIL_APP_PASSWORD ?? "").replace(/\s+/g, ""),
+      },
+      pool: true,
+      maxConnections: 2,
+    });
+  }
+  return transport;
+}
+
+async function sendViaSmtp(message: Message): Promise<SendResult> {
+  try {
+    const info = await getTransport().sendMail({
+      from: fromHeader(),
+      to: message.to,
+      subject: message.subject,
+      text: message.text,
+      html: message.html,
+      replyTo: message.replyTo,
+      attachments: message.attachments?.map((file) => ({
+        filename: file.filename,
+        content: file.content,
+        contentType: file.contentType,
+      })),
+    });
+
+    return { ok: true, id: info.messageId ?? randomUUID() };
+  } catch (error) {
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : "Gmail SMTP send failed.",
+    };
+  }
+}
+
+// --- OAuth over the Gmail API ---
+
+const TOKEN_URL = "https://oauth2.googleapis.com/token";
+const SEND_URL = "https://gmail.googleapis.com/upload/gmail/v1/users/me/messages/send?uploadType=media";
+
+/** Access tokens last an hour; a warm instance reuses one. */
 let cached: { token: string; expiresAt: number } | null = null;
 
 async function getAccessToken(): Promise<string> {
   if (cached && cached.expiresAt > Date.now() + 60_000) return cached.token;
 
-  const body = new URLSearchParams({
-    client_id: process.env.GMAIL_CLIENT_ID ?? "",
-    client_secret: process.env.GMAIL_CLIENT_SECRET ?? "",
-    refresh_token: process.env.GMAIL_REFRESH_TOKEN ?? "",
-    grant_type: "refresh_token",
-  });
-
   const response = await fetch(TOKEN_URL, {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
-    body,
+    body: new URLSearchParams({
+      client_id: process.env.GMAIL_CLIENT_ID ?? "",
+      client_secret: process.env.GMAIL_CLIENT_SECRET ?? "",
+      refresh_token: process.env.GMAIL_REFRESH_TOKEN ?? "",
+      grant_type: "refresh_token",
+    }),
   });
 
   if (!response.ok) {
@@ -60,123 +149,31 @@ async function getAccessToken(): Promise<string> {
     access_token: string;
     expires_in: number;
   };
-
-  cached = {
-    token: data.access_token,
-    expiresAt: Date.now() + data.expires_in * 1000,
-  };
+  cached = { token: data.access_token, expiresAt: Date.now() + data.expires_in * 1000 };
   return cached.token;
 }
 
-/**
- * RFC 2047 encoded-word. Without it a subject like "Köszönjük a vásárlást"
- * arrives as mojibake in clients that assume ASCII headers.
- */
-function encodeHeader(value: string): string {
-  // eslint-disable-next-line no-control-regex
-  if (/^[\x00-\x7F]*$/.test(value)) return value;
-  return `=?UTF-8?B?${Buffer.from(value, "utf8").toString("base64")}?=`;
-}
-
-function base64Url(buffer: Buffer): string {
-  return buffer
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
-
-/** Splits base64 into 76-character lines, as MIME requires. */
-function wrapBase64(value: string): string {
-  return value.replace(/(.{76})/g, "$1\r\n");
-}
-
-function buildMime(message: {
-  from: string;
-  to: string;
-  subject: string;
-  html: string;
-  text: string;
-  replyTo?: string;
-  attachments?: EmailAttachment[];
-}): Buffer {
-  const altBoundary = `alt_${randomUUID()}`;
-  const mixedBoundary = `mix_${randomUUID()}`;
-  const hasAttachments = (message.attachments?.length ?? 0) > 0;
-
-  const headers = [
-    `From: ${message.from}`,
-    `To: ${message.to}`,
-    `Subject: ${encodeHeader(message.subject)}`,
-    message.replyTo ? `Reply-To: ${message.replyTo}` : null,
-    "MIME-Version: 1.0",
-    hasAttachments
-      ? `Content-Type: multipart/mixed; boundary="${mixedBoundary}"`
-      : `Content-Type: multipart/alternative; boundary="${altBoundary}"`,
-  ].filter(Boolean);
-
-  const alternative = [
-    `--${altBoundary}`,
-    'Content-Type: text/plain; charset="UTF-8"',
-    "Content-Transfer-Encoding: base64",
-    "",
-    wrapBase64(Buffer.from(message.text, "utf8").toString("base64")),
-    `--${altBoundary}`,
-    'Content-Type: text/html; charset="UTF-8"',
-    "Content-Transfer-Encoding: base64",
-    "",
-    wrapBase64(Buffer.from(message.html, "utf8").toString("base64")),
-    `--${altBoundary}--`,
-  ].join("\r\n");
-
-  if (!hasAttachments) {
-    return Buffer.from([...headers, "", alternative, ""].join("\r\n"), "utf8");
-  }
-
-  const parts = [
-    ...headers,
-    "",
-    `--${mixedBoundary}`,
-    `Content-Type: multipart/alternative; boundary="${altBoundary}"`,
-    "",
-    alternative,
-  ];
-
-  for (const file of message.attachments ?? []) {
-    parts.push(
-      `--${mixedBoundary}`,
-      `Content-Type: ${file.contentType ?? "application/octet-stream"}; name="${file.filename}"`,
-      "Content-Transfer-Encoding: base64",
-      `Content-Disposition: attachment; filename="${file.filename}"`,
-      "",
-      wrapBase64(file.content.toString("base64")),
-    );
-  }
-
-  parts.push(`--${mixedBoundary}--`, "");
-  return Buffer.from(parts.join("\r\n"), "utf8");
-}
-
-export async function sendViaGmail(message: {
-  to: string;
-  subject: string;
-  html: string;
-  text: string;
-  attachments?: EmailAttachment[];
-  replyTo?: string;
-}): Promise<SendResult> {
+async function sendViaApi(message: Message): Promise<SendResult> {
   try {
     const token = await getAccessToken();
 
-    const mime = buildMime({
-      from: process.env.GMAIL_SENDER ?? "",
-      to: message.to,
-      subject: message.subject,
-      html: message.html,
-      text: message.text,
-      replyTo: message.replyTo,
-      attachments: message.attachments,
-    });
+    // nodemailer can build the MIME without opening a connection, which
+    // saves hand-rolling multipart and RFC 2047 header encoding.
+    const built = await nodemailer
+      .createTransport({ streamTransport: true, buffer: true, newline: "unix" })
+      .sendMail({
+        from: fromHeader(),
+        to: message.to,
+        subject: message.subject,
+        text: message.text,
+        html: message.html,
+        replyTo: message.replyTo,
+        attachments: message.attachments?.map((file) => ({
+          filename: file.filename,
+          content: file.content,
+          contentType: file.contentType,
+        })),
+      });
 
     const response = await fetch(SEND_URL, {
       method: "POST",
@@ -184,22 +181,28 @@ export async function sendViaGmail(message: {
         authorization: `Bearer ${token}`,
         "content-type": "message/rfc822",
       },
-      body: new Uint8Array(mime),
+      body: new Uint8Array(built.message as Buffer),
     });
 
     if (!response.ok) {
       return {
         ok: false,
-        error: `Gmail send failed (${response.status}): ${(await response.text()).slice(0, 300)}`,
+        error: `Gmail API send failed (${response.status}): ${(await response.text()).slice(0, 300)}`,
       };
     }
 
     const data = (await response.json()) as { id?: string };
-    return { ok: true, id: data.id ?? base64Url(mime).slice(0, 16) };
+    return { ok: true, id: data.id ?? randomUUID() };
   } catch (error) {
     return {
       ok: false,
-      error: error instanceof Error ? error.message : "Gmail send failed.",
+      error: error instanceof Error ? error.message : "Gmail API send failed.",
     };
   }
+}
+
+export async function sendViaGmail(message: Message): Promise<SendResult> {
+  return gmailAppPasswordConfigured()
+    ? sendViaSmtp(message)
+    : sendViaApi(message);
 }

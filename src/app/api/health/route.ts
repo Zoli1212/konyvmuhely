@@ -1,4 +1,5 @@
 import { emailConfigured, emailProvider } from "@/lib/email";
+import { gmailMode } from "@/lib/email-gmail";
 import { blobAuthMode, blobConfigured } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 
@@ -37,6 +38,7 @@ export async function GET(): Promise<Response> {
     googleSignIn: isSet("AUTH_GOOGLE_ID") && isSet("AUTH_GOOGLE_SECRET"),
     email: emailConfigured(),
     emailProvider: emailProvider(),
+    emailGmailMode: gmailMode(),
     invoicing_SZAMLAZZ_AGENT_KEY: isSet("SZAMLAZZ_AGENT_KEY"),
   };
 
