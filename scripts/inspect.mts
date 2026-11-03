@@ -54,6 +54,7 @@ const orders = await prisma.order.findMany({
     billingZip: true,
     billingCity: true,
     confirmationEmailSentAt: true,
+    withdrawalConsentAt: true,
     _count: { select: { items: true, entitlements: true } },
     invoice: {
       select: {
@@ -96,6 +97,9 @@ for (const o of orders) {
   }
   if (inv?.lastError) console.log(`    invoice error: ${inv.lastError.slice(0, 200)}`);
   console.log(`    confirmation: ${when(o.confirmationEmailSentAt)}`);
+  console.log(
+    `    consent:      ${o.withdrawalConsentAt ? `given ${when(o.withdrawalConsentAt)}` : "MISSING"}`,
+  );
 }
 
 await prisma.$disconnect();
