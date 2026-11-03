@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { currentUser } from "@/lib/auth-guard";
 import { readCart, writeCart } from "@/lib/cart";
-import { startCheckout } from "@/lib/checkout";
 import { routes } from "@/lib/routes";
 
 function localeFrom(formData: FormData): Locale {
@@ -50,41 +49,9 @@ export async function clearCart(): Promise<void> {
 }
 
 /**
- * Starts a Stripe Checkout session and hands the browser over to Stripe.
- * On any refusal the visitor comes back to the cart with a reason in the
- * query string, which the cart page renders.
- */
-export async function checkoutAction(formData: FormData): Promise<void> {
-  const locale = localeFrom(formData);
-
-  const user = await currentUser();
-  if (!user) {
-    redirect(
-      `${routes.login(locale)}?next=${encodeURIComponent(routes.cart(locale))}`,
-    );
-  }
-
-  const cart = await readCart();
-
-  const result = await startCheckout({
-    userId: user.id,
-    userEmail: user.email,
-    bookIds: cart,
-    locale,
-  });
-
-  if (!result.ok) {
-    redirect(`${routes.cart(locale)}?problem=${result.reason}`);
-  }
-
-  // The cart is intentionally left alone until the webhook confirms payment,
-  // so an abandoned checkout does not lose the visitor's selection.
-  redirect(result.url);
-}
-
-/**
  * Buy a single title without a detour through the cart. The book still joins
- * the cart first, so an abandoned payment leaves the visitor somewhere sane.
+ * the cart first, so an abandoned purchase leaves the visitor somewhere sane,
+ * and the billing step reads the cart like any other purchase.
  */
 export async function buyNow(formData: FormData): Promise<void> {
   const locale = localeFrom(formData);
@@ -98,24 +65,9 @@ export async function buyNow(formData: FormData): Promise<void> {
   }
 
   const user = await currentUser();
-  if (!user) {
-    redirect(
-      `${routes.login(locale)}?next=${encodeURIComponent(routes.cart(locale))}`,
-    );
-  }
+  const next = routes.checkout(locale);
 
-  const result = await startCheckout({
-    userId: user.id,
-    userEmail: user.email,
-    bookIds: [bookId],
-    locale,
-  });
-
-  if (!result.ok) {
-    redirect(`${routes.cart(locale)}?problem=${result.reason}`);
-  }
-
-  // The cart is intentionally left alone until the webhook confirms payment,
-  // so an abandoned checkout does not lose the visitor's selection.
-  redirect(result.url);
+  redirect(
+    user ? next : `${routes.login(locale)}?next=${encodeURIComponent(next)}`,
+  );
 }

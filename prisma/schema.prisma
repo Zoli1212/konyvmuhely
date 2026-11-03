@@ -232,6 +232,16 @@ model Order {
   /// second visit to the return URL cannot send the buyer a duplicate.
   confirmationEmailSentAt DateTime?
 
+  /// When the buyer expressly agreed that performance may begin at once, and
+  /// acknowledged that this ends their fourteen-day right of withdrawal.
+  ///
+  /// 45/2014. (II. 26.) Korm. rendelet requires both the consent and the
+  /// acknowledgement *before* a digital download starts, and requires the
+  /// seller to be able to show it afterwards. A timestamp on the order is
+  /// that proof: it is written in the same request that creates the Stripe
+  /// session, so an order cannot exist without it.
+  withdrawalConsentAt DateTime?
+
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   items        OrderItem[]
   entitlements Entitlement[]

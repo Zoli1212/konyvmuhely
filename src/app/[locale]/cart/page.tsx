@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { checkoutAction, removeFromCart } from "@/actions/cart";
+import { removeFromCart } from "@/actions/cart";
 import { Cover } from "@/components/cover";
 import { ArrowRightIcon, TrashIcon, WarningIcon } from "@/components/icons";
 import { SubmitButton } from "@/components/submit-button";
@@ -165,16 +165,13 @@ export default async function CartPage({
                   {t.book.goToLibrary}
                 </Link>
               ) : (
-                <form action={checkoutAction}>
-                  <input type="hidden" name="locale" value={locale} />
-                  <SubmitButton
-                    className="btn btn-primary btn-lg w-full sm:w-auto"
-                    pendingLabel={t.common.loading}
-                  >
-                    {t.cart.checkout}
-                    <ArrowRightIcon className="h-4 w-4" />
-                  </SubmitButton>
-                </form>
+                <Link
+                  href={routes.checkout(locale)}
+                  className="btn btn-primary btn-lg w-full sm:w-auto"
+                >
+                  {t.cart.checkout}
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
               )}
             </div>
           </div>

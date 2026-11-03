@@ -289,6 +289,45 @@
     color: var(--color-rose-400);
   }
 
+  .field-invalid,
+  .field-invalid:hover {
+    border-color: var(--color-rose-400);
+  }
+
+  /* The browser's own checkbox ignores the page's colours entirely, and the
+     one place it matters is the consent box a purchase depends on. */
+  .checkbox {
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1px solid var(--color-ink-500);
+    border-radius: 0.3125rem;
+    background-color: var(--color-ink-900);
+    cursor: pointer;
+    transition:
+      border-color 0.16s var(--ease-out-soft),
+      background-color 0.16s var(--ease-out-soft);
+  }
+
+  .checkbox:hover {
+    border-color: var(--color-gold-600);
+  }
+
+  .checkbox:focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 2px;
+  }
+
+  .checkbox:checked {
+    border-color: var(--color-gold-500);
+    background-color: var(--color-gold-500);
+    /* Inlined so the tick needs no network request and no icon component. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231a1710' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-6'/%3E%3C/svg%3E");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   /* --- small text bits --- */
 
   .eyebrow {

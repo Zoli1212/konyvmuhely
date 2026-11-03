@@ -25,6 +25,8 @@ export const routes = {
   verifyEmail: (locale: Locale) => localePath(locale, "/verify-email"),
   privacy: (locale: Locale) => localePath(locale, "/privacy"),
   terms: (locale: Locale) => localePath(locale, "/terms"),
+  /** Billing details and the withdrawal waiver, the last step before Stripe. */
+  checkout: (locale: Locale) => localePath(locale, "/checkout"),
   checkoutSuccess: (locale: Locale) => localePath(locale, "/checkout/success"),
   checkoutCancelled: (locale: Locale) => localePath(locale, "/cart?cancelled=1"),
   /**

@@ -6,6 +6,11 @@ import { routes } from "./routes";
 import { siteUrl } from "./env";
 import { ensureInvoiceRecord } from "./invoicing";
 import { getStripe, stripeLocale } from "./stripe";
+import {
+  BILLING_COUNTRY,
+  toStripeAddress,
+  type BillingDetails,
+} from "./billing";
 
 /**
  * Both halves of the payment flow live here.
@@ -29,6 +34,10 @@ export async function startCheckout(params: {
   userEmail: string;
   bookIds: string[];
   locale: Locale;
+  /** Collected by the shop, not by Stripe. See src/lib/billing.ts. */
+  billing: BillingDetails;
+  /** When the buyer waived the right of withdrawal. */
+  withdrawalConsentAt: Date;
 }): Promise<StartCheckoutResult> {
   const stripe = getStripe();
   if (!stripe) return { ok: false, reason: "stripe-unconfigured" };
@@ -92,12 +101,13 @@ export async function startCheckout(params: {
   );
 
   const amountMinor = books.reduce((sum, b) => sum + b.priceMinor, 0);
+  const customerId = await ensureStripeCustomer(stripe, params);
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: lineItems,
     locale: stripeLocale[params.locale],
-    customer_email: params.userEmail,
+    customer: customerId,
     success_url: `${base}${routes.checkoutReturn(params.locale)}`,
     cancel_url: `${base}${routes.checkoutCancelled(params.locale)}`,
     // The webhook can rebuild the whole order from this, which is what makes
@@ -107,14 +117,11 @@ export async function startCheckout(params: {
       bookIds: books.map((b) => b.id).join(","),
       locale: params.locale,
     },
-    // A Hungarian invoice needs a name and address, and Stripe Checkout is the
-    // only point in the flow where we can ask for them without building a
-    // second form. Required rather than optional: an order without an address
-    // cannot be invoiced, and NAV will not accept an invented one.
-    billing_address_collection: "required",
-    // Optional for the buyer. A company that gives its adószám gets it on the
-    // invoice; a private person simply leaves it blank.
-    tax_id_collection: { enabled: true },
+    // The address is already on the Customer and must stay there. Stripe
+    // Checkout's own address form always offers every country in the world
+    // with no way to narrow it, and this shop sells to Hungary only - so the
+    // shop collects the address itself and tells Stripe not to touch it.
+    customer_update: { address: "never", name: "never" },
     // Digital goods: nothing to ship, and the buyer gets an emailed receipt.
     payment_intent_data: {
       metadata: { userId: params.userId },
@@ -124,7 +131,9 @@ export async function startCheckout(params: {
   if (!session.url) return { ok: false, reason: "stripe-unconfigured" };
 
   // Record the pending order so it shows up in the buyer's order list even if
-  // they abandon the payment. Fulfilment does not depend on this row existing.
+  // they abandon the payment. Fulfilment does not depend on this row existing
+  // - except for the withdrawal consent, which is written here because it was
+  // given here, and which the law requires the seller to be able to show.
   await prisma.order.create({
     data: {
       userId: params.userId,
@@ -133,6 +142,13 @@ export async function startCheckout(params: {
       currency,
       status: "PENDING",
       customerEmail: params.userEmail,
+      withdrawalConsentAt: params.withdrawalConsentAt,
+      billingName: params.billing.name,
+      billingCountry: BILLING_COUNTRY,
+      billingZip: params.billing.zip,
+      billingCity: params.billing.city,
+      billingAddress: params.billing.address,
+      billingTaxId: params.billing.taxId,
       items: {
         create: books.map((book) => ({
           bookId: book.id,
@@ -144,6 +160,55 @@ export async function startCheckout(params: {
   });
 
   return { ok: true, url: session.url };
+}
+
+/**
+ * The buyer's Stripe Customer, carrying the address the shop collected.
+ *
+ * Reused across purchases so a repeat buyer appears once in the dashboard
+ * rather than once per order, and refreshed every time because the address
+ * on the Customer is what Stripe shows on the payment page - a stale one
+ * would quietly contradict the invoice.
+ */
+async function ensureStripeCustomer(
+  stripe: Stripe,
+  params: {
+    userId: string;
+    userEmail: string;
+    billing: BillingDetails;
+  },
+): Promise<string> {
+  const user = await prisma.user.findUnique({
+    where: { id: params.userId },
+    select: { stripeCustomerId: true },
+  });
+
+  const fields = {
+    email: params.userEmail,
+    name: params.billing.name,
+    address: toStripeAddress(params.billing),
+    metadata: { userId: params.userId },
+  };
+
+  if (user?.stripeCustomerId) {
+    try {
+      const existing = await stripe.customers.update(user.stripeCustomerId, fields);
+      return existing.id;
+    } catch {
+      // The stored id can be from a different Stripe account - switching
+      // from test keys to live keys is exactly when that happens. Fall
+      // through and make a new one rather than failing the purchase.
+    }
+  }
+
+  const created = await stripe.customers.create(fields);
+
+  await prisma.user.update({
+    where: { id: params.userId },
+    data: { stripeCustomerId: created.id },
+  });
+
+  return created.id;
 }
 
 export type FulfillResult = {
@@ -259,24 +324,34 @@ export async function fulfillCheckoutSession(
 }
 
 /**
- * Billing details as Stripe collected them. `address.line2` is folded into one
- * address line because that is what a Hungarian invoice expects.
+ * Billing details as Stripe has them, for the order row.
+ *
+ * Only fields Stripe actually filled are returned. The shop collects the
+ * address itself and writes it on the pending order, so a blank coming back
+ * from Stripe means "nothing to add" - spreading the nulls instead would
+ * erase a good address and leave the invoice unissuable.
+ *
+ * `address.line2` is folded into one line because that is what a Hungarian
+ * invoice expects.
  */
 function billingFromSession(session: Stripe.Checkout.Session) {
   const details = session.customer_details;
   const address = details?.address;
 
   const line = [address?.line1, address?.line2].filter(Boolean).join(", ");
-  const taxId = details?.tax_ids?.find((t) => t.value)?.value ?? null;
 
-  return {
-    billingName: details?.name ?? null,
-    billingCountry: address?.country ?? null,
-    billingZip: address?.postal_code ?? null,
-    billingCity: address?.city ?? null,
-    billingAddress: line.length > 0 ? line : null,
-    billingTaxId: taxId,
+  const candidates = {
+    billingName: details?.name,
+    billingCountry: address?.country,
+    billingZip: address?.postal_code,
+    billingCity: address?.city,
+    billingAddress: line.length > 0 ? line : undefined,
+    billingTaxId: details?.tax_ids?.find((t) => t.value)?.value,
   };
+
+  return Object.fromEntries(
+    Object.entries(candidates).filter(([, value]) => Boolean(value)),
+  ) as Partial<Record<keyof typeof candidates, string>>;
 }
 
 /**
