@@ -301,10 +301,15 @@ The closing part is a collection of daily practices, mantras and prayers.
 // The handbooks live in their own file; only the type crosses between them,
 // so the import below is erased at runtime and there is no cycle.
 import { HANDBOOKS } from "./catalogue-yogikus.mts";
+import { TIBETAN_BOOKLETS } from "./catalogue-tibeti.mts";
 
 /**
  * Storefront order: the long volumes first, then the handbook series. The
  * publisher uses the array index as sortIndex, so reordering here reorders
  * the shop.
  */
-export const CATALOGUE: CatalogueEntry[] = [...BIG_BOOKS, ...HANDBOOKS];
+export const CATALOGUE: CatalogueEntry[] = [
+  ...BIG_BOOKS,
+  ...HANDBOOKS,
+  ...TIBETAN_BOOKLETS,
+];

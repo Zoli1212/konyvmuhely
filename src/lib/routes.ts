@@ -18,6 +18,7 @@ export const routes = {
   cart: (locale: Locale) => localePath(locale, "/cart"),
   library: (locale: Locale) => localePath(locale, "/library"),
   account: (locale: Locale) => localePath(locale, "/account"),
+  orders: (locale: Locale) => localePath(locale, "/orders"),
   login: (locale: Locale) => localePath(locale, "/login"),
   register: (locale: Locale) => localePath(locale, "/register"),
   forgotPassword: (locale: Locale) => localePath(locale, "/forgot-password"),

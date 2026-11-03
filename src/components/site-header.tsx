@@ -36,6 +36,11 @@ export function SiteHeader({
         <nav className="ml-2 hidden items-center gap-1 sm:flex">
           <HeaderLink href={routes.books(locale)}>{t.nav.books}</HeaderLink>
           {user ? (
+            <HeaderLink href={routes.orders(locale)}>
+              {t.nav.orders}
+            </HeaderLink>
+          ) : null}
+          {user ? (
             <HeaderLink href={routes.library(locale)}>
               {t.nav.library}
             </HeaderLink>
@@ -109,6 +114,7 @@ export function SiteHeader({
         <HeaderLink href={routes.books(locale)}>{t.nav.books}</HeaderLink>
         {user ? (
           <HeaderLink href={routes.library(locale)}>{t.nav.library}</HeaderLink>
+          <HeaderLink href={routes.orders(locale)}>{t.nav.orders}</HeaderLink>
         ) : null}
         {user?.role === "ADMIN" ? (
           <HeaderLink href={routes.admin(locale)}>{t.nav.admin}</HeaderLink>
