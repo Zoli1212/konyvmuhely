@@ -39,7 +39,7 @@ const f = (name: string) => path.join(BIG, name);
 const AUTHOR = "Molnár Zoltán";
 const SERIES = "Tibeti ösvények";
 
-export const CATALOGUE: CatalogueEntry[] = [
+const BIG_BOOKS: CatalogueEntry[] = [
   {
     slug: "mahamudra-osvenye",
     file: f("Mahamudra Ösvénye.pdf"),
@@ -297,3 +297,14 @@ The closing part is a collection of daily practices, mantras and prayers.
 99 pages in eight parts. Familiarity with the first volume helps but is not required.`,
   },
 ];
+
+// The handbooks live in their own file; only the type crosses between them,
+// so the import below is erased at runtime and there is no cycle.
+import { HANDBOOKS } from "./catalogue-yogikus.mts";
+
+/**
+ * Storefront order: the long volumes first, then the handbook series. The
+ * publisher uses the array index as sortIndex, so reordering here reorders
+ * the shop.
+ */
+export const CATALOGUE: CatalogueEntry[] = [...BIG_BOOKS, ...HANDBOOKS];
