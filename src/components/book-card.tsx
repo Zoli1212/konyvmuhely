@@ -5,7 +5,7 @@ import { FileChips } from "@/components/file-chips";
 import { CheckIcon } from "@/components/icons";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
-import type { LocalizedBook } from "@/lib/books";
+import { isBooklet, type LocalizedBook } from "@/lib/books";
 import { formatMoney } from "@/lib/money";
 import { routes } from "@/lib/routes";
 
@@ -67,7 +67,17 @@ export function BookCard({
           {book.blurb}
         </p>
 
-        <FileChips files={book.files} locale={locale} className="mt-3" />
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+          {book.pageCount ? (
+            <span className="chip">
+              {isBooklet(book.pageCount) ? t.book.booklet : t.book.volume}
+              <span className="text-mute tabular-nums">
+                {t.book.pagesValue(book.pageCount)}
+              </span>
+            </span>
+          ) : null}
+          <FileChips files={book.files} locale={locale} />
+        </div>
       </div>
     </article>
   );
