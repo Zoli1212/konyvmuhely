@@ -13,6 +13,8 @@
  */
 import Stripe from "stripe";
 
+import { describeKey } from "./stripe-mode.mts";
+
 /** Exactly the events src/app/api/stripe/webhook/route.ts acts on. */
 const EVENTS: Stripe.WebhookEndpointCreateParams.EnabledEvent[] = [
   "checkout.session.completed",
@@ -32,9 +34,9 @@ if (!key) {
 
 const url = `${site.replace(/\/$/, "")}/api/stripe/webhook`;
 const stripe = new Stripe(key, { appInfo: { name: "ebook-shop setup" } });
-const live = key.startsWith("sk_live_");
 
-console.error(`Mode: ${live ? "LIVE" : "test"}`);
+
+console.error(`Mode: ${describeKey(key)}`);
 
 // --- the account itself ---
 

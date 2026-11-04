@@ -10,6 +10,8 @@
  */
 import Stripe from "stripe";
 
+import { describeKey } from "./stripe-mode.mts";
+
 const key = process.env.STRIPE_SECRET_KEY;
 if (!key) {
   console.error("Set STRIPE_SECRET_KEY.");
@@ -19,7 +21,7 @@ if (!key) {
 const stripe = new Stripe(key, { appInfo: { name: "ebook-shop smoke test" } });
 const site = process.env.SITE_URL ?? "https://buddhista-konyvmuhely.vercel.app";
 
-console.log(`Mode: ${key.startsWith("sk_live_") ? "LIVE" : "test"}`);
+console.log(`Mode: ${describeKey(key)}`);
 
 const session = await stripe.checkout.sessions.create({
   mode: "payment",

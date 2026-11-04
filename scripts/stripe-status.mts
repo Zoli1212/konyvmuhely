@@ -9,6 +9,8 @@
  */
 import Stripe from "stripe";
 
+import { describeKey } from "./stripe-mode.mts";
+
 const key = process.env.STRIPE_SECRET_KEY;
 if (!key) {
   console.error("Set STRIPE_SECRET_KEY.");
@@ -16,11 +18,11 @@ if (!key) {
 }
 
 const stripe = new Stripe(key, { appInfo: { name: "ebook-shop status" } });
-const live = key.startsWith("sk_live_");
+
 
 const account = await stripe.accounts.retrieve();
 
-console.log(`Mode:             ${live ? "LIVE" : "test / sandbox"}`);
+console.log(`Mode:             ${describeKey(key)}`);
 console.log(`Account:          ${account.id}`);
 console.log(`Country:          ${account.country}`);
 console.log(`Default currency: ${account.default_currency?.toUpperCase()}`);
