@@ -60,6 +60,7 @@ export default async function TermsPage({
         "Minden vásárlásról **elektronikus számlát** állítunk ki a Számlázz.hu rendszerén keresztül, amely azt a NAV Online Számla rendszerébe is bejelenti.",
         "A számlát a visszaigazoló levélhez csatoljuk, és a megrendelésednél bármikor letöltheted.",
         "Ezért kéri a fizetési oldal a számlázási nevet és címet. Ha cégként vásárolsz, ott adhatod meg az adószámot is.",
+        "A megrendelés leadásával **hozzájárulsz ahhoz, hogy a számlát elektronikus úton, PDF formátumban kapd meg** — e-mailben, és a fiókodban letölthetően. Papíralapú számlát nem küldünk. Ha mégis arra lenne szükséged, írj, és megoldjuk.",
       ],
     },
     {
@@ -121,6 +122,7 @@ export default async function TermsPage({
         "Every purchase is invoiced electronically through Számlázz.hu, which also reports the invoice to the Hungarian tax authority's NAV Online Invoice system.",
         "The invoice is attached to your confirmation email and can be downloaded from your order at any time.",
         "This is why the payment page asks for a billing name and address. Businesses can also enter a tax number there.",
+        "By placing an order you **consent to receiving the invoice electronically, as a PDF** — by email, and downloadable from your account. We do not send paper invoices. If you need one, write to us and we will sort it out.",
       ],
     },
     {
