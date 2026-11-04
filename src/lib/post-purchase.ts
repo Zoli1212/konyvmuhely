@@ -49,7 +49,7 @@ async function sendPurchaseEmails(orderId: string): Promise<void> {
       customerEmail: true,
       confirmationEmailSentAt: true,
       user: { select: { name: true, email: true, locale: true } },
-      invoice: { select: { number: true } },
+      invoice: { select: { number: true, status: true, lastError: true } },
       items: {
         select: {
           titleSnapshot: true,
@@ -148,6 +148,8 @@ async function sendPurchaseEmails(orderId: string): Promise<void> {
     currency: order.currency,
     titles: order.items.map((item) => item.titleSnapshot),
     invoiceNumber: order.invoice?.number ?? null,
+    invoiceError:
+      order.invoice?.status === "FAILED" ? order.invoice.lastError : null,
   });
 
   await sendEmail({

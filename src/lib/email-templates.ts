@@ -65,6 +65,12 @@ const copy = {
     saleItems: "Tételek",
     saleInvoice: "Számla",
     saleInvoicePending: "még nem készült el",
+    saleInvoiceFailed: "NEM SIKERÜLT KIÁLLÍTANI",
+    saleFailedSubject: (store: string, amount: string) =>
+      `${store} – eladás ${amount}, DE A SZÁMLA NEM KÉSZÜLT EL`,
+    saleFailedWarning:
+      "A vásárlás rendben lezajlott és a vevő megkapta a könyvet, de a számla kiállítása elakadt. Ezt pótolni kell: nyisd meg a megrendeléseket, és nyomd meg a Számla újra gombot.",
+    saleFailedReason: "A számlázó ezt válaszolta",
   },
 
   en: {
@@ -105,6 +111,12 @@ const copy = {
     saleItems: "Items",
     saleInvoice: "Invoice",
     saleInvoicePending: "not issued yet",
+    saleInvoiceFailed: "COULD NOT BE ISSUED",
+    saleFailedSubject: (store: string, amount: string) =>
+      `${store} – sale ${amount}, BUT THE INVOICE FAILED`,
+    saleFailedWarning:
+      "The purchase went through and the buyer has their book, but issuing the invoice failed. This needs sorting: open the orders and press Retry invoice.",
+    saleFailedReason: "The invoicing service replied",
   },
 } satisfies Record<Locale, Record<string, unknown>>;
 
@@ -260,7 +272,14 @@ export function saleNotificationEmail(options: {
   currency: string;
   titles: string[];
   invoiceNumber: string | null;
+  /** When the invoice failed, what the invoicing service said. */
+  invoiceError?: string | null;
 }): RenderedEmail {
+  // A failed invoice is a tax problem, not a detail. Until now it read the
+  // same as "still being prepared", so the one notice that could catch it
+  // said nothing - including in the subject line, which is all that shows
+  // in an inbox list.
+  const failed = Boolean(options.invoiceError);
   const t = copy.hu;
   const base = siteUrl();
   const amount = formatMoney(options.amountMinor, options.currency, "hu");
@@ -275,14 +294,22 @@ export function saleNotificationEmail(options: {
        <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.total)}</td><td style="font-weight:600;">${escapeHtml(amount)}</td></tr>
        <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.saleBuyer)}</td><td>${escapeHtml(options.buyerName)} &lt;${escapeHtml(options.buyerEmail)}&gt;</td></tr>
        <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.saleItems)}</td><td>${escapeHtml(options.titles.join(", "))}</td></tr>
-       <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.saleInvoice)}</td><td>${escapeHtml(options.invoiceNumber ?? t.saleInvoicePending)}</td></tr>
+       <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.saleInvoice)}</td><td${failed ? ' style="color:#c2410c;font-weight:600;"' : ""}>${escapeHtml(options.invoiceNumber ?? (failed ? t.saleInvoiceFailed : t.saleInvoicePending))}</td></tr>
        <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.orderRef)}</td><td style="font-family:monospace;font-size:12px;">${escapeHtml(options.orderId)}</td></tr>
      </table>`,
+    failed
+      ? `<div style="margin:0 0 18px 0;padding:14px 16px;border:1px solid #c2410c;border-radius:8px;background:#fff7ed;">
+           <p style="margin:0 0 8px 0;font-size:14px;line-height:1.5;color:#7c2d12;">${escapeHtml(t.saleFailedWarning)}</p>
+           <p style="margin:0;font-size:12px;line-height:1.5;color:#9a3412;"><strong>${escapeHtml(t.saleFailedReason)}:</strong> ${escapeHtml(options.invoiceError ?? "")}</p>
+         </div>`
+      : "",
     emailButton("Megrendelések", `${base}/hu/admin/orders`),
   ].join("");
 
   return {
-    subject: t.saleSubject(env.storeName, amount),
+    subject: failed
+      ? t.saleFailedSubject(env.storeName, amount)
+      : t.saleSubject(env.storeName, amount),
     html: emailLayout({
       title: t.saleSubject(env.storeName, amount),
       preheader: `${options.titles.join(", ")} — ${amount}`,
@@ -294,8 +321,14 @@ export function saleNotificationEmail(options: {
       `${t.total}: ${amount}`,
       `${t.saleBuyer}: ${options.buyerName} <${options.buyerEmail}>`,
       `${t.saleItems}: ${options.titles.join(", ")}`,
-      `${t.saleInvoice}: ${options.invoiceNumber ?? t.saleInvoicePending}`,
+      `${t.saleInvoice}: ${
+        options.invoiceNumber ??
+        (failed ? t.saleInvoiceFailed : t.saleInvoicePending)
+      }`,
       `${t.orderRef}: ${options.orderId}`,
+      ...(failed
+        ? ["", t.saleFailedWarning, `${t.saleFailedReason}: ${options.invoiceError}`]
+        : []),
     ].join("\n"),
   };
 }
