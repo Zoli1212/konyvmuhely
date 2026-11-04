@@ -86,7 +86,9 @@ The closing parts address the unity of wisdom and compassion, the unity of actio
 
   {
     slug: "tantra-nagykonyve",
-    file: f("A TANTRA NAGYKÖNYVE.pdf"),
+    // Points at the builder's own output rather than a copy, so rebuilding
+    // the book is all it takes for the next publish to carry the change.
+    file: f("tantra_nagykonyve/A tantra nagykonyve.pdf"),
     downloadName: "A-tantra-nagykonyve.pdf",
     pages: 128,
     priceHuf: 4990,
