@@ -199,6 +199,19 @@ export default async function BookPage({
             </dl>
           ) : null}
 
+          {/* An age mark on the card is a label; here, where someone decides
+              whether to buy, it has to say what it is about. */}
+          {record.ageRestricted ? (
+            <div className="panel mt-8 flex items-start gap-3 border-rose-400/35 px-5 py-4">
+              <span className="chip chip-warn shrink-0">
+                {t.book.ageRestricted}
+              </span>
+              <p className="text-sm leading-relaxed text-paper-dim">
+                {t.book.ageRestrictedNote}
+              </p>
+            </div>
+          ) : null}
+
           {/* --- long description --- */}
           {paragraphs.length > 0 ? (
             <section className="mt-12 max-w-2xl border-t border-ink-800 pt-10">

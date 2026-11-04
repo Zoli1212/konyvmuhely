@@ -76,6 +76,11 @@ export function BookCard({
               </span>
             </span>
           ) : null}
+          {book.ageRestricted ? (
+            <span className="chip chip-warn" title={t.book.ageRestrictedNote}>
+              {t.book.ageRestricted}
+            </span>
+          ) : null}
           <FileChips files={book.files} locale={locale} />
         </div>
       </div>

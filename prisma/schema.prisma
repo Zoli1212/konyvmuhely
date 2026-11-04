@@ -170,6 +170,11 @@ model Book {
 
   published Boolean @default(false)
   featured  Boolean @default(false)
+
+  /// Shown with an 18+ mark and a warning. Set per title rather than derived
+  /// from the subject, because one book in a series can need it while the
+  /// rest do not.
+  ageRestricted Boolean @default(false)
   /// Manual ordering on the storefront; lower comes first.
   sortIndex Int     @default(0)
 

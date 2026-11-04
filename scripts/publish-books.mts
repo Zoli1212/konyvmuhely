@@ -198,6 +198,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     pageCount: entry.pages,
     published: true,
     featured: entry.featured ?? false,
+    ageRestricted: entry.ageRestricted ?? false,
     sortIndex: index,
     coverUrl: `/api/assets/${coverBlob.pathname}`,
     coverPathname: coverBlob.pathname,

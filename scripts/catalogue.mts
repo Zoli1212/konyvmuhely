@@ -31,6 +31,8 @@ export type CatalogueEntry = {
   accent: "gold" | "copper" | "jade" | "lapis" | "amethyst" | "saffron";
   mark: "wheel" | "lotus" | "knot" | "flame" | "triple" | "sun";
   featured?: boolean;
+  /** Marks the title 18+ in the shop. */
+  ageRestricted?: boolean;
 };
 
 const BIG = "c:\\Users\\mzolt\\Desktop\\ClaudProjects\\nagy_konyvek";
@@ -41,6 +43,48 @@ const SERIES = "Tibeti ösvények";
 
 const BIG_BOOKS: CatalogueEntry[] = [
   {
+    slug: "mahamudra-osvenye",
+    file: f("Mahamudra Ösvénye.pdf"),
+    downloadName: "Mahamudra-osvenye.pdf",
+    pages: 326,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    featured: true,
+    accent: "gold",
+    mark: "knot",
+
+    titleHu: "Mahamudra Ösvénye",
+    titleEn: "The Path of Mahamudra",
+    subtitleHu: "Milarepa tanításai és gyakorlatai",
+    subtitleEn: "The teachings and practices of Milarepa",
+
+    blurbHu:
+      "A Nagy Pecsét ösvénye végigvezetve, Milarepa életén és dalain keresztül: a samatha és a vipassana alapjaitól a tudat természetének közvetlen megpillantásáig. Tizenhat rész, az előkészületektől a végső gyümölcsig.",
+    blurbEn:
+      "The path of the Great Seal, traced through the life and songs of Milarepa: from the groundwork of samatha and vipassana to the direct glimpse of the nature of mind. Sixteen parts, from preparation to final fruition.",
+
+    descriptionHu: `A "mahámudra" szanszkrit szó: maha annyi mint nagy, mudra pedig pecsét. A kagyü hagyomány központi tanítása arról szól, hogy a tudat természete már most tökéletes — nem megszerezni kell, hanem felismerni.
+
+Ez a kötet nem fogalmi bevezető, hanem végigvezetés. Az első rész a mahámudra jelentését és indiai gyökereit tisztázza, majd Milarepa életrajza következik: a bűntől és a bánattól Marpa lábáig, a magányos remeteségtől a dalok bölcsességéig. Az életút itt nem díszítés, hanem a tanítás hordozója.
+
+Innen a könyv a gyakorlásba fordul. Testtartás és légzés, a tudat megnyugtatása (samatha), a valóság természetének feltárása (vipassana), majd a tudat természetének közvetlen megpillantása. Külön fejezet foglalkozik a guru jógával, az illúzió játékával (mája), az érzelmek átalakításával, a halállal és a bardóval, a karmával és az újjászületéssel.
+
+A záró részek a bölcsesség és az együttérzés egységét, a cselekvés és a meditáció egységét, végül a mahámudra végső gyümölcsét tárgyalják.
+
+326 oldal, tizenhat nagy résszel. Gyakorlóknak, akik nem elégszenek meg az áttekintéssel.`,
+    descriptionEn: `"Mahamudra" is Sanskrit: maha meaning great, mudra meaning seal. The central teaching of the Kagyu lineage holds that the nature of mind is already perfect — not something to acquire, but something to recognise.
+
+This is not a conceptual introduction but a guided path. The opening clarifies the meaning and Indian roots of mahamudra, then turns to the life of Milarepa: from wrongdoing and grief to the feet of Marpa, from solitary retreat to the wisdom of the songs. The biography is not decoration here; it carries the teaching.
+
+From there the book turns to practice. Posture and breath, calming the mind (samatha), uncovering the nature of reality (vipassana), and then the direct glimpse of mind's own nature. Separate chapters treat guru yoga, the play of illusion (maya), the transformation of emotion, death and the bardo, karma and rebirth.
+
+The closing parts address the unity of wisdom and compassion, the unity of action and meditation, and finally the ultimate fruition of mahamudra.
+
+326 pages in sixteen major parts. For practitioners who want more than an overview.`,
+  },
+
+  {
     slug: "tantra-nagykonyve",
     file: f("A TANTRA NAGYKÖNYVE.pdf"),
     downloadName: "A-tantra-nagykonyve.pdf",
@@ -49,6 +93,7 @@ const BIG_BOOKS: CatalogueEntry[] = [
     author: AUTHOR,
     series: SERIES,
     featured: true,
+    ageRestricted: true,
     accent: "copper",
     mark: "flame",
 
@@ -107,48 +152,6 @@ Appendix: glossary, a comparative table of the four tantra classes, masters and 
 
 128 pages, seventeen chapters, a hundred and twenty-seven sections.`,
   },
-  {
-    slug: "mahamudra-osvenye",
-    file: f("Mahamudra Ösvénye.pdf"),
-    downloadName: "Mahamudra-osvenye.pdf",
-    pages: 326,
-    priceHuf: 4990,
-    author: AUTHOR,
-    series: SERIES,
-    featured: true,
-    accent: "gold",
-    mark: "knot",
-
-    titleHu: "Mahamudra Ösvénye",
-    titleEn: "The Path of Mahamudra",
-    subtitleHu: "Milarepa tanításai és gyakorlatai",
-    subtitleEn: "The teachings and practices of Milarepa",
-
-    blurbHu:
-      "A Nagy Pecsét ösvénye végigvezetve, Milarepa életén és dalain keresztül: a samatha és a vipassana alapjaitól a tudat természetének közvetlen megpillantásáig. Tizenhat rész, az előkészületektől a végső gyümölcsig.",
-    blurbEn:
-      "The path of the Great Seal, traced through the life and songs of Milarepa: from the groundwork of samatha and vipassana to the direct glimpse of the nature of mind. Sixteen parts, from preparation to final fruition.",
-
-    descriptionHu: `A "mahámudra" szanszkrit szó: maha annyi mint nagy, mudra pedig pecsét. A kagyü hagyomány központi tanítása arról szól, hogy a tudat természete már most tökéletes — nem megszerezni kell, hanem felismerni.
-
-Ez a kötet nem fogalmi bevezető, hanem végigvezetés. Az első rész a mahámudra jelentését és indiai gyökereit tisztázza, majd Milarepa életrajza következik: a bűntől és a bánattól Marpa lábáig, a magányos remeteségtől a dalok bölcsességéig. Az életút itt nem díszítés, hanem a tanítás hordozója.
-
-Innen a könyv a gyakorlásba fordul. Testtartás és légzés, a tudat megnyugtatása (samatha), a valóság természetének feltárása (vipassana), majd a tudat természetének közvetlen megpillantása. Külön fejezet foglalkozik a guru jógával, az illúzió játékával (mája), az érzelmek átalakításával, a halállal és a bardóval, a karmával és az újjászületéssel.
-
-A záró részek a bölcsesség és az együttérzés egységét, a cselekvés és a meditáció egységét, végül a mahámudra végső gyümölcsét tárgyalják.
-
-326 oldal, tizenhat nagy résszel. Gyakorlóknak, akik nem elégszenek meg az áttekintéssel.`,
-    descriptionEn: `"Mahamudra" is Sanskrit: maha meaning great, mudra meaning seal. The central teaching of the Kagyu lineage holds that the nature of mind is already perfect — not something to acquire, but something to recognise.
-
-This is not a conceptual introduction but a guided path. The opening clarifies the meaning and Indian roots of mahamudra, then turns to the life of Milarepa: from wrongdoing and grief to the feet of Marpa, from solitary retreat to the wisdom of the songs. The biography is not decoration here; it carries the teaching.
-
-From there the book turns to practice. Posture and breath, calming the mind (samatha), uncovering the nature of reality (vipassana), and then the direct glimpse of mind's own nature. Separate chapters treat guru yoga, the play of illusion (maya), the transformation of emotion, death and the bardo, karma and rebirth.
-
-The closing parts address the unity of wisdom and compassion, the unity of action and meditation, and finally the ultimate fruition of mahamudra.
-
-326 pages in sixteen major parts. For practitioners who want more than an overview.`,
-  },
-
   {
     slug: "tibeti-meditaciok-es-imak",
     file: f("Tibeti meditációs gyakorlatok és imák_v02.pdf"),

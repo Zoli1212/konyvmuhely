@@ -85,6 +85,9 @@ const hu = {
     editionHu: "magyar",
     editionEn: "angol",
     booklet: "füzet",
+    ageRestricted: "18+",
+    ageRestrictedNote:
+      "Felnőtt tartalom. A kötet egy fejezete a tantrikus szexuális gyakorlatot tárgyalja. 18 éven aluliaknak nem ajánljuk.",
     volume: "könyv",
     noFiles: "Ehhez a kötethez még nincs feltöltve letölthető fájl.",
     instantDownload: "Azonnali letöltés",
@@ -518,6 +521,9 @@ const en: Dictionary = {
     editionHu: "Hungarian",
     editionEn: "English",
     booklet: "booklet",
+    ageRestricted: "18+",
+    ageRestrictedNote:
+      "Adult content. One chapter of this volume covers tantric sexual practice. Not recommended for readers under 18.",
     volume: "book",
     noFiles: "No downloadable file has been attached to this title yet.",
     instantDownload: "Instant download",

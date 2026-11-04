@@ -357,6 +357,16 @@
     color: var(--color-gold-300);
   }
 
+  /* Loud enough to be seen at a glance on a card, not so loud it reads as
+     an error. An age mark is information, not a warning about the shop. */
+  .chip-warn {
+    border-color: color-mix(in oklab, var(--color-rose-400) 45%, transparent);
+    background-color: color-mix(in oklab, var(--color-rose-400) 12%, transparent);
+    color: var(--color-rose-400);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
   .chip-sage {
     border-color: rgb(127 200 160 / 0.4);
     background-color: rgb(127 200 160 / 0.1);

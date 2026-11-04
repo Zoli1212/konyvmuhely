@@ -29,6 +29,7 @@ const bookSelect = {
   pageCount: true,
   published: true,
   featured: true,
+  ageRestricted: true,
   sortIndex: true,
   createdAt: true,
   files: {
