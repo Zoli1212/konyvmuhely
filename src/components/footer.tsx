@@ -2,13 +2,19 @@ import Link from "next/link";
 
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
-import { env } from "@/lib/env";
+import { company, env } from "@/lib/env";
 import { routes } from "@/lib/routes";
 
 export function Footer({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   // Rendered on the server at request time; no client clock involved.
   const year = new Date().getFullYear();
+
+  // The shop trades under a name, but the seller is a company, and Hungarian
+  // law requires a webshop to publish who that is. Payment providers check
+  // the same thing: a site whose pages never name the registered business
+  // does not obviously belong to it.
+  const seller = company();
 
   return (
     <footer className="mt-24 border-t border-ink-800">
@@ -19,6 +25,23 @@ export function Footer({ locale }: { locale: Locale }) {
           </p>
           <p className="mt-2 text-sm leading-relaxed text-mute">
             {t.footer.tagline}
+          </p>
+
+          <p className="mt-4 text-xs leading-relaxed text-mute">
+            {t.footer.operatedBy} <span className="text-paper-dim">{seller.name}</span>
+            {seller.seat ? <><br />{seller.seat}</> : null}
+            {seller.taxNumber ? (
+              <>
+                <br />
+                {t.footer.taxNumber}: {seller.taxNumber}
+              </>
+            ) : null}
+            {seller.registrationNumber ? (
+              <>
+                {" · "}
+                {t.footer.regNumber}: {seller.registrationNumber}
+              </>
+            ) : null}
           </p>
         </div>
 

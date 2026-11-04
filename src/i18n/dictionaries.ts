@@ -424,6 +424,9 @@ const hu = {
 
   footer: {
     tagline: "Digitális könyvek közvetlenül a szerzőtől.",
+    operatedBy: "Üzemeltető:",
+    taxNumber: "Adószám",
+    regNumber: "Cégjegyzékszám",
     books: "Könyvek",
     library: "Könyvtáram",
     orders: "Rendeléseim",
@@ -853,6 +856,9 @@ const en: Dictionary = {
 
   footer: {
     tagline: "Digital books straight from the author.",
+    operatedBy: "Operated by",
+    taxNumber: "Tax number",
+    regNumber: "Company reg. no.",
     books: "Books",
     library: "My library",
     orders: "My orders",
