@@ -24,7 +24,14 @@ export default async function AdminOrdersPage({
       status: true,
       customerEmail: true,
       user: { select: { name: true, email: true } },
-      invoice: { select: { status: true, number: true, lastError: true } },
+      invoice: {
+        select: {
+          status: true,
+          number: true,
+          lastError: true,
+          sentToBuyerAt: true,
+        },
+      },
       items: {
         select: { book: { select: { titleHu: true, titleEn: true } } },
       },
@@ -108,12 +115,29 @@ export default async function AdminOrdersPage({
 
                 <td>
                   {invoiceStatus === "ISSUED" ? (
-                    <a
-                      href={`/api/invoice/${order.id}`}
-                      className="font-mono text-xs text-gold-300 underline-offset-2 hover:underline"
-                    >
-                      {order.invoice?.number ?? t.admin.invoiceStatus.ISSUED}
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <a
+                        href={`/api/invoice/${order.id}`}
+                        className="font-mono text-xs text-gold-300 underline-offset-2 hover:underline"
+                      >
+                        {order.invoice?.number ?? t.admin.invoiceStatus.ISSUED}
+                      </a>
+                      {/* An invoice issued after the confirmation went out has
+                          never reached the buyer; this is the only way to get
+                          it to them. Hidden once it has been delivered. */}
+                      {order.invoice?.sentToBuyerAt ? null : (
+                        <form action={retryInvoice}>
+                          <input type="hidden" name="orderId" value={order.id} />
+                          <input type="hidden" name="locale" value={locale} />
+                          <SubmitButton
+                            className="btn btn-ghost btn-sm"
+                            pendingLabel="…"
+                          >
+                            {t.admin.table.sendInvoice}
+                          </SubmitButton>
+                        </form>
+                      )}
+                    </div>
                   ) : invoiceStatus === "FAILED" ? (
                     <div className="flex items-center gap-2">
                       <span
