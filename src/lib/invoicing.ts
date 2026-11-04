@@ -106,6 +106,9 @@ export async function processInvoice(orderId: string): Promise<InvoiceOutcome> {
     {
       externalId: order.id,
       orderNumber: order.id,
+      // The order id also goes in the comment, which no plan gates, so it
+      // stays on the invoice even where rendelesSzam cannot be sent.
+      comment: `Megrendelés: ${order.id}`,
       language,
       currency: order.currency,
       buyer: {

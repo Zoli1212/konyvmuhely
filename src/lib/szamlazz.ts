@@ -68,6 +68,19 @@ export function szamlazzConfigured(): boolean {
   return Boolean(process.env.SZAMLAZZ_AGENT_KEY);
 }
 
+/**
+ * Whether to send the fields Szamlazz.hu gates behind a paid plan.
+ *
+ * `rendelesSzam` is one of them. On a plan without it the whole request is
+ * refused with error 8 — "nincs jogosultsagod vagy megfelelo dijcsomagod" —
+ * so a purely cosmetic field takes the invoice down with it. Off unless
+ * SZAMLAZZ_PLAN_EXTRAS is set, because an invoice that exists beats an
+ * invoice that carries an order number.
+ */
+function extras(): boolean {
+  return process.env.SZAMLAZZ_PLAN_EXTRAS === "true";
+}
+
 // --- XML helpers ---
 
 function esc(value: string | number | null | undefined): string {
@@ -143,7 +156,7 @@ function buildInvoiceXml(
     <penznem>${esc(input.currency.toUpperCase())}</penznem>
     <szamlaNyelve>${input.language === "en" ? "en" : "hu"}</szamlaNyelve>
     ${opt("megjegyzes", input.comment)}
-    ${opt("rendelesSzam", input.orderNumber)}
+    ${extras() ? opt("rendelesSzam", input.orderNumber) : ""}
     <fizetve>true</fizetve>
   </fejlec>
   <elado>
