@@ -81,6 +81,19 @@ function extras(): boolean {
   return process.env.SZAMLAZZ_PLAN_EXTRAS === "true";
 }
 
+/**
+ * Whether to ask for a true electronic invoice.
+ *
+ * An e-szamla is the right document for a shop that only ever emails a PDF,
+ * but the feature has to be switched on in the Szamlazz.hu account first;
+ * without it the request fails outright with error 54. Defaults to on,
+ * because that is what this shop should issue — set SZAMLAZZ_ESZAMLA=false
+ * to fall back to an ordinary invoice while the account is sorted out.
+ */
+function electronicInvoice(): boolean {
+  return process.env.SZAMLAZZ_ESZAMLA !== "false";
+}
+
 // --- XML helpers ---
 
 function esc(value: string | number | null | undefined): string {
@@ -143,7 +156,7 @@ function buildInvoiceXml(
 <xmlszamla xmlns="http://www.szamlazz.hu/xmlszamla" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.szamlazz.hu/xmlszamla https://www.szamlazz.hu/szamla/docs/xsds/agent/xmlszamla.xsd">
   <beallitasok>
     <szamlaagentkulcs>${esc(process.env.SZAMLAZZ_AGENT_KEY)}</szamlaagentkulcs>
-    <eszamla>true</eszamla>
+    <eszamla>${electronicInvoice() ? "true" : "false"}</eszamla>
     <szamlaLetoltes>true</szamlaLetoltes>
     <valaszVerzio>2</valaszVerzio>
     <szamlaKulsoAzon>${esc(input.externalId)}</szamlaKulsoAzon>
