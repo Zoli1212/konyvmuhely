@@ -60,6 +60,14 @@ const copy = {
 
     saleSubject: (store: string, amount: string) =>
       `${store} – új eladás, ${amount}`,
+    invoiceReadySubject: (store: string, number: string) =>
+      `${store} – a számlád (${number})`,
+    invoiceReadyHeading: "Elkészült a számlád",
+    invoiceReadyLead:
+      "A vásárlásodról szóló számla elkészült, és csatolva találod ehhez a levélhez. Elnézést kérünk, amiért nem a visszaigazolóval együtt érkezett.",
+    invoiceReadyWhere:
+      "A számlát bármikor újra letöltheted a fiókodban, a Rendeléseim oldalon.",
+    invoiceReadyCta: "Rendeléseim",
     saleHeading: "Új vásárlás",
     saleBuyer: "Vásárló",
     saleItems: "Tételek",
@@ -106,6 +114,14 @@ const copy = {
     verifyExpiry: (hours: number) => `The link is valid for ${hours} hours.`,
 
     saleSubject: (store: string, amount: string) => `${store} – new sale, ${amount}`,
+    invoiceReadySubject: (store: string, number: string) =>
+      `${store} – your invoice (${number})`,
+    invoiceReadyHeading: "Your invoice is ready",
+    invoiceReadyLead:
+      "The invoice for your purchase has been issued and is attached to this message. Our apologies that it did not arrive with the confirmation.",
+    invoiceReadyWhere:
+      "You can download it again at any time from the My orders page in your account.",
+    invoiceReadyCta: "My orders",
     saleHeading: "New purchase",
     saleBuyer: "Buyer",
     saleItems: "Items",
@@ -264,6 +280,54 @@ export function emailVerificationEmail(options: {
 }
 
 /** Notice to the shop owner. Always in Hungarian - there is one recipient. */
+/**
+ * Sent on its own when an invoice was issued after the confirmation had
+ * already gone out — a retry, in practice. Deliberately not a second copy
+ * of the confirmation: the buyer already has the books and the links, and
+ * what they are missing is one document.
+ */
+export function invoiceReadyEmail(options: {
+  locale: Locale;
+  orderId: string;
+  invoiceNumber: string;
+}): RenderedEmail {
+  const t = copy[options.locale];
+  const base = siteUrl();
+  const ordersUrl = `${base}/${options.locale}/orders`;
+
+  const body = [
+    emailHeading(t.invoiceReadyHeading),
+    `<p style="margin:0 0 14px 0;font-size:15px;line-height:1.6;">${escapeHtml(t.invoiceReadyLead)}</p>`,
+    `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 18px 0;font-size:14px;">
+       <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.invoiceNumber)}</td><td style="font-weight:600;">${escapeHtml(options.invoiceNumber)}</td></tr>
+       <tr><td style="padding:4px 16px 4px 0;color:#8b8796;">${escapeHtml(t.orderRef)}</td><td style="font-family:monospace;font-size:12px;">${escapeHtml(options.orderId)}</td></tr>
+     </table>`,
+    `<p style="margin:0 0 18px 0;font-size:14px;line-height:1.6;color:#8b8796;">${escapeHtml(t.invoiceReadyWhere)}</p>`,
+    emailButton(t.invoiceReadyCta, ordersUrl),
+  ].join("");
+
+  return {
+    subject: t.invoiceReadySubject(env.storeName, options.invoiceNumber),
+    html: emailLayout({
+      title: t.invoiceReadySubject(env.storeName, options.invoiceNumber),
+      preheader: t.invoiceReadyHeading,
+      body,
+      footerNote: t.footer,
+    }),
+    text: [
+      t.invoiceReadyHeading,
+      "",
+      t.invoiceReadyLead,
+      "",
+      `${t.invoiceNumber}: ${options.invoiceNumber}`,
+      `${t.orderRef}: ${options.orderId}`,
+      "",
+      t.invoiceReadyWhere,
+      ordersUrl,
+    ].join("\n"),
+  };
+}
+
 export function saleNotificationEmail(options: {
   orderId: string;
   buyerName: string;

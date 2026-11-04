@@ -285,6 +285,12 @@ model Invoice {
   lastError String?   @db.Text
   issuedAt  DateTime?
 
+  /// When the buyer actually received the invoice PDF — attached to the
+  /// purchase confirmation, or sent on its own after a retry. Null means
+  /// nobody has sent it to them yet, which is the only case where a retry
+  /// should mail anything: a second copy is worse than none.
+  sentToBuyerAt DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

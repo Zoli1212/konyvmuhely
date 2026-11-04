@@ -1,6 +1,7 @@
 import { isLocale, type Locale } from "@/i18n/config";
 import { emailConfigured, sendEmail } from "./email";
 import {
+  invoiceReadyEmail,
   purchaseConfirmationEmail,
   saleNotificationEmail,
 } from "./email-templates";
@@ -136,6 +137,16 @@ async function sendPurchaseEmails(orderId: string): Promise<void> {
     data: { confirmationEmailSentAt: new Date() },
   });
 
+  // Only when the PDF was really on the message. A confirmation sent before
+  // the invoice existed must not count as delivery, or the retry would stay
+  // silent and the buyer would never get it.
+  if (attachment) {
+    await prisma.invoice.updateMany({
+      where: { orderId: order.id },
+      data: { sentToBuyerAt: new Date() },
+    });
+  }
+
   // --- notify the shop owner ---
   const ownerAddress = await shopOwnerAddress();
   if (!ownerAddress) return;
@@ -189,4 +200,91 @@ async function* streamChunks(stream: ReadableStream<Uint8Array>) {
   } finally {
     reader.releaseLock();
   }
+}
+
+
+/**
+ * Sends the invoice on its own, but only to a buyer who has not had it.
+ *
+ * The case this exists for: the invoice failed at purchase time, the
+ * confirmation went out without it, and someone pressed retry afterwards.
+ * Nothing else would tell the buyer their invoice now exists.
+ *
+ * Does nothing when the confirmation has not gone out yet - that message
+ * will carry the PDF itself - and nothing when the invoice has already
+ * reached them, because a second copy is worse than none.
+ */
+export async function sendInvoiceIfBuyerHasNotGotIt(
+  orderId: string,
+): Promise<"sent" | "already-had-it" | "not-yet-issued" | "no-confirmation-yet" | "skipped"> {
+  if (!emailConfigured()) return "skipped";
+
+  const order = await prisma.order.findUnique({
+    where: { id: orderId },
+    select: {
+      id: true,
+      status: true,
+      customerEmail: true,
+      confirmationEmailSentAt: true,
+      user: { select: { email: true, locale: true } },
+      invoice: { select: { status: true, number: true, sentToBuyerAt: true } },
+    },
+  });
+
+  if (!order || order.status !== "PAID") return "skipped";
+
+  const invoice = order.invoice;
+  if (!invoice || invoice.status !== "ISSUED" || !invoice.number) {
+    return "not-yet-issued";
+  }
+  if (invoice.sentToBuyerAt) return "already-had-it";
+  // The confirmation is still to come and will carry the PDF.
+  if (!order.confirmationEmailSentAt) return "no-confirmation-yet";
+
+  const pdfRef = await getInvoicePdfRef(orderId);
+  if (!pdfRef) return "not-yet-issued";
+
+  const stored = await readStoredFile({
+    storage: pdfRef.storage,
+    pathname: pdfRef.pathname,
+    visibility: "private",
+  });
+  if (!stored) return "not-yet-issued";
+
+  const chunks: Uint8Array[] = [];
+  for await (const chunk of streamChunks(stored.stream)) chunks.push(chunk);
+
+  const locale: Locale = isLocale(order.user.locale) ? order.user.locale : "hu";
+  const message = invoiceReadyEmail({
+    locale,
+    orderId: order.id,
+    invoiceNumber: invoice.number,
+  });
+
+  const sent = await sendEmail({
+    to: order.customerEmail ?? order.user.email,
+    subject: message.subject,
+    html: message.html,
+    text: message.text,
+    attachments: [
+      {
+        filename: `szamla-${invoice.number.replace(/[^\w-]/g, "_")}.pdf`,
+        content: Buffer.concat(chunks),
+        contentType: "application/pdf",
+      },
+    ],
+    idempotencyKey: `invoice-${order.id}`,
+  });
+
+  if (!sent.ok) {
+    console.error("invoice email not sent", order.id, sent.error);
+    return "skipped";
+  }
+
+  await prisma.invoice.updateMany({
+    where: { orderId: order.id },
+    data: { sentToBuyerAt: new Date() },
+  });
+
+  return "sent";
 }
