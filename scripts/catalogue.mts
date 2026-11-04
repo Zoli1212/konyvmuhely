@@ -41,6 +41,73 @@ const SERIES = "Tibeti ösvények";
 
 const BIG_BOOKS: CatalogueEntry[] = [
   {
+    slug: "tantra-nagykonyve",
+    file: f("A TANTRA NAGYKÖNYVE.pdf"),
+    downloadName: "A-tantra-nagykonyve.pdf",
+    pages: 128,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    featured: true,
+    accent: "copper",
+    mark: "flame",
+
+    titleHu: "A Tantra Nagykönyve",
+    titleEn: "The Great Book of Tantra",
+    subtitleHu: "A vadzsrajána teljes útja",
+    subtitleEn: "The complete path of Vajrayana",
+    coverTitle: "A Tantra Nagykönyve",
+    coverSubtitle: "A vadzsrajána teljes útja",
+
+    blurbHu:
+      "A buddhista tantra egésze egy kötetben: beavatás és szamaja, istenségjóga, csatornák és szelek, tummo, karmamudrá, Náropa hat jógája, bardó és phowa, végül a mahámudrá. Tizenhét fejezet, százhuszonhét alfejezet.",
+    blurbEn:
+      "The whole of Buddhist tantra in one volume: initiation and samaya, deity yoga, channels and winds, tummo, karmamudra, the six yogas of Naropa, bardo and phowa, and finally mahamudra. Seventeen chapters, a hundred and twenty-seven sections.",
+
+    descriptionHu: `A *tantra* szanszkrit szó: szövedék, szövőszéken feszülő fonál, folytonosság. A tibeti *gyü* ugyanezt mondja. Nem költői kép, hanem a rendszer meghatározása — az, ami a kezdettől a végig megszakítatlanul jelen van benned: a tudat tiszta, ragyogó természete.
+
+Ebből következik minden más. A szútra célnak tekinti ezt a természetet, amit három világkorszak alatt kell elérni; a tantra **alapnak** tekinti, amely már most adott. Ezért nevezik eredményjárműnek: nem az okot műveled, hogy gyümölcsöt hozzon, hanem az eredményt veszed fel ösvénynek.
+
+A könyv kimondja azt is, ami a tantra **nem**. Nem szexuális technika — a szexuális gyakorlat benne van, egy teljes fejezet szól róla, de a rendszer nagyjából egy huszadrésze. Nem ezoterikus energiamunka, nem mágia, és nem varázsszer: gyorsabb út, de csak annak, aki a lassút is elbírná.
+
+A szerkezet végigviszi az egész ösvényt. **Előkészítés:** a ngöndro — menedék, leborulások, Vadzsraszattva, mandala-felajánlás, gurujóga —, a számlálás ritmusával és a gyakori hibákkal együtt. **Beavatás:** a négy abhiséka egyenként, a szamaja rendszere, a fogadalom megsértése és helyreállítása.
+
+**Istenségjóga:** a jidam kiválasztása, a három szamádhi, a kiépítés menete a magszótagtól a teljes alakig, a tiszta büszkeség, és hogyan fejtsd meg a saját szádhanádat.
+
+**A vadzsratest:** három csatorna, tíz szél, fehér és vörös csepp, a csomók feloldása, a trülkhor. Innen a **beteljesítési szakasz**: vadzsra-recitáció, váza-légzés, **tummo**, a négy öröm leszálló és felszálló sorrendben, a tiszta fény és az illuzórikus test.
+
+A **karmamudrá** fejezete nem kerüli meg a témát: előfeltételek, a partner kiválasztása és a kölcsönös megállapodás, az aktus menete, a visszatartás technikája — és külön alfejezet a hibákról, veszélyekről és az etikai határokról.
+
+Azután **Náropa hat jógája**, a **bardó** nyolc felbomlási szakasza és a phowa, a haragos istenségek és a csöd, a guru és a vonal kérdése — beleértve azt is, mi a teendő, ha a kapcsolat megromlik.
+
+A záró fejezetek a tantra filozófiáját, majd a modern élethez való viszonyát tárgyalják: mi veszett el a nyugati átvételben, hol keveredik össze a neotantra a vadzsrajánával, és milyen mintázat szerint történnek a visszaélések.
+
+Függelék: glosszárium, a négy tantraosztály összehasonlító táblázata, mesterek és vonalak, gyakorlati útmutatók, kérdések és válaszok.
+
+128 oldal, tizenhét fejezet, százhuszonhét alfejezet.`,
+    descriptionEn: `*Tantra* is Sanskrit for weave, warp thread, continuity. The Tibetan *gyü* says the same. Not a poetic image but the definition of the system — that which is present in you unbroken from beginning to end: the clear, radiant nature of mind.
+
+Everything else follows. Sutra treats that nature as a goal to be reached across three aeons; tantra treats it as the **ground**, already given. Hence the name result-vehicle: you do not cultivate the cause so that it may bear fruit, you take the result as the path.
+
+The book is equally clear about what tantra is **not**. Not a sexual technique — sexual practice is in it, a whole chapter's worth, but roughly a twentieth of the system. Not esoteric energy work, not magic, and no shortcut: a faster road, but only for someone who could manage the slow one.
+
+The structure covers the whole path. **Preparation:** ngöndro — refuge, prostrations, Vajrasattva, mandala offering, guru yoga — with its counting rhythm and its common faults. **Initiation:** the four abhishekas one by one, the system of samaya, breach and repair.
+
+**Deity yoga:** choosing the yidam, the three samadhis, generation from seed syllable to full form, divine pride, and how to read your own sadhana.
+
+**The vajra body:** three channels, ten winds, white and red drops, untying the knots, trulkhor. Then the **completion stage**: vajra recitation, vase breathing, **tummo**, the four joys in descending and ascending order, clear light and the illusory body.
+
+The **karmamudra** chapter does not evade its subject: prerequisites, choosing a partner and mutual agreement, the course of the act, the technique of retention — and a section of its own on errors, dangers and ethical limits.
+
+Then **the six yogas of Naropa**, the eight stages of dissolution in the **bardo** and phowa, the wrathful deities and chöd, the question of guru and lineage — including what to do when the relationship goes wrong.
+
+The closing chapters treat the philosophy of tantra, then its place in modern life: what was lost in the Western reception, where neotantra gets confused with Vajrayana, and the pattern abuses follow.
+
+Appendix: glossary, a comparative table of the four tantra classes, masters and lineages, practical guides, questions and answers.
+
+128 pages, seventeen chapters, a hundred and twenty-seven sections.`,
+  },
+  {
     slug: "mahamudra-osvenye",
     file: f("Mahamudra Ösvénye.pdf"),
     downloadName: "Mahamudra-osvenye.pdf",
