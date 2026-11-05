@@ -33,13 +33,13 @@ export async function generateMetadata({
  * unrecognised falls back to it rather than showing an empty page.
  */
 function readCategory(raw: string | undefined): BookCategory {
-  return raw === "esoteric" ? "ESOTERIC" : "BUDDHIST";
+  return raw === "yoga" ? "ESOTERIC" : "BUDDHIST";
 }
 
 /** The default shelf has no query string, so its URL stays the plain one. */
 function shelfHref(locale: Locale, category: BookCategory): string {
   const base = routes.books(locale);
-  return category === "ESOTERIC" ? `${base}?category=esoteric` : base;
+  return category === "ESOTERIC" ? `${base}?category=yoga` : base;
 }
 
 export default async function BooksPage({
