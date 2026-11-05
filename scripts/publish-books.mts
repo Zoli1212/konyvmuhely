@@ -242,6 +242,52 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     });
   }
 
+  // Further editions, if the entry lists any. Same skip-when-unchanged rule
+  // as the main file: re-uploading 80 MB to fix a blurb helps nobody.
+  for (const extra of entry.extraFiles ?? []) {
+    const bytes = await readFile(extra.file);
+    const slot = { format: extra.format, fileLocale: extra.locale };
+
+    const stored = await prisma.bookFile.findUnique({
+      where: { bookId_format_fileLocale: { bookId: book.id, ...slot } },
+      select: { sizeBytes: true },
+    });
+
+    const extension = extra.format.toLowerCase();
+    const blob =
+      stored?.sizeBytes === bytes.byteLength
+        ? null
+        : await uploadToBlob(
+            `books/${entry.slug}/${entry.slug}-${extra.locale.toLowerCase()}.${extension}`,
+            bytes,
+            "private",
+            extra.contentType,
+          );
+
+    if (!blob) {
+      console.log(`  ${extra.format} ${extra.locale}: unchanged`);
+      continue;
+    }
+
+    const fileData = {
+      storage: "BLOB" as const,
+      url: blob.url,
+      pathname: blob.pathname,
+      fileName: extra.downloadName,
+      sizeBytes: bytes.byteLength,
+    };
+
+    await prisma.bookFile.upsert({
+      where: { bookId_format_fileLocale: { bookId: book.id, ...slot } },
+      update: fileData,
+      create: { bookId: book.id, ...slot, ...fileData },
+    });
+
+    console.log(
+      `  ${extra.format} ${extra.locale}: ${(bytes.byteLength / 1024 / 1024).toFixed(1)} MB uploaded`,
+    );
+  }
+
   console.log(
     `published ${label}${pdfBlob ? "" : " (file unchanged, cover refreshed)"}`,
   );

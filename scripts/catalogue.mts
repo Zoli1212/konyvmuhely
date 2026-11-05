@@ -35,6 +35,19 @@ export type CatalogueEntry = {
   ageRestricted?: boolean;
   /** Which shelf it sits on. Defaults per series. */
   category?: "BUDDHIST" | "YOGA" | "ESOTERIC" | "SCIENCE";
+
+  /**
+   * Further editions of the same book. Buying the book grants every file
+   * attached to it, so an English EPUB beside the Hungarian PDF costs the
+   * buyer nothing extra and needs no second listing.
+   */
+  extraFiles?: {
+    file: string;
+    downloadName: string;
+    format: "PDF" | "EPUB";
+    locale: "HU" | "EN";
+    contentType: string;
+  }[];
 };
 
 const BIG = "c:\\Users\\mzolt\\Desktop\\ClaudProjects\\nagy_konyvek";
@@ -441,7 +454,9 @@ The closing part is a collection of daily practices, mantras and prayers.
 // so the import below is erased at runtime and there is no cycle.
 import { HANDBOOKS } from "./catalogue-yogikus.mts";
 import { TIBETAN_BOOKLETS } from "./catalogue-tibeti.mts";
+import { ESOTERIC_BOOKS } from "./catalogue-ezoteria.mts";
 import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
+import { ESOTERIC_BOOKS } from "./catalogue-ezoteria.mts";
 import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
 
 /**
@@ -453,5 +468,6 @@ export const CATALOGUE: CatalogueEntry[] = [
   ...BIG_BOOKS,
   ...HANDBOOKS,
   ...TIBETAN_BOOKLETS,
+  ...ESOTERIC_BOOKS,
   ...SCIENCE_BOOKS,
 ];

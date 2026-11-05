@@ -30,6 +30,16 @@ export const SCIENCE_BOOKS: CatalogueEntry[] = [
     accent: "lapis",
     mark: "triple",
 
+    extraFiles: [
+      {
+        file: f("Production_AI_Engineering_EN.epub"),
+        downloadName: "Production-AI-Engineering-EN.epub",
+        format: "EPUB",
+        locale: "EN",
+        contentType: "application/epub+zip",
+      },
+    ],
+
     titleHu: "Production AI Engineering",
     titleEn: "Production AI Engineering",
     subtitleHu: "Éles üzemű AI-rendszerek tervezése, építése és üzemeltetése",
