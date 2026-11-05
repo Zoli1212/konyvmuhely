@@ -1,10 +1,12 @@
 import Link from "next/link";
 
 import { BookCard } from "@/components/book-card";
+import { ShelfLinks } from "@/components/shelf-links";
 import { ArrowRightIcon, DownloadIcon, LockIcon } from "@/components/icons";
 import { currentUser } from "@/lib/auth-guard";
 import {
   getOwnedBookIds,
+  countPublishedByCategory,
   listPublishedBooks,
   localizeBook,
 } from "@/lib/books";
@@ -18,8 +20,9 @@ export default async function HomePage({
 }) {
   const { locale, t } = await resolvePage(params);
 
-  const [books, user] = await Promise.all([
+  const [books, shelfCounts, user] = await Promise.all([
     listPublishedBooks(),
+    countPublishedByCategory(),
     currentUser(),
   ]);
 
@@ -122,6 +125,13 @@ export default async function HomePage({
                 </Link>
               ) : null
             }
+          />
+
+          <ShelfLinks
+            locale={locale}
+            active={null}
+            counts={shelfCounts}
+            className="mt-7"
           />
 
           <div className="mt-9 grid grid-cols-2 gap-x-6 gap-y-11 sm:grid-cols-3 lg:grid-cols-4">
