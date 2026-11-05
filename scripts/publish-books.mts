@@ -199,6 +199,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     published: true,
     featured: entry.featured ?? false,
     ageRestricted: entry.ageRestricted ?? false,
+    category: entry.category ?? "BUDDHIST",
     sortIndex: index,
     coverUrl: `/api/assets/${coverBlob.pathname}`,
     coverPathname: coverBlob.pathname,

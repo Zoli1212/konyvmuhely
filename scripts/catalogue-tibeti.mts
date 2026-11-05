@@ -236,4 +236,5 @@ export const TIBETAN_BOOKLETS: CatalogueEntry[] = ENTRIES.map((entry) => ({
   author: AUTHOR,
   series: SERIES,
   priceHuf: entry.priceHuf ?? PRICE,
+  category: "BUDDHIST",
 }));

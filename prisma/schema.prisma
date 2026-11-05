@@ -51,6 +51,14 @@ enum InvoiceStatus {
 
 /// Where an uploaded file physically lives. BLOB is Vercel Blob (production),
 /// LOCAL is the on-disk fallback used for local development.
+/// Which shelf a title sits on. The shop started as a Buddhist catalogue and
+/// grew an esoteric one beside it; they share an author and a register but
+/// not a readership, so the storefront keeps them apart.
+enum BookCategory {
+  BUDDHIST
+  ESOTERIC
+}
+
 enum StorageKind {
   BLOB
   LOCAL
@@ -168,8 +176,9 @@ model Book {
   /// Shown as a detail on the book page; optional.
   pageCount Int?
 
-  published Boolean @default(false)
-  featured  Boolean @default(false)
+  published Boolean      @default(false)
+  featured  Boolean      @default(false)
+  category  BookCategory @default(BUDDHIST)
 
   /// Shown with an 18+ mark and a warning. Set per title rather than derived
   /// from the subject, because one book in a series can need it while the

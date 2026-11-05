@@ -1,5 +1,5 @@
 import type { Prisma } from "@/generated/prisma/client";
-import type { FileLocale } from "@/generated/prisma/enums";
+import type { BookCategory, FileLocale } from "@/generated/prisma/enums";
 import type { Locale } from "@/i18n/config";
 import { prisma } from "./prisma";
 
@@ -30,6 +30,7 @@ const bookSelect = {
   published: true,
   featured: true,
   ageRestricted: true,
+  category: true,
   sortIndex: true,
   createdAt: true,
   files: {
@@ -128,12 +129,29 @@ export function localizeBook(book: BookRecord, locale: Locale): LocalizedBook {
   };
 }
 
-export async function listPublishedBooks(): Promise<BookRecord[]> {
+export async function listPublishedBooks(
+  category?: BookCategory,
+): Promise<BookRecord[]> {
   return prisma.book.findMany({
-    where: { published: true },
+    where: { published: true, ...(category ? { category } : {}) },
     orderBy: [{ sortIndex: "asc" }, { createdAt: "desc" }],
     select: bookSelect,
   });
+}
+
+/** How many published titles sit on each shelf, for the tab labels. */
+export async function countPublishedByCategory(): Promise<
+  Record<BookCategory, number>
+> {
+  const rows = await prisma.book.groupBy({
+    by: ["category"],
+    where: { published: true },
+    _count: { _all: true },
+  });
+
+  const counts: Record<BookCategory, number> = { BUDDHIST: 0, ESOTERIC: 0 };
+  for (const row of rows) counts[row.category] = row._count._all;
+  return counts;
 }
 
 export async function listAllBooks(): Promise<BookRecord[]> {

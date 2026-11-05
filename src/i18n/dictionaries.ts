@@ -62,6 +62,9 @@ const hu = {
   },
 
   books: {
+    categoryBuddhist: "Buddhizmus",
+    categoryEsoteric: "Ezoterika",
+    categoryEmpty: "Ezen a polcon még nincs kötet.",
     title: "Könyvek",
     lead: "A bolt teljes kínálata.",
     empty: "Jelenleg nincs elérhető könyv.",
@@ -499,6 +502,9 @@ const en: Dictionary = {
   },
 
   books: {
+    categoryBuddhist: "Buddhism",
+    categoryEsoteric: "Esoteric",
+    categoryEmpty: "Nothing on this shelf yet.",
     title: "Books",
     lead: "The full catalogue.",
     empty: "No books are available right now.",

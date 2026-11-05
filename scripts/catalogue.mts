@@ -33,6 +33,8 @@ export type CatalogueEntry = {
   featured?: boolean;
   /** Marks the title 18+ in the shop. */
   ageRestricted?: boolean;
+  /** Which shelf it sits on. Defaults per series. */
+  category?: "BUDDHIST" | "ESOTERIC";
 };
 
 const BIG = "c:\\Users\\mzolt\\Desktop\\ClaudProjects\\nagy_konyvek";

@@ -565,6 +565,7 @@ Topics: the role of the observer, superposition and collapse, nonlocality, the z
   // ---------- Tibetan ----------
   {
     slug: "milarepa-a-fekete-magustol",
+    category: "BUDDHIST",
     file: f("milarepa_kezikonyv.pdf"),
     downloadName: "Milarepa-a-fekete-magustol-a-szentig.pdf",
     pages: 12,
@@ -597,6 +598,7 @@ The bookletlet follows the path: the betrayal by relatives, the revenge and the 
   },
   {
     slug: "nyingma-hagyomany-kezikonyve",
+    category: "BUDDHIST",
     file: f("nyingma_kezikonyv.pdf"),
     downloadName: "A-nyingma-hagyomany-kezikonyve.pdf",
     pages: 13,
@@ -629,9 +631,15 @@ Drawing on Padmasambhava, Longchenpa and Jigme Lingpa, the booklet transmits the
   },
 ];
 
+/**
+ * The series is esoteric by default — subtle body, kundalini, crystals,
+ * psionics — but two titles in it are plainly Buddhist and belong on the
+ * other shelf, so they say so for themselves.
+ */
 export const HANDBOOKS: CatalogueEntry[] = ENTRIES.map((entry) => ({
   ...entry,
   author: AUTHOR,
   series: SERIES,
   priceHuf: entry.priceHuf ?? PRICE,
+  category: entry.category ?? "ESOTERIC",
 }));
