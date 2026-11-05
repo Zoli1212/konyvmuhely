@@ -399,6 +399,7 @@ The bookletlet teaches how to unwind that chain: the psychosomatics of the seven
   },
   {
     slug: "gyogyulas-a-mutetbol",
+    category: "ESOTERIC",
     file: f("mutetbol_gyogyulas_kezikonyv.pdf"),
     downloadName: "Gyogyulas-a-mutetbol.pdf",
     pages: 12,
@@ -429,6 +430,7 @@ The practical part follows the same structure: tissue regeneration and scar care
   },
   {
     slug: "kristalyok-kezikonyve",
+    category: "ESOTERIC",
     file: f("kristalyok_kezikonyv.pdf"),
     downloadName: "A-kristalyok-kezikonyve.pdf",
     pages: 19,
@@ -493,6 +495,7 @@ What makes this volume distinctive: it consistently sets the Eastern concepts ag
   },
   {
     slug: "pszionika-alapkonyve",
+    category: "ESOTERIC",
     file: f("pszionika_alapkonyv.pdf"),
     downloadName: "A-pszionika-alapkonyve.pdf",
     pages: 11,
@@ -632,14 +635,15 @@ Drawing on Padmasambhava, Longchenpa and Jigme Lingpa, the booklet transmits the
 ];
 
 /**
- * The series is esoteric by default — subtle body, kundalini, crystals,
- * psionics — but two titles in it are plainly Buddhist and belong on the
- * other shelf, so they say so for themselves.
+ * The series is yoga and kundalini by default, but it is not uniform: two
+ * titles in it are plainly Buddhist and three belong on the esoteric shelf.
+ * Those say so for themselves rather than being filed by the series they
+ * happen to sit in.
  */
 export const HANDBOOKS: CatalogueEntry[] = ENTRIES.map((entry) => ({
   ...entry,
   author: AUTHOR,
   series: SERIES,
   priceHuf: entry.priceHuf ?? PRICE,
-  category: entry.category ?? "ESOTERIC",
+  category: entry.category ?? "YOGA",
 }));

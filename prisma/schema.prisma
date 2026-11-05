@@ -52,14 +52,16 @@ enum InvoiceStatus {
 /// Where an uploaded file physically lives. BLOB is Vercel Blob (production),
 /// LOCAL is the on-disk fallback used for local development.
 /// Which shelf a title sits on. The shop started as a Buddhist catalogue and
-/// grew a second one beside it; they share an author and a register but not
-/// a readership, so the storefront keeps them apart.
+/// grew two more beside it; they share an author and a register but not a
+/// readership, so the storefront keeps them apart.
 ///
-/// ESOTERIC is the structural name and the display name is not: the shelf is
-/// shown as "Yoga & Kundalíni". Names a shop puts in front of buyers change
-/// more often than its data model should.
+/// The names here match the shelves as buyers see them, which they did not
+/// when there were only two: YOGA used to be called ESOTERIC internally
+/// while being shown as "Yoga & Kundalíni", and that became a trap the
+/// moment a shelf actually named Ezoterika was added.
 enum BookCategory {
   BUDDHIST
+  YOGA
   ESOTERIC
 }
 

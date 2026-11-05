@@ -33,13 +33,22 @@ export async function generateMetadata({
  * unrecognised falls back to it rather than showing an empty page.
  */
 function readCategory(raw: string | undefined): BookCategory {
-  return raw === "yoga" ? "ESOTERIC" : "BUDDHIST";
+  if (raw === "yoga") return "YOGA";
+  if (raw === "esoteric") return "ESOTERIC";
+  return "BUDDHIST";
 }
+
+const SLUGS: Record<BookCategory, string> = {
+  BUDDHIST: "",
+  YOGA: "yoga",
+  ESOTERIC: "esoteric",
+};
 
 /** The default shelf has no query string, so its URL stays the plain one. */
 function shelfHref(locale: Locale, category: BookCategory): string {
   const base = routes.books(locale);
-  return category === "ESOTERIC" ? `${base}?category=yoga` : base;
+  const slug = SLUGS[category];
+  return slug ? `${base}?category=${slug}` : base;
 }
 
 export default async function BooksPage({
@@ -63,6 +72,7 @@ export default async function BooksPage({
 
   const shelves: { key: BookCategory; label: string }[] = [
     { key: "BUDDHIST", label: t.books.categoryBuddhist },
+    { key: "YOGA", label: t.books.categoryYoga },
     { key: "ESOTERIC", label: t.books.categoryEsoteric },
   ];
 

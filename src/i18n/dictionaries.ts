@@ -63,7 +63,8 @@ const hu = {
 
   books: {
     categoryBuddhist: "Buddhizmus",
-    categoryEsoteric: "Yoga & Kundalíni",
+    categoryYoga: "Yoga & Kundalíni",
+    categoryEsoteric: "Ezoterika",
     categoryEmpty: "Ezen a polcon még nincs kötet.",
     title: "Könyvek",
     lead: "A bolt teljes kínálata.",
@@ -503,7 +504,8 @@ const en: Dictionary = {
 
   books: {
     categoryBuddhist: "Buddhism",
-    categoryEsoteric: "Yoga & Kundalini",
+    categoryYoga: "Yoga & Kundalini",
+    categoryEsoteric: "Esoteric",
     categoryEmpty: "Nothing on this shelf yet.",
     title: "Books",
     lead: "The full catalogue.",

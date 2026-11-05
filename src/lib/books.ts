@@ -149,7 +149,11 @@ export async function countPublishedByCategory(): Promise<
     _count: { _all: true },
   });
 
-  const counts: Record<BookCategory, number> = { BUDDHIST: 0, ESOTERIC: 0 };
+  const counts: Record<BookCategory, number> = {
+    BUDDHIST: 0,
+    YOGA: 0,
+    ESOTERIC: 0,
+  };
   for (const row of rows) counts[row.category] = row._count._all;
   return counts;
 }
