@@ -153,6 +153,7 @@ export async function countPublishedByCategory(): Promise<
     BUDDHIST: 0,
     YOGA: 0,
     ESOTERIC: 0,
+    SCIENCE: 0,
   };
   for (const row of rows) counts[row.category] = row._count._all;
   return counts;

@@ -6,7 +6,7 @@ import { routes } from "@/lib/routes";
 import type { BookCategory } from "@/generated/prisma/enums";
 
 /**
- * The three shelves, as links.
+ * The shelves, as links.
  *
  * Links rather than buttons: each shelf is a page of its own, so it can be
  * shared, bookmarked and reached without JavaScript.
@@ -21,6 +21,7 @@ const SLUGS: Record<BookCategory, string> = {
   BUDDHIST: "",
   YOGA: "yoga",
   ESOTERIC: "esoteric",
+  SCIENCE: "science",
 };
 
 export function shelfHref(locale: Locale, category: BookCategory): string {
@@ -32,6 +33,7 @@ export function shelfHref(locale: Locale, category: BookCategory): string {
 export function readShelf(raw: string | undefined): BookCategory {
   if (raw === "yoga") return "YOGA";
   if (raw === "esoteric") return "ESOTERIC";
+  if (raw === "science") return "SCIENCE";
   // Buddhism is the default: it is what the shop is named after and where
   // most of the catalogue sits. An unrecognised value lands here rather
   // than on an empty page.
@@ -56,6 +58,7 @@ export function ShelfLinks({
     { key: "BUDDHIST", label: t.books.categoryBuddhist },
     { key: "YOGA", label: t.books.categoryYoga },
     { key: "ESOTERIC", label: t.books.categoryEsoteric },
+    { key: "SCIENCE", label: t.books.categoryScience },
   ];
 
   return (

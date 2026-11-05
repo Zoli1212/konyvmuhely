@@ -34,7 +34,7 @@ export type CatalogueEntry = {
   /** Marks the title 18+ in the shop. */
   ageRestricted?: boolean;
   /** Which shelf it sits on. Defaults per series. */
-  category?: "BUDDHIST" | "YOGA" | "ESOTERIC";
+  category?: "BUDDHIST" | "YOGA" | "ESOTERIC" | "SCIENCE";
 };
 
 const BIG = "c:\\Users\\mzolt\\Desktop\\ClaudProjects\\nagy_konyvek";
@@ -441,6 +441,8 @@ The closing part is a collection of daily practices, mantras and prayers.
 // so the import below is erased at runtime and there is no cycle.
 import { HANDBOOKS } from "./catalogue-yogikus.mts";
 import { TIBETAN_BOOKLETS } from "./catalogue-tibeti.mts";
+import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
+import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
 
 /**
  * Storefront order: the long volumes first, then the handbook series. The
@@ -451,4 +453,5 @@ export const CATALOGUE: CatalogueEntry[] = [
   ...BIG_BOOKS,
   ...HANDBOOKS,
   ...TIBETAN_BOOKLETS,
+  ...SCIENCE_BOOKS,
 ];
