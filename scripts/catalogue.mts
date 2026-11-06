@@ -454,8 +454,10 @@ The closing part is a collection of daily practices, mantras and prayers.
 // so the import below is erased at runtime and there is no cycle.
 import { HANDBOOKS } from "./catalogue-yogikus.mts";
 import { TIBETAN_BOOKLETS } from "./catalogue-tibeti.mts";
+import { BUDDHIST_BOOKS } from "./catalogue-buddhista.mts";
 import { ESOTERIC_BOOKS } from "./catalogue-ezoteria.mts";
 import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
+import { BUDDHIST_BOOKS } from "./catalogue-buddhista.mts";
 import { ESOTERIC_BOOKS } from "./catalogue-ezoteria.mts";
 import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
 
@@ -468,6 +470,7 @@ export const CATALOGUE: CatalogueEntry[] = [
   ...BIG_BOOKS,
   ...HANDBOOKS,
   ...TIBETAN_BOOKLETS,
+  ...BUDDHIST_BOOKS,
   ...ESOTERIC_BOOKS,
   ...SCIENCE_BOOKS,
 ];
