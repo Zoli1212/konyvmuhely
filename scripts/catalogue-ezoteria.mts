@@ -19,6 +19,72 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "csikung-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("csikung_nagykonyve/A csikung nagykonyve.pdf"),
+    downloadName: "A-csikung-nagykonyve.pdf",
+    pages: 217,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "copper",
+    mark: "wheel",
+
+    titleHu: "A Csikung Nagykönyve",
+    titleEn: "The Great Book of Qigong",
+    subtitleHu: "A csi művelésének teljes rendszere",
+    subtitleEn: "The complete system of cultivating qi",
+    coverTitle: "A Csikung Nagykönyve",
+    coverSubtitle: "A csi művelése",
+
+    blurbHu:
+      "A csi és a három kincs, meridiánok és dantienek, a három szabályozás, cövekállás, Nyolc Brokát, Ínátalakítás, az Öt Állat Játéka, hat gyógyító hang, belső mosoly, kis égi kör, orvosi csikung, külső csi, vaj kung és nej kung, a belső alkímia — és a csi-zavar kezelése. Tizenhét fejezet, kétszáz feletti alfejezet.",
+    blurbEn:
+      "Qi and the three treasures, meridians and dantians, the three regulations, standing post, the Eight Brocades, Muscle-Tendon Change, the Five Animal Frolics, the six healing sounds, the inner smile, the microcosmic orbit, medical qigong, external qi, wai gong and nei gong, inner alchemy — and how to handle qi disturbance. Seventeen chapters, over two hundred sections.",
+
+    descriptionHu: `A csikung legtöbb nyugati bemutatása gyakorlatgyűjtemény: itt van nyolc mozdulat, csináld reggelente. A mozdulatok megvannak, de a rendszer nincs — és ezért nem is épül semmi belőle.
+
+Ez a kötet **a három szabályozással** kezd, mert az az egész rendszer magja: a test, a légzés és a tudat szabályozása. Minden gyakorlat, ami a könyvben szerepel, ennek a háromnak a valamilyen beállítása. Aki ezt érti, az bármelyik formát helyesen tudja végezni; aki nem, az a mozdulatot másolja.
+
+**A csi és a három kincs.** Mit jelent a csi a kínai gondolkodásban, honnan jön, a **dzsing**, a **sen**, az alkímiai lépcső közöttük. A csi négy zavara, **hogyan fogy és hogyan gyűlik**, a napi és évszakos ingadozás — és hogy mire számíthatsz, amikor elkezd gyűlni.
+
+**A történet**, amelyből kiderül, miért zavaros ma a kép: a Huang Ti Nej Csing, a taoista vonal, külső és belső alkímia, a Sao-lin, Hua To Öt Állat Játéka — majd az, hogy **a „csikung" szó 1949 után született**, a nyolcvanas évek láza, **1999 fordulata**, és a csikung Magyarországon.
+
+**A finomtest térképe:** a tizenkét főmeridián, a **szervóra**, a nyolc rendkívüli edény, a zsen és a tu tengely, **a három dantien**, a tizenkét pont, amit ismerned kell, a három kapu a gerincen, a **vej csi** mező.
+
+Azután a gyakorlás, felépítve. **Cövekállás** (csan csuang) — a legtöbbet hozó és leginkább elhanyagolt gyakorlat. A klasszikus formák: **Nyolc Brokát**, **Ínátalakítás**, az **Öt Állat Játéka**. A **hat gyógyító hang** és a **belső mosoly**. A **kis égi kör** keringetése.
+
+**Orvosi csikung** az öt elem rendszerében, **külső csi**, a **csing megőrzése**, a **vaj kung** és **nej kung** különbsége, végül a **nej tan**: a belső alkímia.
+
+És amit a legtöbb kiadvány elhallgat: egy fejezet a **csi-zavarról**, a csapdákról és a biztonságról. Mit jelent, mitől alakul ki, hogyan ismerd fel, mit csinálj vele.
+
+Az első fejezet ad egy azonnal elkezdhető gyakorlatot (a **vucsi állást**), megmondja, **mit fogsz érezni az első hetekben**, felsorolja a **kilenc leggyakoribb kezdő hibát**, és azt is, **miért hagyják abba** a legtöbben.
+
+217 oldal, tizenhét fejezet.`,
+    descriptionEn: `Most Western presentations of qigong are exercise collections: here are eight movements, do them in the morning. The movements are there, the system is not — which is why nothing is built from them.
+
+This volume starts with **the three regulations**, because that is the core of the whole system: regulating the body, the breath and the mind. Every practice in the book is some setting of those three. Understand that and you can perform any form correctly; miss it and you are copying a movement.
+
+**Qi and the three treasures.** What qi means in Chinese thought, where it comes from, **jing**, **shen**, and the alchemical ladder between them. The four disturbances of qi, **how it is depleted and how it accumulates**, its daily and seasonal fluctuation — and what to expect when it starts to gather.
+
+**The history**, which explains why the picture is muddled today: the Huangdi Neijing, the Taoist line, outer and inner alchemy, Shaolin, Hua Tuo's Five Animal Frolics — and then the fact that **the word "qigong" was coined after 1949**, the fever of the 1980s, **the turn of 1999**, and qigong in Hungary.
+
+**The map of the subtle body:** the twelve main meridians, the **organ clock**, the eight extraordinary vessels, the ren and du axes, **the three dantians**, the twelve points you need to know, the three gates along the spine, the **wei qi** field.
+
+Then the practice, built up in order. **Standing post** (zhan zhuang) — the practice that gives most and is neglected most. The classical forms: the **Eight Brocades**, **Muscle-Tendon Change**, the **Five Animal Frolics**. The **six healing sounds** and the **inner smile**. Circulating the **microcosmic orbit**.
+
+**Medical qigong** within the five-element system, **external qi**, **preserving jing**, the difference between **wai gong** and **nei gong**, and finally **nei dan**: inner alchemy.
+
+And what most publications leave out: a chapter on **qi disturbance**, the traps and safety. What it is, what brings it on, how to recognise it, what to do about it.
+
+The first chapter gives a practice you can start at once (the **wuji stance**), says **what you will feel in the first weeks**, lists the **nine commonest beginner errors**, and also **why most people give up**.
+
+217 pages, seventeen chapters.`,
+  },
+  {
     slug: "joga-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
