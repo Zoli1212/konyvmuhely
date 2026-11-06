@@ -19,6 +19,80 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "joga-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("joga_nagykonyve/A joga nagykonyve.pdf"),
+    downloadName: "A-joga-nagykonyve.pdf",
+    pages: 185,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "YOGA",
+    featured: true,
+    accent: "jade",
+    mark: "lotus",
+
+    titleHu: "A Jóga Nagykönyve",
+    titleEn: "The Great Book of Yoga",
+    subtitleHu: "A teljes ösvény: filozófia, ászana, pránájáma, finomtest",
+    subtitleEn: "The complete path: philosophy, asana, pranayama, subtle body",
+    coverTitle: "A Jóga Nagykönyve",
+    coverSubtitle: "A teljes ösvény",
+
+    blurbHu:
+      "Számkhja, gunák és klésák, Patandzsali nyolc ága, jama és nijama, ászana funkcionális anatómiával, pránájáma, nádík és csakrák, bandha és mudrá, pratjáhára, dháraná, dhjána és szamádhi, kundaliní, a négy jógaút, sátkarma és dinacsarja. Tizenhét fejezet, száznyolcvan alfejezet.",
+    blurbEn:
+      "Samkhya, the gunas and kleshas, Patanjali's eight limbs, yama and niyama, asana with functional anatomy, pranayama, nadis and chakras, bandha and mudra, pratyahara, dharana, dhyana and samadhi, kundalini, the four yogic paths, shatkarma and dinacharya. Seventeen chapters, a hundred and eighty sections.",
+
+    descriptionHu: `A második alfejezet címe: **„Mi a jóga, ha nem testgyakorlás."** A harmadiké: **„Hogyan lett a jógából fitnesz."** A könyv ezzel kezd, mert enélkül a többi nem érthető — a nyugaton ismert jóga egy több ezer éves rendszer egyetlen ágának a huszadik századi átalakulása.
+
+Az első fejezet letisztázza a **tizenkét alapfogalmat** és a **nyolc leggyakoribb tévhitet**, elhelyezi a jógát a **hat darsana** között, és megválaszolja, hogy mi a viszonya a valláshoz.
+
+**A történet.** Az indusvölgyi nyomok — és amit **nem tudunk** róluk —, a védikus tapasz, az upanisadok belső áldozata, a sramana-mozgalom közös gyökere, a Bhagavad-gítá három útja, Patandzsali, a tantra fordulata, a hathajóga születése, a gyarmati kor, **Krishnamacharya tornaterme**, és a jóga Magyarországon.
+
+**A filozófiai alap**, amit a legtöbb kiadvány kihagy, pedig nélküle a gyakorlás technikák halmaza marad. Számkhja: purusa mint tanú, prakriti huszonnégy kategóriája, **a három guna** és a felismerésük, a csitta, **az öt vritti**, **az öt klésa**, karma és szamszkára, **abhjásza és vairágja** mint a két szárny.
+
+**Patandzsali nyolc ága:** miért nyolc és miért ebben a sorrendben, a külső és a belső négy, **a kilenc akadály**, a négy hozzáállás, a szamádhi fokozatai, a krijá-jóga — és külön alfejezet arról, **mi hiányzik Patandzsaliból**.
+
+**Jama és nijama** tételesen, a pratipaksa-bhávana módszerével, konkrét helyzetekkel — és azzal, **amikor az elvek ütköznek**.
+
+**Ászana:** szthira és szukha, mi történik a testben, az ászanacsaládok. Utána egy teljes fejezet **funkcionális anatómia**: a gerinc négy görbülete, **mit bír a porckorong**, a medence, a csípőízület egyéni változatai, a váll, a térd, a rekeszizom, a fascia — **a hajlékonyság mítosza** és **a sérülés anatómiája**.
+
+**Pránájáma:** az öt váju, a légzés mechanikája, teljes jógalégzés, nádí-sódhana, udzsáji, hűtő és hevítő légzések, kapálabháti és bhasztriká, a **kumbhaka** — sorrenddel, adagolással és a gyakori hibákkal.
+
+**A finomtest:** a nádík, idá, pingalá, szusumná, a **szvara-jóga**, a csakrák és a forrásaik. **Bandha és mudrá**: a prána–apána logika, a három zár külön és együtt, a kéz- és test-mudrák, biztonsággal.
+
+Azután a befelé vezető út: **pratjáhára** (a teknős hasonlat és a félreértés, jóga-nidrá), **dháraná** (trátaka, mantra, nádánuszandhána), **dhjána és szamádhi**, a szamjama.
+
+A záró fejezetek: **kundaliní**, a **karma-, bhakti-, dzsnyána- és hathajóga**, a sátkarma, az étrend és a dinacsarja, végül **a saját gyakorlás felépítése**.
+
+185 oldal, tizenhét fejezet.`,
+    descriptionEn: `The second section is titled **"What yoga is, if not physical exercise."** The third: **"How yoga became fitness."** The book opens there, because without it the rest does not make sense — the yoga known in the West is the twentieth-century transformation of a single branch of a system thousands of years old.
+
+The first chapter clears up the **twelve basic terms** and the **eight commonest misconceptions**, places yoga among the **six darshanas**, and answers how it relates to religion.
+
+**The history.** Indus valley traces — and what we **do not** know about them — Vedic tapas, the inner sacrifice of the Upanishads, the shared root of the shramana movement, the three paths of the Bhagavad Gita, Patanjali, the tantric turn, the birth of hatha yoga, the colonial period, **Krishnamacharya's gymnasium**, and yoga in Hungary.
+
+**The philosophical ground**, which most publications skip, though without it practice stays a heap of techniques. Samkhya: purusha as witness, the twenty-four categories of prakriti, **the three gunas** and how to recognise them, chitta, **the five vrittis**, **the five kleshas**, karma and samskara, **abhyasa and vairagya** as the two wings.
+
+**Patanjali's eight limbs:** why eight and why in this order, the outer four and the inner four, **the nine obstacles**, the four attitudes, the stages of samadhi, kriya yoga — and a section of its own on **what is missing from Patanjali**.
+
+**Yama and niyama** one by one, with the method of pratipaksha-bhavana, in concrete situations — and on **what to do when the principles conflict**.
+
+**Asana:** sthira and sukha, what happens in the body, the families of postures. Then a full chapter of **functional anatomy**: the four curves of the spine, **what a disc can and cannot take**, the pelvis, individual variation in the hip joint, the shoulder, the knee, the diaphragm, the fascia — **the myth of flexibility** and **the anatomy of injury**.
+
+**Pranayama:** the five vayus, the mechanics of breathing, full yogic breath, nadi shodhana, ujjayi, cooling and heating breaths, kapalabhati and bhastrika, **kumbhaka** — with sequence, dosage and the common errors.
+
+**The subtle body:** the nadis, ida, pingala, sushumna, **svara yoga**, the chakras and their sources. **Bandha and mudra**: the prana–apana logic, the three locks separately and together, hand and body mudras, with safety.
+
+Then the inward path: **pratyahara** (the tortoise simile and its misreading, yoga nidra), **dharana** (trataka, mantra, nadanusandhana), **dhyana and samadhi**, samyama.
+
+The closing chapters: **kundalini**, the **karma, bhakti, jnana and hatha** paths, shatkarma, diet and dinacharya, and finally **building your own practice**.
+
+185 pages, seventeen chapters.`,
+  },
+  {
     slug: "meditacio-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
