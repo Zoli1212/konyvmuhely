@@ -1,9 +1,11 @@
 /**
- * The esoteric shelf's long volumes.
+ * The long volumes that are not Tibetan — the yoga and esoteric shelves.
  *
  * Separate from the Tibetan series, because they do not belong to it: the
  * series name is printed on the cover, and "Tibeti ösvények" above a book
- * on Hermetic and Taoist beauty lore would simply be wrong.
+ * on Hermetic beauty lore or the serpent power would simply be wrong.
+ *
+ * They share a series line but not a shelf: each entry names its own.
  */
 import path from "node:path";
 
@@ -16,6 +18,85 @@ const AUTHOR = "Molnár Zoltán";
 const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
+  {
+    slug: "kundalini-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("kundalini_nagykonyve/A kundalini nagykonyve.pdf"),
+    downloadName: "A-kundalini-nagykonyve.pdf",
+    pages: 168,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "YOGA",
+    featured: true,
+    accent: "saffron",
+    mark: "flame",
+
+    titleHu: "A Kundaliní Nagykönyve",
+    titleEn: "The Great Book of Kundalini",
+    subtitleHu: "A kígyóerő teljes útja: felébresztés, krízis, integráció",
+    subtitleEn:
+      "The full path of the serpent power: awakening, crisis, integration",
+    coverTitle: "A Kundaliní Nagykönyve",
+    coverSubtitle: "A kígyóerő teljes útja",
+
+    blurbHu:
+      "Nádík, csakrák és granthik, az öt váju és az ódzsasz, bandhák és mudrák, a pránájáma mint motor, a felébresztés négy útja, belső alkímia, tünettan, a kundaliní-krízis kezelése, árnyék és sziddhik, végül a stabilizáció. Tizenhét fejezet, több mint száz alfejezet.",
+    blurbEn:
+      "Nadis, chakras and granthis, the five vayus and ojas, bandhas and mudras, pranayama as the engine, the four roads to awakening, inner alchemy, symptomatology, handling a kundalini crisis, shadow and siddhis, and finally stabilisation. Seventeen chapters, over a hundred sections.",
+
+    descriptionHu: `A kundaliníról két dolgot szokás írni: vagy misztikus ködöt, vagy ijesztgetést. Ez a könyv egyiket sem teszi. Öt tételben kimondja, **mit állít a hagyomány** — és hat pontban azt is, **mit nem**, mert a félreértések ott kezdődnek, hogy valaki többet olvas bele, mint ami benne van.
+
+A szerkezet végigviszi az egész utat, és a súlypontja nem ott van, ahol a legtöbb kiadványé.
+
+**A finomtest anatómiája:** az öt burok, a prána és az öt váju, az alvájuk, a nádík rendszere, idá és pingalá a szvara-jógával, a szusumná és a benne futó csatornák, a **három granthi**, a bindu, az amrita és az ódzsasz. Külön alfejezet arról, hogyan térképezd fel a sajátodat — és egy a fogalmak használati szabályáról.
+
+**A csakrák** egyenként, a gyökértől az ezerszirmúig, pszichológiai olvasattal és a tengely dinamikájával.
+
+Az ötödik fejezet címe önmagáért beszél: **„Előkészítés: a tartály építése"** — és az első alfejezete az, hogy *miért ez a könyv legfontosabb fejezete*. Idegrendszer, alvás, étrend, jama és nijama nem erkölcstanként, hanem statikaként, brahmacsarja a maga valóságában, kilencven napos alapozó program — és egy alfejezet arról, **mikor ne kezdj bele**.
+
+Onnan a **test:** sátkarma, a számító ászanák, múla, uddíjána és dzsálandhara bandha, mahá bandha, mahámudrá, a gerinchullám, khécsarí. Majd a **pránájáma** mint motor, a **mantra és a nádá**, az adzsapá-dzsapa, és a **belső alkímia** nap-hold rendszere a nektárral, a kis keringéssel és a vizualizáció csapdáival.
+
+Ami a könyvet komollyá teszi, az a következő három fejezet.
+
+**Tünettan.** Hő és hideg, remegés és kriyák, spontán testhelyzetek, fényjelenségek, belső hangok, erotikus hullámok, érzelmi kitörések, spontán kumbhaka — és egy alfejezet arról, **mi nem kundaliní**.
+
+**A kundaliní-krízis.** A négy út a bajba, súlyossági fokozatok, az első lépés a fékezés, a földelés eszköztára, **kundaliní vagy pszichózis**, kihez fordulj, orvosok és gyógyszerek, a hosszú lábadozás, hogyan segíts másnak, és a megelőzés tizenkét szabálya.
+
+**Az árnyék.** Düh, halálfélelem, szégyen és trauma, hatalom, magány, a tanító kérdése, a közösségek árnyéka, a spirituális versengés — és a **visszaélés felismerése és a kilépés**.
+
+Végül a stabilizáció és az integráció: az első hetek, a kapcsolatok, a szahadzsa állapot, mit mondj és mit ne, tíz év múlva.
+
+Függelék: szószedet, csakratáblázat, technikák gyorstáblája, napi rendek, **kétéves ív**, ellenjavallatok, **elsősegély — mit csinálj, ha…**, mítoszok és tévhitek, naplósablon, huszonöt kérdéses ellenőrzőlista.
+
+168 oldal, tizenhét fejezet.`,
+    descriptionEn: `Two things usually get written about kundalini: mystical fog, or scare stories. This book does neither. It states in five propositions **what the tradition claims** — and in six points **what it does not**, because misunderstanding starts when someone reads more into it than is there.
+
+The structure covers the whole path, and its centre of gravity is not where most publications put theirs.
+
+**The anatomy of the subtle body:** the five sheaths, prana and the five vayus, the sub-vayus, the system of nadis, ida and pingala with svara yoga, sushumna and the channels within it, the **three granthis**, bindu, amrita and ojas. A section of its own on mapping your own — and another on how the terminology may be used.
+
+**The chakras** one by one, from root to thousand-petalled, with a psychological reading and the dynamics of the axis.
+
+The fifth chapter's title speaks for itself: **"Preparation: building the vessel"** — and its first section is *why this is the most important chapter in the book*. Nervous system, sleep, diet, yama and niyama treated as statics rather than moralising, brahmacharya as it actually is, a ninety-day groundwork programme — and a section on **when not to begin**.
+
+From there the **body:** shatkarma, the asanas that matter, mula, uddiyana and jalandhara bandha, maha bandha, mahamudra, the spinal wave, khechari. Then **pranayama** as the engine, **mantra and nada**, ajapa-japa, and the **inner alchemy** of sun and moon with the nectar, the microcosmic orbit and the traps of visualisation.
+
+What makes the book serious are the three chapters that follow.
+
+**Symptomatology.** Heat and cold, trembling and kriyas, spontaneous postures, light phenomena, inner sounds, erotic waves, emotional outbursts, spontaneous kumbhaka — and a section on **what is not kundalini**.
+
+**The kundalini crisis.** The four roads into trouble, degrees of severity, braking as the first step, the grounding toolkit, **kundalini or psychosis**, who to turn to, doctors and medication, the long convalescence, how to help someone else, and twelve rules of prevention.
+
+**The shadow.** Anger, fear of death, shame and trauma, power, loneliness, the question of the teacher, the shadow side of communities, spiritual competitiveness — and **recognising abuse and getting out**.
+
+Finally stabilisation and integration: the first weeks, relationships, the sahaja state, what to say and what not to, ten years on.
+
+Appendix: glossary, chakra table, a quick table of techniques, daily routines, a **two-year arc**, contraindications, **first aid — what to do if…**, myths and misconceptions, a journal template, a twenty-five question checklist.
+
+168 pages, seventeen chapters.`,
+  },
   {
     slug: "szepseg-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
