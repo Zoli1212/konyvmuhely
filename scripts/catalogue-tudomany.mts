@@ -89,6 +89,76 @@ The closing chapters are the consequences: **GPS**, gravitational waves, black h
 269 pages, eighteen chapters. As much mathematics as is unavoidable — and none of it without saying what it means.`,
   },
   {
+    slug: "python-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("python_nagykonyve/A Python nagykonyve.pdf"),
+    downloadName: "A-Python-nagykonyve.pdf",
+    pages: 342,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "jade",
+    mark: "knot",
+
+    titleHu: "A Python Nagykönyve",
+    titleEn: "The Great Book of Python",
+    subtitleHu: "A nyelv a tervezési döntései felől",
+    subtitleEn: "The language seen through its design decisions",
+    coverTitle: "A Python Nagykönyve",
+    coverSubtitle: "Tizennyolc fejezet, háromszáz alfejezet",
+
+    blurbHu:
+      "Nem referencia és nem gyorstalpaló. Az objektummodelltől a memóriakezelésen, az attribútumkeresésen és a bájtkódon át a GIL-ig és az éles üzemig — minden szabály abból, amiért így döntöttek. Tizennyolc fejezet, 342 oldal.",
+    blurbEn:
+      "Neither a reference nor a crash course. From the object model through memory management, attribute lookup and bytecode to the GIL and production practice — every rule derived from the decision behind it. Eighteen chapters, 342 pages.",
+
+    descriptionHu: `A Pythonról szóló könyvek többsége szabálylistát ad: ezt így kell, azt úgy, ez a csapda, azt kerüld. A szabályokat meg lehet tanulni, de nem állnak össze semmivé — és az első nem tankönyvi helyzetben kiderül, hogy a tudás lyukas.
+
+Ez a kötet **a döntésekkel kezd, amelyekből a szabályok következnek**. Majdnem minden, ami a Pythonban elsőre furcsa, egy kimondható tervezési választás egyenes folyománya. Ha a választást értjük, a szabályt nem kell megjegyezni.
+
+**I. A nyelv természete.** Miért lett ilyen: minden objektum, dinamikus de erős tipizálás, a behúzás mint szintaxis, az olvashatóság mint kényszer. Az EAFP és a versenyhelyzet, amely miatt nem stílus, hanem helyesség. A PEP-folyamat, az ötéves támogatási ablak, és **amit a Python nem tud jól** — öt terület, ahol más nyelv a helyes választás.
+
+**Az objektummodell:** a \`PyObject\` fejléce, az azonosság és a hírhedt egészszám-csapda, mutábilis és immutábilis, a \`__new__\` és a \`__init__\` szétválasztása, a pickle mint biztonsági felület.
+
+**A névterek** mint szótárak: LEGB, az értékadás lokálissá tesz, zárványok és cellák, a ciklusváltozó-csapda, és a \`match\` névkötési szabálya, amely **csendben rossz eredményt ad**, ha nem ismerjük.
+
+**A memória:** hivatkozásszámlálás és ciklusgyűjtő együtt, a \`__del__\` és miért kerüljük, gyenge hivatkozások, hogyan szivárog a memória — és a \`gc.freeze\`, amely a fork utáni lapmásolást megakadályozza.
+
+**II. Adatok.** Miért nem 0.3 a 0.1 + 0.2, és mit kezdjünk vele: pénz, idő, mérték — a három tipikus tévedés. Numerikusan stabil képletek, kioltás, \`math.fsum\`. Unicode: kódpont, grafémaklaszter, normalizálás, mojibake, **homográf- és kétirányú támadás**, és a magyar nyelv sajátosságai. A lista mint dinamikus tömb, a \`deque\`, a \`heapq\`, a \`bisect\` — és egy költségtáblázat, amelyből a legtöbb hibás adatszerkezet-választás kiderül. A hasítótábla belülről, a kompakt szótár, és a hasításütközéses szolgáltatásmegtagadás.
+
+**III. Végrehajtás.** Függvények, zárványok, dekorátorok — újrapróbálkozás szóródással, áramkör-megszakító, és hogy miért rossz a mellékhatás rossz helyen. Iterátorok és generátorok: a lustaság négy csapdája, egy teljes adatfolyam-feldolgozó, aszinkron iteráció. A kivételkezelés **háromrétegű stratégiája** — fordítás, átengedés, határ —, időkorláttal, idempotenciakulccsal és kecses leállítással. Az importrendszer hat lépése, körkörös importok, virtuális környezetek, **a függőség mint kockázat**.
+
+**IV. Objektumok.** Az attribútumkeresés pontos sorrendje — és ebből egyetlen mechanizmusként esik ki a \`@property\`, a \`@classmethod\`, a \`__slots__\`, a kötött metódus és a \`cached_property\`. A leíróprotokoll, a metaosztály helyett \`__init_subclass__\`, és egy hatvan soros deklaratív modell, amely ugyanazon az elven áll, mint a Django és a Pydantic. MRO, a \`super()\`, amely **nem a szülőt jelenti**, keverékek, tartalmazás, dunder-térkép. Típusjelölések és protokollok: szerkezeti típusosság, generikusok, adatosztályok, és **a lehetetlen állapotok kizárása** a típussal.
+
+**V. A futtató és a gyakorlat.** Mi történik a \`python program.py\` után: AST, bájtkód, az adaptív értelmező, amely futás közben átírja magát. A GIL — mit véd, mit nem, és miért nem teszi szálbiztossá a kódunkat —, a szabad szálú build és az alértelmezők. Konkurencia egyetlen kérdésből: **mire vár a program?** Végül a gyakorlat: hibakeresés, tesztelés, tulajdonságalapú tesztelés, profilozás, csomagolás, naplózás, biztonság, kiadás.
+
+342 oldal, tizennyolc fejezet, háromszáz alfejezet. Mérhető számokkal, futtatható példákkal, és azzal a szemponttal minden döntésnél, hogy **melyik változatot fogja hat hónap múlva valaki más gyorsabban megérteni.**`,
+    descriptionEn: `Most books on Python hand you a list of rules: do this, avoid that, here is a pitfall. Rules can be memorised, but they do not add up to anything — and the first situation outside the textbook reveals the gaps.
+
+This volume starts with **the decisions the rules follow from**. Almost everything that seems strange about Python is the direct consequence of a design choice that can be stated plainly. Understand the choice and the rule needs no memorising.
+
+**I. The nature of the language.** Why it turned out this way: everything is an object, dynamic but strong typing, indentation as syntax, readability as a constraint. EAFP and the race condition that makes it correctness rather than style. The PEP process, the five-year support window, and **what Python is not good at** — five areas where another language is the right choice.
+
+**The object model:** the \`PyObject\` header, identity and the notorious small-integer trap, mutable versus immutable, the separation of \`__new__\` and \`__init__\`, pickle as an attack surface.
+
+**Namespaces** as dictionaries: LEGB, assignment making a name local, closures and cells, the loop-variable trap, and the \`match\` name-binding rule that **silently gives wrong answers** if you do not know it.
+
+**Memory:** reference counting and the cycle collector together, \`__del__\` and why to avoid it, weak references, how memory leaks — and \`gc.freeze\`, which stops copy-on-write page duplication after a fork.
+
+**II. Data.** Why 0.1 + 0.2 is not 0.3 and what to do about it: money, time, units — the three typical mistakes. Numerically stable formulations, cancellation, \`math.fsum\`. Unicode: code point, grapheme cluster, normalisation, mojibake, **homograph and bidirectional attacks**. The list as a dynamic array, \`deque\`, \`heapq\`, \`bisect\` — and a cost table that explains most wrong data-structure choices. The hash table from the inside, the compact dict, and hash-collision denial of service.
+
+**III. Execution.** Functions, closures, decorators — retry with jitter, circuit breakers, and why a side effect in the wrong place hurts. Iterators and generators: the four traps of laziness, a complete streaming pipeline, async iteration. A **three-layer exception strategy** — translate, propagate, boundary — with timeouts, idempotency keys and graceful shutdown. The six steps of the import system, circular imports, virtual environments, **dependencies as risk**.
+
+**IV. Objects.** The exact order of attribute lookup — from which \`@property\`, \`@classmethod\`, \`__slots__\`, bound methods and \`cached_property\` all fall out as one mechanism. The descriptor protocol, \`__init_subclass__\` instead of metaclasses, and a sixty-line declarative model built on the same principle as Django and Pydantic. The MRO, \`super()\` which **does not mean "the parent"**, mixins, composition, a dunder map. Type hints and protocols: structural typing, generics, dataclasses, and **making illegal states unrepresentable**.
+
+**V. The runtime and the practice.** What happens after \`python program.py\`: AST, bytecode, the adaptive interpreter that rewrites itself while running. The GIL — what it protects, what it does not, and why it does not make your code thread-safe — the free-threaded build and subinterpreters. Concurrency from a single question: **what is the program waiting for?** Finally the practice: debugging, testing, property-based testing, profiling, packaging, logging, security, release.
+
+342 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and one question behind every decision: **which version will someone else understand faster in six months?**`,
+  },
+  {
     slug: "production-ai-engineering",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
