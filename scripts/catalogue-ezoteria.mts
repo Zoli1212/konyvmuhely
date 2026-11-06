@@ -19,6 +19,81 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "meditacio-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("meditacio_nagykonyve/A meditacio nagykonyve.pdf"),
+    downloadName: "A-meditacio-nagykonyve.pdf",
+    pages: 224,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "YOGA",
+    featured: true,
+    accent: "jade",
+    mark: "sun",
+
+    titleHu: "A Meditáció Nagykönyve",
+    titleEn: "The Great Book of Meditation",
+    subtitleHu: "A légzéstől a dzshánákig, a belátástól a természetes állapotig",
+    subtitleEn:
+      "From the breath to the jhanas, from insight to the natural state",
+    coverTitle: "A Meditáció Nagykönyve",
+    coverSubtitle: "A tudat művelése",
+
+    blurbHu:
+      "Samatha és a kilenc szakasz, a dzshánák, ánápánaszati, a négy éberségalap, a belátás tizenhat tudása, metta és tonglen, zazen és kóan, lamrim és istenségjóga, mahámudrá és dzogcsen — Patandzsalival, taoista, szúfi és keresztény utakkal, és azzal, amit az agykutatás mond. Tizenhét fejezet, 248 alfejezet.",
+    blurbEn:
+      "Samatha and its nine stages, the jhanas, anapanasati, the four foundations of mindfulness, the sixteen insight knowledges, metta and tonglen, zazen and koan, lamrim and deity yoga, mahamudra and Dzogchen — with Patanjali, Taoist, Sufi and Christian paths, and what the neuroscience says. Seventeen chapters, 248 sections.",
+
+    descriptionHu: `Az első alfejezet címe: **„A szó, amely félrevezet."** A könyv azzal kezd, hogy a *meditáció* egyetlen szóval jelöl több tucat, egymástól gyökeresen eltérő műveletet — és hogy a legtöbb kudarc abból ered, hogy valaki a céljához nem illő technikát gyakorol évekig.
+
+Innen a **négy mechanizmus**, ami ténylegesen dolgozik, és a **két tengely**, amely mentén minden módszer elhelyezhető: a **stabilitás** és a **tisztaság**. Ezzel a két koordinátával a könyv megmondja, melyik ösvény való neked — nem ízlés, hanem szerkezet alapján.
+
+**A test.** A hét pont, szék, pad vagy föld, a fájdalom kezelése, légzés és idegrendszer, a tekintet, az ülés szerkezete, és ami hosszú gyakorlásban elromlik.
+
+**Samatha.** A kilenc szakasz, a hat erő, a két őr — éberség és introspekció —, az **öt hiba és a nyolc ellenszer**, a negyven klasszikus tárgy, a kaszinák, a nimitta, a píti. Hatvannapos protokollal, és egy alfejezettel arról, mit tegyél, **ha nem épül a koncentráció**.
+
+**A dzshánák.** A belépés feltételei, az öt tényező, az első négy dzshána, a négy formanélküli szféra, kemény és lágy dzshánák, **hamis dzshánák és csapdák** — és a tisztességes kérdés: *kell-e neked egyáltalán dzshána*.
+
+**Ánápánaszati** tizenhat lépésben, a thai erdei és a zen változattal, és azzal, mit csinálj, **amikor a légzés eltűnik**.
+
+**A négy éberségalap és a vipasszaná**, a mahási-jegyzés és a goenka-testpásztázás.
+
+**A belátás szakaszai.** A tizenhat tudás, köztük a **dukkha-nyánák** — a „sötét éjszaka" —, és külön alfejezet arról, mit csinálj benne. Az ösvény-pillanat, a négy ösvény, a tíz béklyó, a ciklusok, és őszintén: **a térkép veszélyei**.
+
+**A szív művelése.** Metta, karuná, muditá, upékkhá a közeli és távoli ellenségeikkel, **tonglen**, a megbocsátás, és az önegyüttérzés — amit a könyv nyugati hiánynak nevez.
+
+Azután a hagyományok a maguk módszertanával: **zen** (zazen, kóan, sikantaza), a **tibeti ösvény** (analitikus meditáció, lamrim, zsiné, ngöndro, lodzsong, istenségjóga, álomjóga, a halál gyakorlása), végül **mahámudrá és dzogcsen** — a négy jóga, a rámutatás, rushen, szemdzin, trekcsö, tögal, és hogy *mi a különbség a kettő között*.
+
+A záró fejezetek: Patandzsali és a mantra, taoista, szúfi és keresztény utak, **MBSR és az agykutatás**, az akadályok és az **árnyékoldal**, az elvonulás és a tanító kérdése.
+
+224 oldal, tizenhét fejezet, 248 alfejezet.`,
+    descriptionEn: `The first section is titled **"The word that misleads."** The book opens by pointing out that *meditation* names dozens of radically different operations with a single word — and that most failure comes from practising, for years, a technique that does not fit the goal.
+
+From there the **four mechanisms** that actually do the work, and the **two axes** along which every method can be placed: **stability** and **clarity**. With those two coordinates the book can say which path suits you — by structure, not by taste.
+
+**The body.** The seven points, chair, bench or floor, dealing with pain, breath and nervous system, the gaze, the structure of a sitting, and what goes wrong over long practice.
+
+**Samatha.** The nine stages, the six powers, the two guards — mindfulness and introspection — the **five faults and eight antidotes**, the forty classical objects, the kasinas, the nimitta, piti. With a sixty-day protocol, and a section on what to do **when concentration will not build**.
+
+**The jhanas.** Conditions for entry, the five factors, the first four jhanas, the four formless spheres, hard and soft jhanas, **false jhanas and traps** — and the honest question: *do you need jhana at all*.
+
+**Anapanasati** in sixteen steps, with the Thai forest and Zen variants, and what to do **when the breath disappears**.
+
+**The four foundations and vipassana**, Mahasi noting and Goenka body-scanning.
+
+**The stages of insight.** The sixteen knowledges, including the **dukkha ñanas** — the "dark night" — with a section of its own on what to do inside it. The path moment, the four paths, the ten fetters, the cycles, and frankly: **the dangers of the map**.
+
+**Cultivating the heart.** Metta, karuna, mudita, upekkha with their near and far enemies, **tonglen**, forgiveness, and self-compassion — which the book calls a Western absence.
+
+Then the traditions with their own methods: **Zen** (zazen, koan, shikantaza), the **Tibetan path** (analytical meditation, lamrim, shiné, ngöndro, lojong, deity yoga, dream yoga, practising death), and finally **mahamudra and Dzogchen** — the four yogas, pointing out, rushen, semdzin, trekchö, tögal, and *what the difference between the two actually is*.
+
+The closing chapters: Patanjali and mantra, Taoist, Sufi and Christian paths, **MBSR and the neuroscience**, the obstacles and the **shadow side**, retreat and the question of a teacher.
+
+224 pages, seventeen chapters, 248 sections.`,
+  },
+  {
     slug: "kundalini-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
