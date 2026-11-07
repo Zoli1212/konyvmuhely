@@ -17,6 +17,72 @@ const SERIES = "Buddhista nagykönyvek";
 
 export const BUDDHIST_BOOKS: CatalogueEntry[] = [
   {
+    slug: "uresseg-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("uresseg_nagykonyve/Az uresseg nagykonyve.pdf"),
+    downloadName: "Az-uresseg-nagykonyve.pdf",
+    pages: 241,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "BUDDHIST",
+    featured: true,
+    accent: "lapis",
+    mark: "sun",
+
+    titleHu: "Az Üresség Nagykönyve",
+    titleEn: "The Great Book of Emptiness",
+    subtitleHu: "A madhjamaka: Nágárdzsuna érvei és hasonlatai",
+    subtitleEn: "Madhyamaka: Nagarjuna's arguments and similes",
+    coverTitle: "Az Üresség Nagykönyve",
+    coverSubtitle: "A madhjamaka iskola",
+
+    blurbHu:
+      "A madhjamaka teljes feldolgozása: a szvabháva születése, a pradnyápáramitá, Nágárdzsuna és a Múlamadhjamakakáriká, a prasanga, a tetralemma, a keletkezés és a mozgás cáfolata, a hétszeres szekérvizsgálat, a két igazság, az üresség üressége, a nihilizmus vádja, Csandrakírti, rangtong és sentong. Harminc fejezet.",
+    blurbEn:
+      "Madhyamaka in full: the rise of svabhava, the Prajnaparamita, Nagarjuna and the Mulamadhyamakakarika, prasanga, the tetralemma, the refutations of arising and motion, the sevenfold chariot analysis, the two truths, the emptiness of emptiness, the charge of nihilism, Candrakirti, rangtong and shentong. Thirty chapters.",
+
+    descriptionHu: `Az üresség a buddhizmus legfélreértettebb fogalma, és a félreértések nem véletlenszerűek: mindig ugyanabból a hibából erednek. A könyv ezért **pontosan megmondja, mit tagad a madhjamaka** — a **szvabhávát**, az önálló, független létezést —, és **mit nem**: a létezést magát.
+
+Ezért van a kötet végén **negyvenöt félreértés** tételesen, és ezért kap önálló fejezetet **a nihilizmus vádja**: ha semmi nem létezik önállóan, mi lesz a karmával, az etikával, a működéssel?
+
+**Az előzmények.** Az abhidharma dharma-elmélete, amelyből a szvabháva fogalma megszületett, majd a **pradnyápáramitá** szútrák, amelyekből a madhjamaka kinő. Aztán **Nágárdzsuna** és a Múlamadhjamakakáriká.
+
+**A módszer**, amit a legtöbb ismertetés kihagy. A **prasanga**: cáfolat saját tézis nélkül — nem állít, hanem az ellenfél állításából vezet le ellentmondást. A **tetralemma** négy sarka. És a **függő keletkezés**, amit a könyv „az érvek királyának" nevez.
+
+Azután az érvek egyenként, mindegyik külön fejezetben: **a keletkezés cáfolata** (a négy ág), **a mozgás cáfolata**, a **tűz és tüzelő** azonosság-különbözőség vizsgálata, a **jellemzők regresszusa**, a cselekvő és a cselekvés, az **én cáfolata a hétszeres szekérvizsgálattal**, majd idő, tér, elemek, érzékelés, végül **nirvána, szamszára és a Tathágata**.
+
+Külön fejezet **a hasonlatok nagy katalógusa** — tükörkép, visszhang, délibáb, álom, holdtükröződés —, mert ezek nem díszítések, hanem a tanítás hordozói.
+
+**A két igazság** és **az üresség üressége**: hogy maga az üresség sem szvabháva, különben az egész rendszer megdőlne.
+
+Majd a továbbélés: **Árjadéva, Buddhapálita, Bhávavivéka** és a szétválás, **Csandrakírti**, Sántidéva, Sántaraksita és Kamalasíla; a madhjamaka **Kelet-Ázsiában** (Csi-cang és a szanlun) és **Tibetben** — a **rangtong–sentong** vita.
+
+A záró fejezetek: **az üresség mint gyakorlat** — mert ez nem pusztán filozófia —, az üresség és a nyugati filozófia (**Wittgenstein**, **Parfit**), és a logika mai olvasatai, köztük a **parakonzisztens** értelmezés.
+
+241 oldal, harminc fejezet.`,
+    descriptionEn: `Emptiness is the most misunderstood concept in Buddhism, and the misunderstandings are not random: they come from the same mistake every time. So the book states exactly **what Madhyamaka denies** — **svabhava**, independent intrinsic existence — and **what it does not**: existence itself.
+
+That is why the volume closes with **forty-five misunderstandings** listed one by one, and why **the charge of nihilism** gets a chapter of its own: if nothing exists independently, what becomes of karma, of ethics, of anything working at all?
+
+**The background.** The Abhidharma dharma theory out of which the notion of svabhava arose, then the **Prajnaparamita** sutras from which Madhyamaka grows. Then **Nagarjuna** and the Mulamadhyamakakarika.
+
+**The method**, which most accounts skip. **Prasanga**: refutation without a thesis of one's own — it asserts nothing, it derives a contradiction from the opponent's claim. The four corners of the **tetralemma**. And **dependent origination**, which the book calls "the king of arguments".
+
+Then the arguments one by one, each in its own chapter: **the refutation of arising** (the four alternatives), **the refutation of motion**, the **fire and fuel** examination of sameness and difference, the **regress of characteristics**, agent and action, **the refutation of self by the sevenfold chariot analysis**, then time, space, elements, perception, and finally **nirvana, samsara and the Tathagata**.
+
+A chapter of its own holds **the great catalogue of similes** — reflection, echo, mirage, dream, the moon on water — because these are not decoration but the vehicle of the teaching.
+
+**The two truths** and **the emptiness of emptiness**: that emptiness itself is not a svabhava either, or the whole system would collapse.
+
+Then the afterlife: **Aryadeva, Buddhapalita, Bhavaviveka** and the parting of ways, **Candrakirti**, Shantideva, Shantarakshita and Kamalashila; Madhyamaka in **East Asia** (Jizang and Sanlun) and in **Tibet** — the **rangtong–shentong** controversy.
+
+The closing chapters: **emptiness as practice** — because this is not philosophy alone — emptiness and Western philosophy (**Wittgenstein**, **Parfit**), and today's logical readings, including the **paraconsistent** interpretation.
+
+241 pages, thirty chapters.`,
+  },
+  {
     slug: "buddhizmus-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
