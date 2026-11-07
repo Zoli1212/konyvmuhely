@@ -19,6 +19,76 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "magia-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("magia_nagykonyve/A magia nagykonyve.pdf"),
+    downloadName: "A-magia-nagykonyve.pdf",
+    pages: 229,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "lapis",
+    mark: "knot",
+
+    titleHu: "A Mágia Nagykönyve",
+    titleEn: "The Great Book of Magic",
+    subtitleHu: "Világkép, erő, látás, anyag, művelet — és a műveletek tára",
+    subtitleEn: "Worldview, power, sight, matter, operation — and the book of workings",
+    coverTitle: "A Mágia Nagykönyve",
+    coverSubtitle: "A gyakorlat és a műveletek tára",
+
+    blurbHu:
+      "A négy láb — szándék, anyag, idő, szellem —, a hasonlóság és az érintkezés törvénye, a tudók népe a bábától a táltosig, az erő öt forrása és tizenkét szivárgója, a második látás, az év mágikus naptára, negyven növény, a kilenc lépésű ritus, jóslás, a tíz alapművelet, az etika és a visszaütés. Plusz a műveletek tára: háromszáznál több rövid munka.",
+    blurbEn:
+      "The four legs — intent, matter, time, spirit — the laws of similarity and contact, the folk of the knowing from midwife to táltos, the five sources of power and its twelve leaks, second sight, the magical calendar of the year, forty plants, the nine-step rite, divination, the ten basic operations, ethics and backlash. Plus the book of workings: over three hundred short operations.",
+
+    descriptionHu: `A mágiáról szóló könyvek többsége vagy receptgyűjtemény forrás nélkül, vagy művelődéstörténet gyakorlat nélkül. Ez a kötet **mindkettőt** adja, de a sorrend nem véletlen: előbb a szerkezet, utána a receptek.
+
+Az alap a **négy láb**: szándék, anyag, idő, szellem. Minden művelet, ami a könyvben szerepel, ennek a négynek a beállítása — és amikor valami nem fog, a hibát is ezen a négyen keresi. A két törvény, amelyre az egész épül: a **hasonlóság** és az **érintkezés**, meg a név és a szó ereje.
+
+**A tudók népe.** Bába, néző, tudós ember, táltos — a magyar hagyomány saját szakmái —, mellettük a boszorkányság, a hoodoo, a brujería, a seiðr és a hermetika. Nem egybemosva: mindegyik a maga logikájával.
+
+**Az erő** öt forrása és **tizenkét szivárgója** — hová folyik el, amit összegyűjtöttél —, és a titok szabálya. **A látás:** a második látás, víz, tükör, füst, álom.
+
+**Az idő és a hely:** a hold, a hét napjai, **az év mágikus naptára**, és azok a helyek, amelyeket a hagyomány erősnek tart — a határ, a keresztút, a kútfő, a tűzhely.
+
+**Az anyag** két fejezetben: **negyven növény**, azután a kő, fém, föld, csont — só, vas, ezüst, sírföld, vörös fonal. A tűz és a gyertya, a viasz és az ólom, a szentelt víz és a füstölő.
+
+**A ritus szerkezete:** a **kilenc lépés**, amelyből egy munka áll. **Jóslás.** A **tíz alapművelet**. A tárgyak: amulett, talizmán, zsákocska, **boszorkányüveg**, bábu. **A szellemekkel való munka:** az ősök — ahol kezdeni kell —, a helyszellemek, a familiáris, az alku és a tiltott kérés, és mi a teendő, **amikor nem az jön, akit hívtál**.
+
+Azután a rendtartás, és itt válik el ez a könyv a műfaj többségétől. **Az etika és a visszaütés:** mi üt vissza *valójában*, mi a hagyomány tényleges álláspontja, a szürke gyakorlat öt szabálya, a harag és a bosszú kezelése, és hol a határ a gyerekeknél, betegeknél, halottaknál.
+
+**Amikor nem sikerül** — egy teljes fejezet hibakeresésről: tényleg nem fogott? a kérés hibái, a négy láb vizsgálata, **amikor te álltál ellen**, és amikor **nem szabad**.
+
+Végül **a műveletek tára**: háromszáznál több rövid, gyors munka pénzre, szerelemre, védelemre, gyógyításra, házra, hivatalra. Mellé a magyar néphit lényei, konyhamágia, ötven egyperces fogás, **az év nyolc kapuja**, álomszótár és jelszótár.
+
+229 oldal, harmincnyolc fejezet és függelék.`,
+    descriptionEn: `Most books on magic are either recipe collections without sources, or cultural history without practice. This one gives **both**, but the order is deliberate: structure first, recipes after.
+
+The ground is the **four legs**: intent, matter, time, spirit. Every operation in the book is a setting of those four — and when something fails, the fault is looked for in the same four. The two laws everything rests on: **similarity** and **contact**, together with the power of the name and the word.
+
+**The folk of the knowing.** Midwife, seer, cunning man, táltos — the Hungarian tradition's own trades — alongside witchcraft, hoodoo, brujería, seiðr and hermeticism. Not blended together: each with its own logic.
+
+**Power**: its five sources and **twelve leaks** — where what you gather drains away — and the rule of secrecy. **Sight:** second sight, water, mirror, smoke, dream.
+
+**Time and place:** the moon, the days of the week, **the magical calendar of the year**, and the places the tradition holds strong — the boundary, the crossroads, the spring, the hearth.
+
+**Matter** in two chapters: **forty plants**, then stone, metal, earth, bone — salt, iron, silver, graveyard dirt, red thread. Fire and candle, wax and lead, holy water and incense.
+
+**The structure of a rite:** the **nine steps** that make up a working. **Divination.** The **ten basic operations**. The objects: amulet, talisman, bag, **witch bottle**, poppet. **Working with spirits:** the ancestors — where one must begin — place spirits, the familiar, the bargain and the forbidden request, and what to do **when it is not who you called that comes**.
+
+Then the discipline, and here the book parts company with most of its genre. **Ethics and backlash:** what *actually* rebounds, what the tradition's real position is, the five rules of grey practice, handling anger and revenge, and where the line falls with children, the sick and the dead.
+
+**When it fails** — a full chapter on diagnosis: did it really fail? faults in the request, examining the four legs, **when it was you who resisted**, and when it **must not be done**.
+
+Finally **the book of workings**: over three hundred short, quick operations for money, love, protection, healing, house and office. Alongside them the beings of Hungarian folk belief, kitchen magic, fifty one-minute methods, **the eight gates of the year**, a dream lexicon and a lexicon of signs.
+
+229 pages, thirty-eight chapters and appendix.`,
+  },
+  {
     slug: "csikung-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
