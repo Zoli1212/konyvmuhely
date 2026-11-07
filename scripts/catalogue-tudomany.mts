@@ -19,6 +19,68 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "kvantumfizika-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("kvantumfizika_nagykonyve/A kvantumfizika nagykonyve.pdf"),
+    downloadName: "A-kvantumfizika-nagykonyve.pdf",
+    pages: 233,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "amethyst",
+    mark: "triple",
+
+    titleHu: "A Kvantumfizika Nagykönyve",
+    titleEn: "The Great Book of Quantum Physics",
+    subtitleHu: "A klasszikus fizika repedéseitől a kvantuminformációig",
+    subtitleEn: "From the cracks in classical physics to quantum information",
+    coverTitle: "A Kvantumfizika Nagykönyve",
+    coverSubtitle: "Elméletek, kísérletek, viták",
+
+    blurbHu:
+      "Maxwell mezőjétől és Boltzmann valószínűségétől Planck kvantumán, Bohr atomján, Heisenberg mátrixain és Schrödinger egyenletén át az EPR-ig, Bell egyenlőtlenségéig, a dekoherenciáig és a kvantuminformációig. A nyolc mai értelmezés, és ami nyitva van. Harmincegy fejezet.",
+    blurbEn:
+      "From Maxwell's field and Boltzmann's probability through Planck's quantum, Bohr's atom, Heisenberg's matrices and Schrödinger's equation to EPR, Bell's inequality, decoherence and quantum information. The eight live interpretations, and what remains open. Thirty-one chapters.",
+
+    descriptionHu: `A kvantumfizikáról szóló ismeretterjesztés rendszerint ott kezd, ahol a furcsaság kezdődik — és ettől a furcsaság megmagyarázhatatlan marad. Ez a kötet **a klasszikus világképpel indul**: mit tudtunk biztosan 1890-ben, és **hol repedt meg**.
+
+Enélkül Planck lépése érthetetlen. Az első rész ezért végigviszi, hogy **miért nem létezhet a klasszikus atom**, hol bukott meg az **ekvipartíció tétele**, és mit mondott 1894-ben Michelson — szemben azzal, ami a valóság volt.
+
+**A felépítés a történet sorrendjét követi**, mert a fogalmak abban a sorrendben lesznek érthetők. Maxwell mezője és az eltolási áram. **Boltzmann**: az entrópia mint megszámlálás, és a két ellenvetés, amely majdnem kidöntötte. A **feketetest-sugárzás** — „a fizika legtisztább kérdése" —, és **hogyan számolt Boltzmann, és mit csinált Planck másképp**.
+
+Innen **Einstein fénykvantuma**, **Bohr atomja**, **de Broglie hulláma**, **Heisenberg mátrixai**, **Schrödinger egyenlete**, **Born valószínűségi értelmezése**, **Dirac antianyaga**, **Pauli elve**, és **Neumann** Hilbert-tere — a matematikai váz, amelyen az egész áll.
+
+Azután a viták, amelyek máig tartanak. **Einstein és Bohr**, az **EPR-érv**, a **macska**, és **Bell egyenlőtlensége** — az a pont, ahol a filozófiai kérdésből mérhető kísérlet lett.
+
+**Feynman útintegrálja**, a **Standard modell**, a **dekoherencia** — és a **nyolc mai értelmezés** egyenként, elfogultság nélkül: koppenhágai, sokvilág, de Broglie–Bohm, GRW, QBism és a többi. A könyv nem dönt helyetted; megmutatja, melyik mit magyaráz meg és mit nem.
+
+Végül a **kvantuminformáció** és a **nyitott kérdések**.
+
+Minden fejezet **„a mai álláspont"** alfejezettel zárul — ami elválasztja azt, amit tudunk, attól, amit hiszünk, és attól, ami nyitva van.
+
+233 oldal, harmincegy fejezet és függelék.`,
+    descriptionEn: `Popular accounts of quantum physics usually begin where the strangeness begins — which is exactly why the strangeness stays unexplained. This volume starts with **the classical picture**: what was known for certain in 1890, and **where it cracked**.
+
+Without that, Planck's move makes no sense. So the first part works through **why a classical atom cannot exist**, where the **equipartition theorem** failed, and what Michelson said in 1894 — against what was actually the case.
+
+**The structure follows the story's own order**, because that is the order in which the concepts become intelligible. Maxwell's field and the displacement current. **Boltzmann**: entropy as counting, and the two objections that nearly brought it down. **Black-body radiation** — "the cleanest question in physics" — and **how Boltzmann counted, and what Planck did differently**.
+
+From there **Einstein's light quantum**, **Bohr's atom**, **de Broglie's wave**, **Heisenberg's matrices**, **Schrödinger's equation**, **Born's probability reading**, **Dirac's antimatter**, **Pauli's principle**, and **von Neumann's** Hilbert space — the mathematical frame the whole thing rests on.
+
+Then the arguments that are still running. **Einstein and Bohr**, the **EPR argument**, the **cat**, and **Bell's inequality** — the point at which a philosophical question became a measurable experiment.
+
+**Feynman's path integral**, the **Standard Model**, **decoherence** — and the **eight live interpretations** one by one, without taking sides: Copenhagen, many-worlds, de Broglie–Bohm, GRW, QBism and the rest. The book does not decide for you; it shows what each explains and what it does not.
+
+Finally **quantum information** and the **open questions**.
+
+Every chapter closes with a section called **"the current position"** — separating what is known from what is believed, and from what is still open.
+
+233 pages, thirty-one chapters and appendix.`,
+  },
+  {
     slug: "relativitas-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
@@ -94,7 +156,7 @@ The closing chapters are the consequences: **GPS**, gravitational waves, black h
     // the next publish to carry the change.
     file: nk("python_nagykonyve/A Python nagykonyve.pdf"),
     downloadName: "A-Python-nagykonyve.pdf",
-    pages: 342,
+    pages: 330,
     priceHuf: 4990,
     author: AUTHOR,
     series: "Tudományos nagykönyvek",
@@ -111,9 +173,9 @@ The closing chapters are the consequences: **GPS**, gravitational waves, black h
     coverSubtitle: "Tizennyolc fejezet, háromszáz alfejezet",
 
     blurbHu:
-      "Nem referencia és nem gyorstalpaló. Az objektummodelltől a memóriakezelésen, az attribútumkeresésen és a bájtkódon át a GIL-ig és az éles üzemig — minden szabály abból, amiért így döntöttek. Tizennyolc fejezet, 342 oldal.",
+      "Nem referencia és nem gyorstalpaló. Az objektummodelltől a memóriakezelésen, az attribútumkeresésen és a bájtkódon át a GIL-ig és az éles üzemig — minden szabály abból, amiért így döntöttek. Tizennyolc fejezet, 330 oldal.",
     blurbEn:
-      "Neither a reference nor a crash course. From the object model through memory management, attribute lookup and bytecode to the GIL and production practice — every rule derived from the decision behind it. Eighteen chapters, 342 pages.",
+      "Neither a reference nor a crash course. From the object model through memory management, attribute lookup and bytecode to the GIL and production practice — every rule derived from the decision behind it. Eighteen chapters, 330 pages.",
 
     descriptionHu: `A Pythonról szóló könyvek többsége szabálylistát ad: ezt így kell, azt úgy, ez a csapda, azt kerüld. A szabályokat meg lehet tanulni, de nem állnak össze semmivé — és az első nem tankönyvi helyzetben kiderül, hogy a tudás lyukas.
 
@@ -135,7 +197,7 @@ Ez a kötet **a döntésekkel kezd, amelyekből a szabályok következnek**. Maj
 
 **V. A futtató és a gyakorlat.** Mi történik a \`python program.py\` után: AST, bájtkód, az adaptív értelmező, amely futás közben átírja magát. A GIL — mit véd, mit nem, és miért nem teszi szálbiztossá a kódunkat —, a szabad szálú build és az alértelmezők. Konkurencia egyetlen kérdésből: **mire vár a program?** Végül a gyakorlat: hibakeresés, tesztelés, tulajdonságalapú tesztelés, profilozás, csomagolás, naplózás, biztonság, kiadás.
 
-342 oldal, tizennyolc fejezet, háromszáz alfejezet. Mérhető számokkal, futtatható példákkal, és azzal a szemponttal minden döntésnél, hogy **melyik változatot fogja hat hónap múlva valaki más gyorsabban megérteni.**`,
+330 oldal, tizennyolc fejezet, háromszáz alfejezet. Mérhető számokkal, futtatható példákkal, és azzal a szemponttal minden döntésnél, hogy **melyik változatot fogja hat hónap múlva valaki más gyorsabban megérteni.**`,
     descriptionEn: `Most books on Python hand you a list of rules: do this, avoid that, here is a pitfall. Rules can be memorised, but they do not add up to anything — and the first situation outside the textbook reveals the gaps.
 
 This volume starts with **the decisions the rules follow from**. Almost everything that seems strange about Python is the direct consequence of a design choice that can be stated plainly. Understand the choice and the rule needs no memorising.
@@ -156,7 +218,65 @@ This volume starts with **the decisions the rules follow from**. Almost everythi
 
 **V. The runtime and the practice.** What happens after \`python program.py\`: AST, bytecode, the adaptive interpreter that rewrites itself while running. The GIL — what it protects, what it does not, and why it does not make your code thread-safe — the free-threaded build and subinterpreters. Concurrency from a single question: **what is the program waiting for?** Finally the practice: debugging, testing, property-based testing, profiling, packaging, logging, security, release.
 
-342 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and one question behind every decision: **which version will someone else understand faster in six months?**`,
+330 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and one question behind every decision: **which version will someone else understand faster in six months?**`,
+  },
+  {
+    slug: "fastapi-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("fastapi_nagykonyve/A FastAPI nagykonyve.pdf"),
+    downloadName: "A-FastAPI-nagykonyve.pdf",
+    pages: 352,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "jade",
+    mark: "triple",
+
+    titleHu: "A FastAPI Nagykönyve",
+    titleEn: "The Great Book of FastAPI",
+    subtitleHu: "A típusjelöléstől az éles üzemig",
+    subtitleEn: "From type hints to production",
+    coverTitle: "A FastAPI Nagykönyve",
+    coverSubtitle: "Tizennyolc fejezet, háromszáz alfejezet",
+
+    blurbHu:
+      "Nem referencia és nem gyorstalpaló. Az ASGI-tól a Pydanticon, a függőséginjektáláson és az adatrétegen át a telepítésig — minden szabály abból, amiért így döntöttek. Tizennyolc fejezet, 352 oldal.",
+    blurbEn:
+      "Neither a reference nor a crash course. From ASGI through Pydantic, dependency injection and the data layer to deployment — every rule derived from the decision behind it. Eighteen chapters, 352 pages.",
+
+    descriptionHu: `A FastAPI-ról szóló anyagok többsége ugyanott áll meg: megmutat egy dekorátort, egy Pydantic-modellt, és kész a végpont. Ami utána jön — az adatréteg, a tranzakcióhatárok, a blokkoló hívások, a jogosultság, a telepítés —, az hiányzik. Pedig **a valódi nehézségek ott vannak**, nem a keretrendszerben.
+
+Ez a kötet **a döntéssel kezd, amelyből minden következik**: ha a típusjelölés futásidőben is olvasható, akkor a függvény aláírása az egész API-szerződés. Innen vezethető le a validálás, a dokumentáció, a kimenet szűrése és a függőséginjektálás is.
+
+**I. Alapok és ASGI.** Mi az ASGI, és miért kellett; a \`scope\`/\`receive\`/\`send\` hármas; egy kérés teljes útja a TCP-kapcsolattól a kiküldött bájtokig; köztes rétegek mint hagyma és **a sorrend, amit mindenki elront**; útvonalillesztés, öt paraméterforrás, és **a válasz mint szerződés** — amiért a kimenetet is validálni érdemes.
+
+**II. A szerződés: Pydantic.** A Rust mag és a v2 teljesítménymodellje; a kényszerítés, amit tudni kell; négy validálási beavatkozási pont; magyar adattípusok — adószám, bankszámla, telefonszám — ellenőrző számjeggyel; **mi ne kerüljön a modellbe**; három modell erőforrásonként; részleges frissítés úgy, hogy a \`null\` és a „nem adták meg" megkülönböztethető legyen; címkézett uniók; verziózás és a törő változások gépi ellenőrzése.
+
+**III. A függőségek.** A \`Depends\`-fa feloldása és gyorsítótárazása; a rendszer négy korlátja; a \`yield\`-függőségek és **a takarítás sorrendje** — ebből vezethető le, hol legyen a tranzakcióhatár; jelszókezelés, a **JWT őszinte mérlege** (mikor ne használjuk), négyszintű jogosultság, többbérlős izoláció három védelmi réteggel; köztes réteg, függőség vagy dekorátor — és a sebességkorlát zsetonvödörrel.
+
+**IV. Adatok és a külvilág.** SQLAlchemy 2.0 aszinkron módban: \`expire_on_commit\`, az **N+1 és a felderítése**, migrációk biztonságos alakja, amit a Postgres tud és kár nem használni; **mi blokkol pontosan**, hogyan mérjük a ciklus-késést, visszanyomás és terhelésvédelem; SSE kontra WebSocket és az üzenetsorrend-garanciák; naplózás, metrika, nyomkövetés — és a riasztások, amelyek tényleg hasznosak.
+
+**V. Éles üzem.** Tesztpiramis, az adatbázis négy stratégiája a tesztben, séma alapú tesztelés; konténer, munkásszám, Kubernetes-leíró, biztonsági ellenőrzőlista, migráció régi rendszerről, és **az első éles nap** listája.
+
+352 oldal, tizennyolc fejezet, háromszáz alfejezet. Mért számokkal, futtatható példákkal, és ott, ahol a dokumentáció nem foglal állást — tranzakcióhatár, verziózás, projektszerkezet —, **indokolt ajánlással**.`,
+    descriptionEn: `Most FastAPI material stops at the same place: it shows a decorator, a Pydantic model, and the endpoint is done. What comes after — the data layer, transaction boundaries, blocking calls, authorisation, deployment — is missing. Yet **that is where the real difficulty lies**, not in the framework.
+
+This volume starts with **the decision everything follows from**: if type hints are readable at runtime, then the function signature is the entire API contract. Validation, documentation, output filtering and dependency injection all follow from it.
+
+**I. Foundations and ASGI.** What ASGI is and why it was needed; the \`scope\`/\`receive\`/\`send\` triple; the full path of a request from the TCP connection to the bytes sent; middleware as an onion and **the ordering everyone gets wrong**; route matching, five parameter sources, and **the response as a contract** — why output deserves validation too.
+
+**II. The contract: Pydantic.** The Rust core and the v2 performance model; coercion and what to know about it; four validation hook points; custom types with their own behaviour; **what does not belong in a model**; three models per resource; partial updates that distinguish \`null\` from "not provided"; tagged unions; versioning with machine-checked breaking changes.
+
+**III. Dependencies.** Resolving and caching the \`Depends\` tree; the four limits of the system; \`yield\` dependencies and **the order of cleanup** — from which the transaction boundary follows; password handling, **an honest assessment of JWT** (when not to use it), four levels of authorisation, multi-tenant isolation in three layers; middleware, dependency or decorator — and rate limiting with a token bucket.
+
+**IV. Data and the outside world.** SQLAlchemy 2.0 in async mode: \`expire_on_commit\`, **N+1 and how to catch it**, safe migration shapes, what Postgres offers and is a shame to ignore; **what exactly blocks**, measuring event-loop lag, backpressure and load shedding; SSE versus WebSocket and message ordering guarantees; logging, metrics, tracing — and the alerts that are actually useful.
+
+**V. Production.** The test pyramid, four database strategies in tests, schema-based testing; containers, worker counts, a Kubernetes manifest, a security checklist, migrating from a legacy system, and **a first-day-live** checklist.
+
+352 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and — where the documentation takes no position — **a reasoned recommendation**.`,
   },
   {
     slug: "production-ai-engineering",
