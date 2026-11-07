@@ -27,6 +27,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client.ts";
 import { renderCover, type AccentName, type MarkName } from "./make-cover.mts";
 import { CATALOGUE, type CatalogueEntry } from "./catalogue.mts";
+import { BOOKLET_MAX_PAGES } from "../src/lib/book-kind.ts";
 
 for (const file of [".env.local", ".env"]) {
   try {
@@ -293,12 +294,26 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
   );
 }
 
+/**
+ * Storefront order: every long volume before every booklet, keeping the
+ * catalogue's own order within each group.
+ *
+ * Done here rather than by arranging the catalogue modules, because the
+ * two kinds are not cleanly separated by module - the yogic series is
+ * booklets except for one long volume, and that one would otherwise land
+ * at the end of its shelf, behind titles a fifth of its length.
+ */
+function storefrontOrder(entries: CatalogueEntry[]): CatalogueEntry[] {
+  const booklet = (e: CatalogueEntry) => e.pages <= BOOKLET_MAX_PAGES;
+  return [...entries.filter((e) => !booklet(e)), ...entries.filter(booklet)];
+}
+
 async function main(): Promise<void> {
   if (!DRY_RUN) {
     await signIn(need("ADMIN_EMAIL"), need("ADMIN_PASSWORD"));
   }
 
-  for (const [index, entry] of CATALOGUE.entries()) {
+  for (const [index, entry] of storefrontOrder(CATALOGUE).entries()) {
     try {
       await publish(entry, index);
     } catch (error) {

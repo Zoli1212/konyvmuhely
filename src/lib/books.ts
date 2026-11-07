@@ -3,6 +3,8 @@ import type { BookCategory, FileLocale } from "@/generated/prisma/enums";
 import type { Locale } from "@/i18n/config";
 import { prisma } from "./prisma";
 
+export { BOOKLET_MAX_PAGES, isBooklet } from "./book-kind";
+
 /**
  * The shape every book query returns. Keeping one select means the storefront,
  * the library and the admin tables all agree on what a book is, and no query
@@ -65,20 +67,6 @@ export type LocalizedBook = Omit<
   blurb: string;
   description: string | null;
 };
-
-/**
- * Where a booklet ends and a book begins.
- *
- * The catalogue holds twelve-page handbooks next to three-hundred-page
- * volumes at very different prices, and a card showing only a price leaves
- * the buyer guessing which they are looking at. Derived from the page count
- * rather than stored, so it cannot drift away from the file.
- */
-export const BOOKLET_MAX_PAGES = 40;
-
-export function isBooklet(pageCount: number | null): boolean {
-  return pageCount !== null && pageCount <= BOOKLET_MAX_PAGES;
-}
 
 /**
  * Picks one of a Hungarian/English pair. Hungarian is the base, so an English

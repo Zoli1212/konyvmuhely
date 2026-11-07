@@ -397,15 +397,20 @@ import { ESOTERIC_BOOKS } from "./catalogue-ezoteria.mts";
 import { SCIENCE_BOOKS } from "./catalogue-tudomany.mts";
 
 /**
- * Storefront order: the long volumes first, then the handbook series. The
- * publisher uses the array index as sortIndex, so reordering here reorders
- * the shop.
+ * The order within each kind. Reordering here reorders the shop.
+ *
+ * Volumes always precede booklets on every shelf, but that rule lives in
+ * the publisher rather than in this arrangement: the two kinds are not
+ * cleanly separated by module — the yogic series is booklets except for
+ * one long volume — so ordering the modules could not express it.
  */
 export const CATALOGUE: CatalogueEntry[] = [
+  // --- long volumes ---
   ...BIG_BOOKS,
-  ...HANDBOOKS,
-  ...TIBETAN_BOOKLETS,
   ...BUDDHIST_BOOKS,
   ...ESOTERIC_BOOKS,
   ...SCIENCE_BOOKS,
+  // --- booklets ---
+  ...HANDBOOKS,
+  ...TIBETAN_BOOKLETS,
 ];
