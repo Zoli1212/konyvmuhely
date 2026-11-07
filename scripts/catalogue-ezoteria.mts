@@ -19,6 +19,80 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "tantrikus-masszazs-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("tantrikus_masszazs_nagykonyve/A tantrikus masszazs nagykonyve.pdf"),
+    downloadName: "A-tantrikus-masszazs-nagykonyve.pdf",
+    pages: 326,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    // Two chapters describe genital massage. Clearer-cut than the tantra
+    // volume, and marked for the same reason: the buyer should know before
+    // paying, not after opening.
+    ageRestricted: true,
+    accent: "copper",
+    mark: "lotus",
+
+    titleHu: "A Tantrikus Masszázs Nagykönyve",
+    titleEn: "The Great Book of Tantric Massage",
+    subtitleHu: "Érintés, jelenlét, beleegyezés",
+    subtitleEn: "Touch, presence, consent",
+    coverTitle: "A Tantrikus Masszázs",
+    coverSubtitle: "Érintés, jelenlét, beleegyezés",
+
+    blurbHu:
+      "A hagyomány és a modern nyugati iskola szétválasztva, az érintés élettana, a beleegyezés és a keretek, a teljes testmenet, has, rekesz és medencefenék, jóni- és lingam-munka, az energia felvezetése, az érzelmi felszabadulás kezelése — és egy teljes fejezet a visszaélésről és a szakmai etikáról. Tizenkilenc fejezet.",
+    blurbEn:
+      "The tradition and the modern Western school told apart, the physiology of touch, consent and boundaries, the full body sequence, belly, diaphragm and pelvic floor, yoni and lingam work, raising the energy, handling emotional release — and a full chapter on abuse and professional ethics. Nineteen chapters.",
+
+    descriptionHu: `Ezen a területen a legtöbb kiadvány két dolgot kever össze: azt, ami valóban indiai hagyomány, és azt, ami a hetvenes évek Kaliforniájában keletkezett. A könyv **két külön fejezetben** tárgyalja a kettőt, és kimondja azt is, **ami NINCS a hagyományban** — a hamis eredettörténetekkel és a dévadászi-kérdéssel együtt.
+
+**A modern iskola** ugyanilyen nyíltan: a neotantra születése, Wilhelm Reich és a testterápia, az Esalen, Margot Anand, a berlini vonal, a magyar helyzet — és hogy **mi történt a kereskedelmi fordulatban**. Egy alfejezet arról, **hogyan ismerhető fel a jó és a rossz iskola**.
+
+**Két térkép, egy test.** A finomtest — prána, öt szél, három nádí, csakrák — és a tényleges anatómia: bőr, **fascia**, izmok, vegetatív idegrendszer, női és férfi anatómia, szexuális válaszciklus, hormonális háttér. Benne egy alfejezet arról, **hol nem szabad nyomni**.
+
+**Az érintés élettana**, ami a könyv gerince: a **C-taktilis rostok** és az optimális érintés sebessége, a **paraszimpatikus váltás**, a fascia válaszai, a fájdalomkapu, a habituáció, a testséma — és külön alfejezet arról, **amit a kutatás alátámaszt, és amit nem**.
+
+Innen a gyakorlat, felépítve: **a beleegyezés és a keretek**, a gyakorló felkészülése, a tér és a rituálé, légzés, hang, mozgás, az **alaptechnikák**, majd a **teljes testmenet**. A has, a rekesz és a medencefenék. A **jóni-** és a **lingam-masszázs**. Az energia felvezetése és a csúcspont kezelése.
+
+Két fejezet, ami nélkül ez a könyv felelőtlen lenne.
+
+**Az érzelmi felszabadulás kezelése** — mert ez a munka kiold dolgokat, és a gyakorlónak tudnia kell, mit csináljon, amikor megtörténik.
+
+**Az árnyék:** visszaélés, kizsákmányolás, szakmai etika. Plusz az **ellenjavallatok**: kinek nem való, és mikor nem szabad.
+
+Az első fejezet előre tisztázza a **leggyakoribb tévhiteket**, megmondja, **kinek való és kinek nem**, és azt is, **amit a könyv nem tartalmaz**.
+
+326 oldal, tizenkilenc fejezet.
+
+**Felnőtt tartalom.** Két fejezet a nemi szervek masszázsát tárgyalja, anatómiai és gyakorlati részletességgel. 18 éven aluliaknak nem ajánljuk.`,
+    descriptionEn: `In this field most publications conflate two things: what is genuinely Indian tradition, and what arose in 1970s California. The book treats them in **two separate chapters**, and states plainly **what is NOT in the tradition** — along with the false origin stories and the devadasi question.
+
+**The modern school** gets the same candour: the birth of neotantra, Wilhelm Reich and body therapy, Esalen, Margot Anand, the Berlin line, the Hungarian situation — and **what happened in the commercial turn**. With a section on **how to tell a good school from a bad one**.
+
+**Two maps, one body.** The subtle body — prana, the five winds, three nadis, chakras — and the actual anatomy: skin, **fascia**, muscles, the autonomic nervous system, female and male anatomy, the sexual response cycle, hormonal background. Including a section on **where not to press**.
+
+**The physiology of touch**, which is the book's spine: the **C-tactile fibres** and the optimal speed of touch, the **parasympathetic shift**, fascial responses, the pain gate, habituation, body schema — and a section of its own on **what the research supports and what it does not**.
+
+From there the practice, built up: **consent and boundaries**, the practitioner's preparation, space and ritual, breath, sound, movement, the **basic techniques**, then the **full body sequence**. The belly, the diaphragm and the pelvic floor. **Yoni** and **lingam** massage. Raising the energy and handling the peak.
+
+Two chapters without which this book would be irresponsible.
+
+**Handling emotional release** — because this work unlocks things, and the practitioner needs to know what to do when it happens.
+
+**The shadow:** abuse, exploitation, professional ethics. Plus the **contraindications**: who it is not for, and when it must not be done.
+
+The first chapter clears up the **commonest misconceptions** in advance, says **who it is for and who it is not**, and also **what the book does not contain**.
+
+326 pages, nineteen chapters.
+
+**Adult content.** Two chapters cover genital massage in anatomical and practical detail. Not recommended for readers under 18.`,
+  },
+  {
     slug: "magia-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
