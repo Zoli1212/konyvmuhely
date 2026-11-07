@@ -140,7 +140,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
   const pdf = await readFile(entry.file);
   const label = `${entry.slug} (${(pdf.byteLength / 1024 / 1024).toFixed(1)} MB)`;
 
-  const cover = renderCover({
+  const cover = await renderCover({
     title: entry.coverTitle ?? entry.titleHu,
     subtitle: entry.coverSubtitle ?? entry.subtitleHu,
     author: entry.author,
@@ -150,10 +150,10 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
   });
 
   await mkdir(COVER_DIR, { recursive: true });
-  await writeFile(path.join(COVER_DIR, `${entry.slug}.png`), cover);
+  await writeFile(path.join(COVER_DIR, `${entry.slug}.webp`), cover);
 
   if (DRY_RUN) {
-    console.log(`[dry-run] ${label} — cover written to .covers/${entry.slug}.png`);
+    console.log(`[dry-run] ${label} — cover written to .covers/${entry.slug}.webp`);
     return;
   }
 
@@ -168,10 +168,10 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
   // Private like every other blob - the store forbids public ones - and
   // reachable through our own /api/assets route.
   const coverBlob = await uploadToBlob(
-    `covers/${entry.slug}-${sha(cover)}.png`,
+    `covers/${entry.slug}-${sha(cover)}.webp`,
     cover,
     "private",
-    "image/png",
+    "image/webp",
   );
 
   const pdfBlob = alreadyHasFile

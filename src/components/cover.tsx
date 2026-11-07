@@ -32,6 +32,10 @@ export function Cover({
           fill
           sizes={sizes}
           priority={priority}
+          // Covers are generated at the size they are shown and stored as
+          // WebP, so Vercel's optimiser has nothing left to do — and every
+          // variant it makes is metered. Unmetered and identical output.
+          unoptimized
           className="object-cover"
         />
       ) : (

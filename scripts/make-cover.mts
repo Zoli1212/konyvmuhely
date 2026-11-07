@@ -14,6 +14,7 @@
  *   const png = await renderCover({ title, subtitle, author, accent, mark });
  */
 import { Resvg } from "@resvg/resvg-js";
+import sharp from "sharp";
 
 export const COVER_WIDTH = 1000;
 export const COVER_HEIGHT = 1500;
@@ -242,10 +243,24 @@ export function buildCoverSvg(spec: CoverSpec): string {
 </svg>`;
 }
 
-export function renderCover(spec: CoverSpec): Buffer {
+/**
+ * What the shop actually serves. A card is at most 18rem wide, so 600px
+ * covers a retina screen with room to spare — and the art is flat colour
+ * and type, which WebP stores in a fraction of a PNG's bytes.
+ *
+ * Rendered large and then reduced rather than drawn small: resvg hints the
+ * type to whole pixels, and at 600px the letterforms coarsen.
+ */
+export const SERVED_WIDTH = 600;
+
+export async function renderCover(spec: CoverSpec): Promise<Buffer> {
   const resvg = new Resvg(buildCoverSvg(spec), {
     font: { fontDirs: ["C:\\Windows\\Fonts"], defaultFontFamily: "Georgia" },
     fitTo: { mode: "width", value: COVER_WIDTH },
   });
-  return Buffer.from(resvg.render().asPng());
+
+  return sharp(Buffer.from(resvg.render().asPng()))
+    .resize({ width: SERVED_WIDTH })
+    .webp({ quality: 82 })
+    .toBuffer();
 }
