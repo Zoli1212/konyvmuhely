@@ -24,7 +24,7 @@ export const ESOTERIC_BOOKS: CatalogueEntry[] = [
     // the next publish to carry the change.
     file: f("magia_haladoknak/Magia haladoknak.pdf"),
     downloadName: "Magia-haladoknak.pdf",
-    pages: 83,
+    pages: 118,
     priceHuf: 4990,
     author: AUTHOR,
     series: SERIES,
@@ -61,9 +61,15 @@ A konzervmunkák saját fejezetben: **bábu, mézesüveg, boszorkányüveg**. Me
 
 **Halottak és szellemek:** **ősmunka** az oltárral, a kéréssel és **a fizetés rendjével**; **temető és halottmunka** a kijárás rendjével; **familiáris és helyszellemek**; **hívás, kör, elbocsátás**.
 
-Végül **látás, álom, jóslás, beavatás**: az álommunka alapja, álomkérés, védelem álomban.
+**Látás, álom, jóslás, beavatás:** az álommunka alapja, álomkérés, védelem álomban, **révülés és utazás**, végül **beavatás és erőmunka** az erő forrásaival.
 
-83 oldal. A második kötet — [Mágia Haladóknak II.](/hu/books/magia-haladoknak-2) — ugyanezt a rendet viszi tovább nehezebb anyaggal.`,
+**Ház, föld, emberek:** **gyertyamágia haladóknak**, **zsinór, csomó, fonal** a kötésekkel, **kert, állat, föld**, és **az év kapui** Gyertyaszentelőtől.
+
+Az utolsó rész a nehéz anyag: **szerelmi kötések**, **átkok** — a méréssel, a szó és a tárgy átkaival —, **rontások** és az eldöntés rendje. Majd **a boszorkánylétra**, **a boszorkányseprű** mint határjelölő, és a **médiumság** három szabálya.
+
+Zárásként **anyagtár és gyorstáblák**.
+
+118 oldal, harminckilenc fejezet. A második kötet — [Mágia Haladóknak II.](/hu/books/magia-haladoknak-2) — ugyanezt a rendet viszi tovább nehezebb anyaggal.`,
     descriptionEn: `The first volume, and its own subtitle says what it is after: **workings, not theory**.
 
 The opening part is **the workshop**. **Oils** for money, love, protection, spirit work and healing — with a section of their own for the **Hungarian formulas** — together with how oils are handled. **Powders and incenses**: drawing, protective, cleansing, with the rules for laying them. **Baths, washes and ointments** and the order of their use.
@@ -80,9 +86,15 @@ Container work gets its own chapter: **poppet, honey jar, witch bottle**. Beside
 
 **The dead and spirits:** **ancestor work** with the altar, the request and **the order of payment**; **cemetery and work with the dead**, with the rules of going out; **the familiar and place spirits**; **calling, circle, dismissal**.
 
-Finally **sight, dream, divination, initiation**: the ground of dream work, dream requests, protection while dreaming.
+**Sight, dream, divination, initiation:** the ground of dream work, dream requests, protection while dreaming, **flight and journeying**, and finally **initiation and power work** with the sources of power.
 
-83 pages. The second volume — [Magic for the Advanced II](/en/books/magia-haladoknak-2) — carries the same order into harder material.`,
+**House, land, people:** **candle magic for the advanced**, **cord, knot, thread** with the bindings, **garden, animal, land**, and **the gates of the year** from Candlemas.
+
+The last part is the hard material: **love bindings**, **curses** — with the measuring, the curses of word and of object — **crossings** and the order of deciding. Then **the witch's ladder**, **the witch's broom** as a boundary marker, and the three rules of **mediumship**.
+
+It closes with **a materials index and quick tables**.
+
+118 pages, thirty-nine chapters. The second volume — [Magic for the Advanced II](/en/books/magia-haladoknak-2) — carries the same order into harder material.`,
   },
   {
     slug: "magia-haladoknak-2",
