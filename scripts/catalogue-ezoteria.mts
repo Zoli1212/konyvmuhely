@@ -19,6 +19,72 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "magia-haladoknak-2",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("magia_haladoknak_2/Magia haladoknak II_uj.pdf"),
+    downloadName: "Magia-haladoknak-II.pdf",
+    pages: 115,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "amethyst",
+    mark: "flame",
+
+    titleHu: "Mágia Haladóknak II.",
+    titleEn: "Magic for the Advanced II",
+    subtitleHu: "Szerelem, pénz, védelem, halottak — a gyakorlat nagy tára",
+    subtitleEn: "Love, money, protection, the dead — the great book of practice",
+    coverTitle: "Mágia Haladóknak II.",
+    coverSubtitle: "A gyakorlat nagy tára",
+
+    blurbHu:
+      "Ezerkétszáz varázslat, apparátus nélkül. Erős olajok, porok és ecetek receptjei, gyertyaöntés és bábu, zsoltárok és szentelmények, pénz- és hatalommunkák, per, szerelem és szexuális kötés, elválasztás, védőüvegek, rontáslevétel, visszatérítés és tükörmunka, sírföld és koporsószeg, halottidézés, familiáris, álomküldés, révülés, boszorkánylétra. Hatvan növény tételesen.",
+    blurbEn:
+      "Twelve hundred workings, with no apparatus. Recipes for strong oils, powders and vinegars, candle casting and poppets, psalms and sacramentals, money and power work, lawsuits, love and sexual binding, separation, protective bottles, uncrossing, return and mirror work, graveyard dirt and coffin nails, calling the dead, the familiar, dream sending, flight, the witch's ladder. Sixty plants listed one by one.",
+
+    descriptionHu: `Ez a második kötet, és a hangsúlya máshol van, mint az elsőé: **az erős műhelyen**.
+
+Az első rész maga a műhely — nem elmélet, hanem recept. **Erős olajok** a nagy formulákkal, vonzó és nyitó olajokkal, halott- és szellemolajokkal. **Porok, reszelékek, hamvak**: védő- és határporok, kemény porok, földek. **Ecetek, savak, keserű vizek**, köztük a **négy tolvaj**, a savanyító és elválasztó üvegek. **Viasz, faggyú, öntött gyertya, bábu.** És a **zsoltárok, szentek, szentelmények** — a népi gyakorlat keresztény rétege, amit a modern kiadványok rendszerint lehagynak.
+
+Onnan a tár hat nagy fejezetcsoportban.
+
+**Pénz, hatalom, per:** a lodestone-munka, üzlet és vevő, szerencsefordítás, a hely munkája, **tekintély és parancs**, végül a per előkészítése, a bíróság és a hatóság.
+
+**Szerelem, szexus, kötés:** erős vonzás, **mézes- és cukros munkák**, szenvedély és szexuális kötés, békítés, család, otthon — és a másik irány: **elválasztás, szabadulás, eltávolítás**.
+
+**Védelem és háború:** csapdák és **boszorkányüvegek**, a **rontás felismerése és levétele**, **visszatérítés és tükörmunka**, végül **kötés, hűtés, igazságtétel** — a sorrenddel együtt, amiben ezeket csinálni kell.
+
+**Halottak és szellemek:** **sírföld, koporsószeg, temető**, halottidézés és médiumság, **familiáris** és szellemfogadás, szellemkiűzés és helytisztítás.
+
+**Sors, látás, álom:** erős jóslás öntéssel, tükörrel, vízzel, füsttel; **álomküldés és álomfogás**; **a seprű, a kenőcs, a révülés**; **sorsfonál és boszorkánylétra**.
+
+Függelékben **hatvan növény tételesen** és **hatvan egyperces fogás**.
+
+115 oldal, ezerkétszáz varázslat. Nem önmunka és nem lélektan: anyag, fogás, sorrend.`,
+    descriptionEn: `This is the second volume, and its weight falls elsewhere than the first's: on **the strong workshop**.
+
+The opening part is the workshop itself — not theory but recipe. **Strong oils** with the great formulas, drawing and opening oils, oils of the dead and of spirits. **Powders, filings, ashes**: protective and boundary powders, harsh powders, earths. **Vinegars, acids, bitter waters**, including the **four thieves**, the souring and separating bottles. **Wax, tallow, cast candles, poppets.** And the **psalms, saints and sacramentals** — the Christian layer of folk practice that modern publications usually drop.
+
+From there the collection, in six large groups.
+
+**Money, power, law:** lodestone work, business and customers, turning luck, the work of a place, **authority and command**, and finally preparing a case, the court and the authorities.
+
+**Love, sex, binding:** strong attraction, **honey and sugar workings**, passion and sexual binding, reconciliation, family, home — and the other direction: **separation, release, removal**.
+
+**Protection and war:** traps and **witch bottles**, **recognising and lifting a curse**, **return and mirror work**, and finally **binding, cooling, redress** — together with the order in which these must be done.
+
+**The dead and spirits:** **graveyard dirt, coffin nails, the cemetery**, calling the dead and mediumship, the **familiar** and taking on a spirit, exorcism and clearing a place.
+
+**Fate, sight, dream:** strong divination by casting, mirror, water and smoke; **dream sending and dream catching**; **the broom, the ointment, the flight**; **the thread of fate and the witch's ladder**.
+
+The appendix lists **sixty plants** one by one and **sixty one-minute methods**.
+
+115 pages, twelve hundred workings. Not self-work and not psychology: material, grip, sequence.`,
+  },
+  {
     slug: "tantrikus-masszazs-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
