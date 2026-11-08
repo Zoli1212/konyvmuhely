@@ -19,6 +19,72 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "magia-haladoknak",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("magia_haladoknak/Magia haladoknak.pdf"),
+    downloadName: "Magia-haladoknak.pdf",
+    pages: 83,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "amethyst",
+    mark: "triple",
+
+    titleHu: "Mágia Haladóknak",
+    titleEn: "Magic for the Advanced",
+    subtitleHu: "Varázslatok, olajok, porok, konzervmunkák, szellemmunka",
+    subtitleEn: "Workings, oils, powders, container work, spirit work",
+    coverTitle: "Mágia Haladóknak",
+    coverSubtitle: "A gyakorlat teljes tára",
+
+    blurbHu:
+      "Olajok, porok, füstölők és fürdők receptjei; pénz, siker, munka, per és hivatal; szerelem, szenvedély, hűség, elválasztás; védelem, rontáslevétel, visszatérítés, igazságtétel; mézesüveg, boszorkányüveg, bábu, lábnyom-munka, keresztút, temető; gyertya-, tükör- és zsinórmunka; ősök, familiáris, helyszellemek; álom, révülés, jóslás. Varázslatok, nem elmélet.",
+    blurbEn:
+      "Recipes for oils, powders, incenses and baths; money, success, work, lawsuits and officialdom; love, passion, fidelity, separation; protection, uncrossing, return, redress; honey jar, witch bottle, poppet, footprint work, crossroads, cemetery; candle, mirror and cord work; ancestors, the familiar, place spirits; dream, flight, divination. Workings, not theory.",
+
+    descriptionHu: `Az első kötet, és a saját alcíme mondja ki, mire megy: **varázslatok, nem elmélet**.
+
+A nyitó rész **a műhely**. **Olajok** pénzre, szerelemre, védelemre, szellemmunkára és gyógyításra — külön alfejezetben a **magyar formulák** —, az olajok kezelésével együtt. **Porok és füstölők**: vonzó, védő, tisztító, a szórás szabályaival. **Fürdők, mosóvizek, kenőcsök** használati rendje.
+
+Onnan a tár, területenként.
+
+**Pénz, munka, siker:** lodestone- és mágnesmunka, álláskeresés, üzlet, **szerencse, út, kockázat**, végül **per, hivatal, igazság** a bírósági munkákkal.
+
+**Szerelem és szenvedély:** vonzás, **szenvedély és testmunka**, hűség, béke, család — és a másik irány: **elválasztás, szabadulás, gyász**, a fonál elvágásával.
+
+**Védelem, tisztítás, visszatérítés** — és itt kezdődik az, ami ezt a könyvet használhatóvá teszi. **Diagnózis: mi van rajtad**, gyors próbákkal. Utána tisztítás és **rontáslevétel**, a napi védőréteg és a hordozott védelem, **ház- és tárgyvédelem**, **visszatérítés és tükörmunka**, végül **kötés, hűtés, csendesítés**.
+
+A konzervmunkák saját fejezetben: **bábu, mézesüveg, boszorkányüveg**. Mellette a **lábnyom, por, keresztút** — a nyomföld és a szóróhelyek rendje.
+
+**Halottak és szellemek:** **ősmunka** az oltárral, a kéréssel és **a fizetés rendjével**; **temető és halottmunka** a kijárás rendjével; **familiáris és helyszellemek**; **hívás, kör, elbocsátás**.
+
+Végül **látás, álom, jóslás, beavatás**: az álommunka alapja, álomkérés, védelem álomban.
+
+83 oldal. A második kötet — [Mágia Haladóknak II.](/hu/books/magia-haladoknak-2) — ugyanezt a rendet viszi tovább nehezebb anyaggal.`,
+    descriptionEn: `The first volume, and its own subtitle says what it is after: **workings, not theory**.
+
+The opening part is **the workshop**. **Oils** for money, love, protection, spirit work and healing — with a section of their own for the **Hungarian formulas** — together with how oils are handled. **Powders and incenses**: drawing, protective, cleansing, with the rules for laying them. **Baths, washes and ointments** and the order of their use.
+
+From there the collection, by domain.
+
+**Money, work, success:** lodestone and magnet work, job seeking, business, **luck, travel, risk**, and finally **lawsuits, officialdom, justice** with the court workings.
+
+**Love and passion:** attraction, **passion and body work**, fidelity, peace, family — and the other direction: **separation, release, grief**, with the cutting of the thread.
+
+**Protection, cleansing, return** — and here begins what makes this book usable. **Diagnosis: what is on you**, with quick tests. Then cleansing and **uncrossing**, the daily protective layer and carried protection, **house and object warding**, **return and mirror work**, and finally **binding, cooling, quieting**.
+
+Container work gets its own chapter: **poppet, honey jar, witch bottle**. Beside it **footprint, powder, crossroads** — track dirt and where it is laid.
+
+**The dead and spirits:** **ancestor work** with the altar, the request and **the order of payment**; **cemetery and work with the dead**, with the rules of going out; **the familiar and place spirits**; **calling, circle, dismissal**.
+
+Finally **sight, dream, divination, initiation**: the ground of dream work, dream requests, protection while dreaming.
+
+83 pages. The second volume — [Magic for the Advanced II](/en/books/magia-haladoknak-2) — carries the same order into harder material.`,
+  },
+  {
     slug: "magia-haladoknak-2",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
