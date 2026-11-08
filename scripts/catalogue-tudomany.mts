@@ -19,6 +19,72 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "robotika-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("robotika_nagykonyve/A robotika nagykonyve.pdf"),
+    downloadName: "A-robotika-nagykonyve.pdf",
+    pages: 234,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "copper",
+    mark: "knot",
+
+    titleHu: "A Robotika Nagykönyve",
+    titleEn: "The Great Book of Robotics",
+    subtitleHu: "Az automatáktól a tanuló gépekig",
+    subtitleEn: "From automata to learning machines",
+    coverTitle: "A Robotika Nagykönyve",
+    coverSubtitle: "Mechanika, érzékelés, szabályozás, tanulás",
+
+    blurbHu:
+      "Hérón automatáitól Wiener kibernetikáján és az Unimate-en át a mai tanuló gépekig: kinematika és a Jacobi-mátrix, hajtások, lábak, kezek, érzékelők és pontfelhő, Kalman-szűrő, SLAM, PID és impedancia, A*, RRT, MPC, ROS, imitációs és megerősítéses tanulás, sim-to-real, látás-nyelv-cselekvés modellek. Harminckét fejezet.",
+    blurbEn:
+      "From Heron's automata through Wiener's cybernetics and the Unimate to today's learning machines: kinematics and the Jacobian, actuators, legs, hands, sensors and point clouds, the Kalman filter, SLAM, PID and impedance control, A*, RRT, MPC, ROS, imitation and reinforcement learning, sim-to-real, vision-language-action models. Thirty-two chapters.",
+
+    descriptionHu: `A robotikáról szóló ismeretterjesztés két irányba szokott elcsúszni: vagy demóvideókat mutat, vagy képleteket. Ez a kötet **a Moravec-paradoxonnal** kezd — hogy a nehéznek hitt dolgok (sakk, logika) könnyűek a gépnek, a könnyűnek hittek (járás, fogás) pedig nehezek —, és ebből vezeti le, **miért nehéz a robotika**.
+
+Az első fejezetben ott van az is, **mi nem robot**, **mit tud ma egy robot és mit nem**, és hogy **Asimov törvényei miért nem mérnöki eszközök**.
+
+**A történet**, amely nélkül a mai megoldások önkényesnek látszanak. Hérón első programozható gépe, al-Dzsazari bütykös hengere, Vaucanson kacsája, **Kempelen Farkas** sakkozója és beszélőgépe, **Jacquard** — ahol a program elválik a géptől —, Babbage és Lovelace. Külön alfejezet arról, **miért nem lett robot a 19. században**.
+
+**A kibernetika:** Watt gömbös szabályozója, Maxwell, a légvédelmi löveg, **Wiener 1948**, a frekvenciatartomány (Black, Nyquist, Bode), **Grey Walter teknősei** mint az első autonóm robotok — és hogy **miért tűnt el a kibernetika mint név**.
+
+Azután az ipari robot Devoltól a PUMA-ig, **Shakey és a szimbolikus korszak**, végül **Brooks testetöltött fordulata**, amely az egész területet átrendezte.
+
+Innen a mérnöki anyag, rétegenként. **Kinematika** és a **Jacobi-mátrix**, dinamika valós időben. **Hajtások, lábak, kezek.** **Érzékelők** és a pontfelhő. **Kalman-szűrő**, **SLAM**. Szabályozás: **PID** és **impedancia**. Tervezés: a **konfigurációs tér**, **A\\***, **RRT**, **MPC**. És a **ROS**, amin mindez fut.
+
+A mai rész: **imitációs és megerősítéses tanulás**, a **sim-to-real** szakadék, és a **látás-nyelv-cselekvés modellek** — ahol a terület épp most tart.
+
+Végül az, amit a demóvideók nem mutatnak: a **kollaboratív robotok**, az **ipari valóság**, a **biztonság és a szabványok**, és a **nyitott kérdések**.
+
+Minden fejezet **„a mai álláspont"** alfejezettel zárul: ami működik, ami nem, és ami nyitva van.
+
+234 oldal, harminckét fejezet és függelék.`,
+    descriptionEn: `Popular accounts of robotics tend to slide one of two ways: demo videos, or formulas. This volume starts with **Moravec's paradox** — that what we assumed was hard (chess, logic) is easy for a machine, and what we assumed was easy (walking, grasping) is hard — and derives from it **why robotics is difficult**.
+
+The first chapter also covers **what is not a robot**, **what a robot can and cannot do today**, and why **Asimov's laws are not engineering tools**.
+
+**The history**, without which today's solutions look arbitrary. Heron's first programmable machine, al-Jazari's camshaft, Vaucanson's duck, **Farkas Kempelen's** chess player and speaking machine, **Jacquard** — where the program separates from the machine — Babbage and Lovelace. With a section on **why the 19th century did not produce the robot**.
+
+**Cybernetics:** Watt's centrifugal governor, Maxwell, the anti-aircraft gun, **Wiener in 1948**, the frequency domain (Black, Nyquist, Bode), **Grey Walter's tortoises** as the first autonomous robots — and why **cybernetics disappeared as a name**.
+
+Then the industrial robot from Devol to the PUMA, **Shakey and the symbolic era**, and finally **Brooks's embodied turn**, which rearranged the whole field.
+
+From there the engineering, layer by layer. **Kinematics** and the **Jacobian**, dynamics in real time. **Actuators, legs, hands.** **Sensors** and the point cloud. The **Kalman filter**, **SLAM**. Control: **PID** and **impedance**. Planning: **configuration space**, **A\\***, **RRT**, **MPC**. And **ROS**, which all of it runs on.
+
+The present: **imitation and reinforcement learning**, the **sim-to-real** gap, and **vision-language-action models** — where the field actually stands.
+
+Finally what the demo videos leave out: **collaborative robots**, **industrial reality**, **safety and standards**, and the **open questions**.
+
+Every chapter closes with a section called **"the current position"**: what works, what does not, and what is still open.
+
+234 pages, thirty-two chapters and appendix.`,
+  },
+  {
     slug: "kvantumfizika-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
