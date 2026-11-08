@@ -11,6 +11,7 @@ import { currentUser } from "@/lib/auth-guard";
 import { getBookBySlug, groupFilesByLocale, localizeBook } from "@/lib/books";
 import { readCart } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
+import { renderInline } from "@/lib/rich-text";
 import { resolvePage } from "@/lib/page-locale";
 import { prisma } from "@/lib/prisma";
 import { routes } from "@/lib/routes";
@@ -221,7 +222,7 @@ export default async function BookPage({
 
               <div className="prose-book mt-5">
                 {paragraphs.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
+                  <p key={index}>{renderInline(paragraph)}</p>
                 ))}
               </div>
             </section>

@@ -461,6 +461,27 @@
     margin-top: 1.125rem;
   }
 
+  .prose-book strong {
+    font-weight: 600;
+    color: var(--color-paper);
+  }
+
+  .prose-book em {
+    font-style: italic;
+  }
+
+  .link-gold {
+    color: var(--color-gold-300);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+    transition: color 150ms ease;
+  }
+
+  .link-gold:hover {
+    color: var(--color-gold-200);
+  }
+
   .prose-book > p:first-child::first-letter {
     float: left;
     font-family: var(--font-display);
