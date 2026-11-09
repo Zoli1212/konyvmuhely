@@ -41,9 +41,9 @@ export const SCIENCE_BOOKS: CatalogueEntry[] = [
     coverSubtitle: "Ágensek gráffal",
 
     blurbHu:
-      "Miért gráf és miért nem lánc, a Pregel-modell, állapot és reducerek, csomópontok, élek, `Command`, párhuzamosság és map-reduce, algráfok, checkpointerek és időutazás, `interrupt` és emberi jóváhagyás, a store, streaming, `ToolNode`, a ReAct-ágens, RAG gráfban, felügyelő és csapat, funkcionális API, hibakezelés, kiértékelés, telepítés, költség — és amit a LangGraph nem old meg. Harminchárom fejezet.",
+      "Miért gráf és miért nem lánc, a Pregel-modell, állapot és reducerek, csomópontok, élek, Command, párhuzamosság és map-reduce, algráfok, checkpointerek és időutazás, interrupt és emberi jóváhagyás, a store, streaming, ToolNode, a ReAct-ágens, RAG gráfban, felügyelő és csapat, funkcionális API, hibakezelés, kiértékelés, telepítés, költség — és amit a LangGraph nem old meg. Harminchárom fejezet.",
     blurbEn:
-      "Why a graph and not a chain, the Pregel model, state and reducers, nodes, edges, `Command`, parallelism and map-reduce, subgraphs, checkpointers and time travel, `interrupt` and human approval, the store, streaming, `ToolNode`, the ReAct agent, RAG in a graph, supervisor and team, the functional API, error handling, evaluation, deployment, cost — and what LangGraph does not solve. Thirty-three chapters.",
+      "Why a graph and not a chain, the Pregel model, state and reducers, nodes, edges, Command, parallelism and map-reduce, subgraphs, checkpointers and time travel, interrupt and human approval, the store, streaming, ToolNode, the ReAct agent, RAG in a graph, supervisor and team, the functional API, error handling, evaluation, deployment, cost — and what LangGraph does not solve. Thirty-three chapters.",
 
     descriptionHu: `Az alcím mondja ki, mire megy: **ami a tutorial után jön**. A LangGraph bemutatói egy tízsoros ReAct-ágenssel végződnek, és onnantól az olvasó magára marad azzal, hogy mi történik, ha a hurok nem áll le, ha a futás félbeszakad, vagy ha valakinek jóvá kell hagynia egy lépést.
 
@@ -51,11 +51,11 @@ A könyv az **első döntésnél** kezd: miért gráf és **miért nem lánc**. 
 
 **A Pregel-modell**, amelyre az egész épül: szuperlépések, üzenetátadás, és hogy miért determinisztikus a párhuzamos végrehajtás.
 
-**A gráf:** állapot és **reducerek**, csomópontok, élek, a **`Command`** — frissítés és irányítás egyszerre —, párhuzamosság, a **`Send`** és a **map-reduce** minta, végül az **algráfok**. Ez utóbbinál egy olyan csapda, ami a legtöbb kezdő rendszert megfekteti: a függvénybe csomagolt algráfban **az `interrupt()` nem folytatható a szülőn keresztül**, tehát a jóváhagyás nem működik.
+**A gráf:** állapot és **reducerek**, csomópontok, élek, a **Command** — frissítés és irányítás egyszerre —, párhuzamosság, a **Send** és a **map-reduce** minta, végül az **algráfok**. Ez utóbbinál egy olyan csapda, ami a legtöbb kezdő rendszert megfekteti: a függvénybe csomagolt algráfban **az interrupt() nem folytatható a szülőn keresztül**, tehát a jóváhagyás nem működik.
 
-**Állapot és idő** — innen lesz a keretrendszer több, mint egy for-ciklus. **Checkpointerek** és szálak, **időutazás** (visszalépés és elágazás), **`interrupt` és az emberi jóváhagyás**, a **store** és a hosszú távú memória, végül a **streaming** a maga öt módjával.
+**Állapot és idő** — innen lesz a keretrendszer több, mint egy for-ciklus. **Checkpointerek** és szálak, **időutazás** (visszalépés és elágazás), **interrupt és az emberi jóváhagyás**, a **store** és a hosszú távú memória, végül a **streaming** a maga öt módjával.
 
-**Eszközök és minták:** a **`ToolNode`**, a **ReAct-ágens**, **RAG gráfban**, a **felügyelő-minta**, csapat és hálózat, az **átadás**, és a **funkcionális API** — amikor nem kell gráfot rajzolni.
+**Eszközök és minták:** a **ToolNode**, a **ReAct-ágens**, **RAG gráfban**, a **felügyelő-minta**, csapat és hálózat, az **átadás**, és a **funkcionális API** — amikor nem kell gráfot rajzolni.
 
 **Üzem**, amiről a bemutatók hallgatnak: **hibakezelés és idempotencia** — mit szabad újrapróbálni és mit nem —, **LangSmith** és a megfigyelhetőség, **kiértékelés**, **telepítés**, **költség, késleltetés, gyorsítótár**.
 
@@ -70,11 +70,11 @@ The book starts at the **first decision**: why a graph and **why not a chain**. 
 
 **The Pregel model** everything rests on: supersteps, message passing, and why parallel execution stays deterministic.
 
-**The graph:** state and **reducers**, nodes, edges, **`Command`** — update and control in one — parallelism, **`Send`** and the **map-reduce** pattern, and finally **subgraphs**. There it covers the trap that sinks most beginners' systems: in a subgraph wrapped in a function, **`interrupt()` cannot be resumed through the parent**, so approval does not work.
+**The graph:** state and **reducers**, nodes, edges, **Command** — update and control in one — parallelism, **Send** and the **map-reduce** pattern, and finally **subgraphs**. There it covers the trap that sinks most beginners' systems: in a subgraph wrapped in a function, **interrupt() cannot be resumed through the parent**, so approval does not work.
 
-**State and time** — this is where the framework becomes more than a for-loop. **Checkpointers** and threads, **time travel** (rewind and branch), **`interrupt` and human approval**, the **store** and long-term memory, and **streaming** with its five modes.
+**State and time** — this is where the framework becomes more than a for-loop. **Checkpointers** and threads, **time travel** (rewind and branch), **interrupt and human approval**, the **store** and long-term memory, and **streaming** with its five modes.
 
-**Tools and patterns:** **`ToolNode`**, the **ReAct agent**, **RAG in a graph**, the **supervisor pattern**, team and network, **handoff**, and the **functional API** — for when you do not want to draw a graph at all.
+**Tools and patterns:** **ToolNode**, the **ReAct agent**, **RAG in a graph**, the **supervisor pattern**, team and network, **handoff**, and the **functional API** — for when you do not want to draw a graph at all.
 
 **Operations**, which the tutorials pass over: **error handling and idempotency** — what may be retried and what may not — **LangSmith** and observability, **evaluation**, **deployment**, **cost, latency, caching**.
 
