@@ -292,7 +292,7 @@ This volume starts with **the decisions the rules follow from**. Almost everythi
     // the next publish to carry the change.
     file: nk("fastapi_nagykonyve/A FastAPI nagykonyve.pdf"),
     downloadName: "A-FastAPI-nagykonyve.pdf",
-    pages: 352,
+    pages: 344,
     priceHuf: 4990,
     author: AUTHOR,
     series: "Tudományos nagykönyvek",
@@ -309,9 +309,9 @@ This volume starts with **the decisions the rules follow from**. Almost everythi
     coverSubtitle: "Tizennyolc fejezet, háromszáz alfejezet",
 
     blurbHu:
-      "Nem referencia és nem gyorstalpaló. Az ASGI-tól a Pydanticon, a függőséginjektáláson és az adatrétegen át a telepítésig — minden szabály abból, amiért így döntöttek. Tizennyolc fejezet, 352 oldal.",
+      "Nem referencia és nem gyorstalpaló. Az ASGI-tól a Pydanticon, a függőséginjektáláson és az adatrétegen át a telepítésig — minden szabály abból, amiért így döntöttek. Tizennyolc fejezet, 344 oldal.",
     blurbEn:
-      "Neither a reference nor a crash course. From ASGI through Pydantic, dependency injection and the data layer to deployment — every rule derived from the decision behind it. Eighteen chapters, 352 pages.",
+      "Neither a reference nor a crash course. From ASGI through Pydantic, dependency injection and the data layer to deployment — every rule derived from the decision behind it. Eighteen chapters, 344 pages.",
 
     descriptionHu: `A FastAPI-ról szóló anyagok többsége ugyanott áll meg: megmutat egy dekorátort, egy Pydantic-modellt, és kész a végpont. Ami utána jön — az adatréteg, a tranzakcióhatárok, a blokkoló hívások, a jogosultság, a telepítés —, az hiányzik. Pedig **a valódi nehézségek ott vannak**, nem a keretrendszerben.
 
@@ -327,7 +327,7 @@ Ez a kötet **a döntéssel kezd, amelyből minden következik**: ha a típusjel
 
 **V. Éles üzem.** Tesztpiramis, az adatbázis négy stratégiája a tesztben, séma alapú tesztelés; konténer, munkásszám, Kubernetes-leíró, biztonsági ellenőrzőlista, migráció régi rendszerről, és **az első éles nap** listája.
 
-352 oldal, tizennyolc fejezet, háromszáz alfejezet. Mért számokkal, futtatható példákkal, és ott, ahol a dokumentáció nem foglal állást — tranzakcióhatár, verziózás, projektszerkezet —, **indokolt ajánlással**.`,
+344 oldal, tizennyolc fejezet, háromszáz alfejezet. Mért számokkal, futtatható példákkal, és ott, ahol a dokumentáció nem foglal állást — tranzakcióhatár, verziózás, projektszerkezet —, **indokolt ajánlással**.`,
     descriptionEn: `Most FastAPI material stops at the same place: it shows a decorator, a Pydantic model, and the endpoint is done. What comes after — the data layer, transaction boundaries, blocking calls, authorisation, deployment — is missing. Yet **that is where the real difficulty lies**, not in the framework.
 
 This volume starts with **the decision everything follows from**: if type hints are readable at runtime, then the function signature is the entire API contract. Validation, documentation, output filtering and dependency injection all follow from it.
@@ -342,7 +342,7 @@ This volume starts with **the decision everything follows from**: if type hints 
 
 **V. Production.** The test pyramid, four database strategies in tests, schema-based testing; containers, worker counts, a Kubernetes manifest, a security checklist, migrating from a legacy system, and **a first-day-live** checklist.
 
-352 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and — where the documentation takes no position — **a reasoned recommendation**.`,
+344 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and — where the documentation takes no position — **a reasoned recommendation**.`,
   },
   {
     slug: "production-ai-engineering",

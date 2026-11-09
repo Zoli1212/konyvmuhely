@@ -28,6 +28,7 @@ import { PrismaClient } from "../src/generated/prisma/client.ts";
 import { renderCover, type AccentName, type MarkName } from "./make-cover.mts";
 import { CATALOGUE, type CatalogueEntry } from "./catalogue.mts";
 import { BOOKLET_MAX_PAGES } from "../src/lib/book-kind.ts";
+import { pdfPageCount } from "./pdf-pages.mts";
 
 for (const file of [".env.local", ".env"]) {
   try {
@@ -139,6 +140,20 @@ const prisma = new PrismaClient({
 async function publish(entry: CatalogueEntry, index: number): Promise<void> {
   const pdf = await readFile(entry.file);
   const label = `${entry.slug} (${(pdf.byteLength / 1024 / 1024).toFixed(1)} MB)`;
+
+  // These books get rebuilt after they are listed, and a rebuild changes
+  // the length. The file is uploaded on every change, but the page count
+  // and the prose that quotes it live in the catalogue by hand — so a
+  // listing can end up advertising 83 pages for a 118-page book. Refuse
+  // the book rather than publish a number that is not true.
+  const actualPages = pdfPageCount(pdf);
+  if (actualPages !== null && actualPages !== entry.pages) {
+    throw new Error(
+      `page count drift: the catalogue says ${entry.pages}, the file has ` +
+        `${actualPages}. Update pages (and any mention of it in the blurb ` +
+        `and description) in the catalogue entry.`,
+    );
+  }
 
   const cover = await renderCover({
     title: entry.coverTitle ?? entry.titleHu,
