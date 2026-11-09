@@ -17,6 +17,86 @@ const SERIES = "Buddhista nagykönyvek";
 
 export const BUDDHIST_BOOKS: CatalogueEntry[] = [
   {
+    slug: "tibeti-bolcsessegek-nagykonyve",
+    file: f("A TIBETI BÖLCSESSÉGEK ÉS MONDÁSOK NAGYKÖNYVE.pdf"),
+    downloadName: "A-tibeti-bolcsessegek-nagykonyve.pdf",
+    pages: 233,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "BUDDHIST",
+    featured: true,
+    accent: "gold",
+    mark: "wheel",
+
+    titleHu: "A Tibeti Bölcsességek és Mondások Nagykönyve",
+    titleEn: "The Great Book of Tibetan Wisdom and Sayings",
+    subtitleHu: "A mondás, amit megjegyzel — és a fogás, amit vele csinálsz",
+    subtitleEn: "The saying you remember — and what you do with it",
+    coverTitle: "Tibeti Bölcsességek",
+    coverSubtitle: "Mondások és fogások",
+
+    blurbHu:
+      "Nyolcszáznál több mondás, mindegyikhez fogás. A hét műfaj a közmondástól a szívbéli tanácsig, Szakja Pandita kincstára, Gampopa tízesei, Atísa drágakő-füzére, a tudatedzés ötvenkilenc jelszava, Padmaszambhava tanácsai, Milarépa énekei, Longcsenpa harminc tanácsa — és a népi mondások tizennégy témában. Harmincöt fejezet.",
+    blurbEn:
+      "Over eight hundred sayings, each with something to do with it. The seven genres from proverb to heart advice, Sakya Pandita's treasury, Gampopa's tens, Atisha's jewel garland, the fifty-nine slogans of mind training, Padmasambhava's counsels, Milarepa's songs, Longchenpa's thirty pieces of advice — and the folk sayings in fourteen themes. Thirty-five chapters.",
+
+    descriptionHu: `A mondásgyűjteményekkel az a baj, hogy el lehet olvasni őket. Végigfut az ember nyolcszáz bölcsességen, mindegyiknél bólint, és másnapra egy sem marad meg — mert a mondás nem olvasnivaló, hanem **eszköz**.
+
+Ez a kötet ezért minden tételhez **fogást** ad: mit csinálj vele. A harmadik fejezet külön a módszerről szól — a hét lépés, **hogyan jegyezz meg egy mondást négy fogással**, az **öt mód, ahogy el szoktuk rontani**, és mit tegyél, **amikor nem fog**.
+
+Előtte viszont tisztáz valamit, ami nélkül az egész összekeveredik: **a hét műfajt**, és hogy **melyikkel mit szabad tenni**.
+
+| Műfaj | Mi |
+|---|---|
+| gtam dpe | közmondás |
+| legs bshad | aforizma |
+| mgur | megvalósítás-ének |
+| zhal gdams | szívbéli tanács |
+| blo sbyong | tudatedzés-jelszó |
+| bslab bya | tízes-lista |
+| rnam thar | életrajzi anekdota |
+
+Ez nem tudományos finomkodás: egy közmondással és egy megvalósítás-énekkel **nem ugyanazt lehet kezdeni**. A fejezet végigveszi a műfajokat egymás ellen, és kimond **négy ütközést, amelyet a könyv nem old fel**.
+
+**A klasszikus források**, fejezetenként: **Szakja Pandita** kincstára három fejezetben — beszéd és hallgatás, hatalom, vagyon, barát, ellenség —, **Gampopa tízesei** kettőben, **Atísa drágakő-füzére** és a kadampa mesterek, a **tudatedzés ötvenkilenc jelszava**, **Padmaszambhava tanácsai**, **Milarépa énekei**, **Longcsenpa harminc szívbéli tanácsa**, Patrul Rinpocse, Dzsamgön Kongtrül, Sabkar, **Padampa Szangje száz tanácsa**, Macsig Labdrön — végül a huszadik századi mesterek Dudzsom és Dilgo Khjence Rinpocsétól.
+
+**A népi mondások** tizennégy témában, és itt derül ki, hogy ez a hagyomány nem csupa fenség: **beszéd és hallgatás**, barát, rokon, szomszéd, **az ellenség és a sértés**, pénz, **munka és lustaság**, étel, test, betegség, **hatalom, hivatal, úr és szolga**, az ostoba és a bölcs, **düh, pletyka, irigység, büszkeség**, idő, szerencse, sors, karma, a hegy és az állat mint hasonlat, **halál, gyász, öregség**, család, házasság, gyerek — és egy teljes fejezet **nevetésről és fekete humorról**, benne a vallási képmutatásról.
+
+A záró három fejezet teszi használhatóvá: **melyik mondás mikor** — helyzetek szerinti rendezés —, **a napi gyakorlat** nyolcszáz mondásra két évre bontva, és **a félreértett és hamis mondások** tíz félreértéssel.
+
+Minden fejezet úgy zárul, hogy **„a mondás, amit ma viszel"**.
+
+233 oldal, harmincöt fejezet.`,
+    descriptionEn: `The trouble with collections of sayings is that they can be read. You run through eight hundred pieces of wisdom, nod at each, and by the next day not one has stayed — because a saying is not reading matter, it is a **tool**.
+
+So this volume gives every entry something **to do with it**. The third chapter is about method alone — the seven steps, **how to commit a saying to memory with four techniques**, the **five ways we habitually get this wrong**, and what to do **when a saying does not take**.
+
+Before that it settles something without which the whole thing blurs: **the seven genres**, and **what may be done with each**.
+
+| Genre | What it is |
+|---|---|
+| gtam dpe | proverb |
+| legs bshad | aphorism |
+| mgur | song of realisation |
+| zhal gdams | heart advice |
+| blo sbyong | mind-training slogan |
+| bslab bya | list of tens |
+| rnam thar | biographical anecdote |
+
+This is not scholarly fussiness: a proverb and a song of realisation **cannot be used the same way**. The chapter sets the genres against each other and states **four conflicts the book does not resolve**.
+
+**The classical sources**, chapter by chapter: **Sakya Pandita's** treasury in three — speech and silence, power, wealth, friend, enemy — **Gampopa's tens** in two, **Atisha's jewel garland** and the Kadampa masters, the **fifty-nine slogans of mind training**, **Padmasambhava's counsels**, **Milarepa's songs**, **Longchenpa's thirty pieces of heart advice**, Patrul Rinpoche, Jamgön Kongtrul, Shabkar, **Padampa Sangye's hundred counsels**, Machig Labdrön — and finally the twentieth-century masters from Dudjom to Dilgo Khyentse Rinpoche.
+
+**The folk sayings** in fourteen themes, where it becomes clear that this tradition is not all loftiness: **speech and silence**, friend, relative, neighbour, **the enemy and the insult**, money, **work and idleness**, food, body, illness, **power, office, master and servant**, the fool and the wise, **anger, gossip, envy, pride**, time, luck, fate, karma, mountain and animal as simile, **death, grief, old age**, family, marriage, children — and a full chapter on **laughter and black humour**, religious hypocrisy included.
+
+The closing three chapters are what make it usable: **which saying when** — arranged by situation — **the daily practice**, eight hundred sayings spread over two years, and **the misunderstood and the fake sayings**, with ten misreadings.
+
+Every chapter ends with **"the saying you take with you today"**.
+
+233 pages, thirty-five chapters.`,
+  },
+  {
     slug: "uresseg-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
