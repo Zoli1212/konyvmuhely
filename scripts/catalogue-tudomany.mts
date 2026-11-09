@@ -19,6 +19,72 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "langgraph-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("langgraph_nagykonyve/A LangGraph nagykonyve.pdf"),
+    downloadName: "A-LangGraph-nagykonyve.pdf",
+    pages: 201,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "lapis",
+    mark: "knot",
+
+    titleHu: "A LangGraph Nagykönyve",
+    titleEn: "The Great Book of LangGraph",
+    subtitleHu: "Ágensek gráffal — és ami a tutorial után jön",
+    subtitleEn: "Agents as graphs — and what comes after the tutorial",
+    coverTitle: "A LangGraph Nagykönyve",
+    coverSubtitle: "Ágensek gráffal",
+
+    blurbHu:
+      "Miért gráf és miért nem lánc, a Pregel-modell, állapot és reducerek, csomópontok, élek, `Command`, párhuzamosság és map-reduce, algráfok, checkpointerek és időutazás, `interrupt` és emberi jóváhagyás, a store, streaming, `ToolNode`, a ReAct-ágens, RAG gráfban, felügyelő és csapat, funkcionális API, hibakezelés, kiértékelés, telepítés, költség — és amit a LangGraph nem old meg. Harminchárom fejezet.",
+    blurbEn:
+      "Why a graph and not a chain, the Pregel model, state and reducers, nodes, edges, `Command`, parallelism and map-reduce, subgraphs, checkpointers and time travel, `interrupt` and human approval, the store, streaming, `ToolNode`, the ReAct agent, RAG in a graph, supervisor and team, the functional API, error handling, evaluation, deployment, cost — and what LangGraph does not solve. Thirty-three chapters.",
+
+    descriptionHu: `Az alcím mondja ki, mire megy: **ami a tutorial után jön**. A LangGraph bemutatói egy tízsoros ReAct-ágenssel végződnek, és onnantól az olvasó magára marad azzal, hogy mi történik, ha a hurok nem áll le, ha a futás félbeszakad, vagy ha valakinek jóvá kell hagynia egy lépést.
+
+A könyv az **első döntésnél** kezd: miért gráf és **miért nem lánc**. A ciklus az, amit egy DAG nem tud, és minden más ebből következik. Rögtön ott van az is, **mit vesztünk a gráffal** — az ár —, és **mikor nem kell LangGraph**.
+
+**A Pregel-modell**, amelyre az egész épül: szuperlépések, üzenetátadás, és hogy miért determinisztikus a párhuzamos végrehajtás.
+
+**A gráf:** állapot és **reducerek**, csomópontok, élek, a **`Command`** — frissítés és irányítás egyszerre —, párhuzamosság, a **`Send`** és a **map-reduce** minta, végül az **algráfok**. Ez utóbbinál egy olyan csapda, ami a legtöbb kezdő rendszert megfekteti: a függvénybe csomagolt algráfban **az `interrupt()` nem folytatható a szülőn keresztül**, tehát a jóváhagyás nem működik.
+
+**Állapot és idő** — innen lesz a keretrendszer több, mint egy for-ciklus. **Checkpointerek** és szálak, **időutazás** (visszalépés és elágazás), **`interrupt` és az emberi jóváhagyás**, a **store** és a hosszú távú memória, végül a **streaming** a maga öt módjával.
+
+**Eszközök és minták:** a **`ToolNode`**, a **ReAct-ágens**, **RAG gráfban**, a **felügyelő-minta**, csapat és hálózat, az **átadás**, és a **funkcionális API** — amikor nem kell gráfot rajzolni.
+
+**Üzem**, amiről a bemutatók hallgatnak: **hibakezelés és idempotencia** — mit szabad újrapróbálni és mit nem —, **LangSmith** és a megfigyelhetőség, **kiértékelés**, **telepítés**, **költség, késleltetés, gyorsítótár**.
+
+Az utolsó rész a tisztesség próbája: **amit a LangGraph nem old meg**, és a **nyitott kérdések a verziósodrással** — mi stabil és mi mozog.
+
+Minden fejezet **„a mai álláspont"** alfejezettel zárul.
+
+201 oldal, harminchárom fejezet, 332 alfejezet. Nem referencia és nem gyorstalpaló: minden szabály abból, amiért így döntöttek.`,
+    descriptionEn: `The subtitle says what it is after: **what comes after the tutorial**. LangGraph's introductions end with a ten-line ReAct agent, and from there the reader is on their own with what happens when the loop will not stop, when a run breaks off halfway, or when someone has to approve a step.
+
+The book starts at the **first decision**: why a graph and **why not a chain**. The cycle is what a DAG cannot do, and everything else follows from it. It also states up front **what the graph costs** — and **when LangGraph is not needed**.
+
+**The Pregel model** everything rests on: supersteps, message passing, and why parallel execution stays deterministic.
+
+**The graph:** state and **reducers**, nodes, edges, **`Command`** — update and control in one — parallelism, **`Send`** and the **map-reduce** pattern, and finally **subgraphs**. There it covers the trap that sinks most beginners' systems: in a subgraph wrapped in a function, **`interrupt()` cannot be resumed through the parent**, so approval does not work.
+
+**State and time** — this is where the framework becomes more than a for-loop. **Checkpointers** and threads, **time travel** (rewind and branch), **`interrupt` and human approval**, the **store** and long-term memory, and **streaming** with its five modes.
+
+**Tools and patterns:** **`ToolNode`**, the **ReAct agent**, **RAG in a graph**, the **supervisor pattern**, team and network, **handoff**, and the **functional API** — for when you do not want to draw a graph at all.
+
+**Operations**, which the tutorials pass over: **error handling and idempotency** — what may be retried and what may not — **LangSmith** and observability, **evaluation**, **deployment**, **cost, latency, caching**.
+
+The closing part is the test of honesty: **what LangGraph does not solve**, and the **open questions with the version drift** — what is stable and what is moving.
+
+Every chapter closes with a section called **"the current position"**.
+
+201 pages, thirty-three chapters, 332 sections. Neither a reference nor a crash course: every rule derived from the decision behind it.`,
+  },
+  {
     slug: "robotika-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
