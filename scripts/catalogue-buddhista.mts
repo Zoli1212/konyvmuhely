@@ -17,6 +17,76 @@ const SERIES = "Buddhista nagykönyvek";
 
 export const BUDDHIST_BOOKS: CatalogueEntry[] = [
   {
+    slug: "szatipatthana-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("szatipatthana_nagykonyve/A szatipatthana nagykonyve.pdf"),
+    downloadName: "A-szatipatthana-nagykonyve.pdf",
+    pages: 432,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "BUDDHIST",
+    featured: true,
+    accent: "saffron",
+    mark: "lotus",
+
+    titleHu: "A Szatipatthána Nagykönyve",
+    titleEn: "The Great Book of Satipatthana",
+    subtitleHu: "A négy éberségi alapzat: a szutta, a hagyomány, a gyakorlás",
+    subtitleEn: "The four foundations of mindfulness: text, tradition, practice",
+    coverTitle: "A Szatipatthána Nagykönyve",
+    coverSubtitle: "A négy éberségi alapzat",
+
+    blurbHu:
+      "A Szatipatthána-szutta teljes feldolgozása: a három szövegváltozat, mi a szati valójában, a refrén mint módszer, a légzés tizenhat lépése, a testtartások és a tiszta tudás, a test részei és a négy elem, a temetőszemlélések, az érzések, a tudatállapotok, az öt akadály, az öt halmaz, a hat érzékkapu, a hét ébredési tényező, a négy igazság mint gyakorlat. Tizenkilenc fejezet, kétszáz feletti kidolgozott gyakorlat.",
+    blurbEn:
+      "The Satipatthana Sutta worked through in full: the three recensions, what sati actually is, the refrain as method, the sixteen steps of breathing, the postures and clear comprehension, the parts of the body and the four elements, the charnel-ground contemplations, feelings, states of mind, the five hindrances, the five aggregates, the six sense doors, the seven awakening factors, the four truths as practice. Nineteen chapters, over two hundred worked exercises.",
+
+    descriptionHu: `Négyszázharminckét oldal egyetlen szuttáról — és ez pontosan annyi, amennyit a szöveg elbír. A Szatipatthána-szutta a buddhista gyakorlás legtöbbet idézett és legkevésbé végigolvasott alapszövege: mindenki ismeri a négy alapzat nevét, és kevesen tudják, **mit mond a refrén**, amit a szutta huszonegyszer elismétel.
+
+A könyv gerince éppen ez. A refrén **nem díszítés, hanem a módszer** — ugyanaz az utasítás mind a huszonegy helyen, és aki ezt érti, az bármelyik gyakorlatot helyesen végzi. Külön fejezet szól róla, mielőtt az alapzatok sorra kerülnének.
+
+Előtte két tisztázás. **Mi a szati valójában** — az „éberség" szó miért kevés, mi az **emlékezés-gyök**, a szati **nyolc funkciója**, és mi a különbsége a figyelemtől. Mellette a **szampadzsannya**, a tiszta tudás, és az **átápí**, a nem lanyhuló erőfeszítés. Azután **a szöveg**: a három változat (MN 10, DN 22, MN 118), a szerkezet, a fordítási nehézségek, a kommentárhagyomány — és tisztességesen az is, **amit a szutta nem mond meg**.
+
+Innen a négy alapzat, mindegyik a maga teljes anyagával.
+
+**A test:** a **légzés tizenhat lépése**, a **testtartások és a tiszta tudás**, a test részei, a **négy elem**, végül a **temetőszemlélések** — a romlandóság szemlélése, amit a népszerű irodalom rendre kihagy.
+
+**Az érzések:** a vedanánupasszaná, a kellemes, kellemetlen és semleges érzés megkülönböztetése, és az a pont, ahol az érzésből vágy lesz.
+
+**A tudat:** a cittánupasszaná, a tudatállapotok felismerése — és hozzá az **öt akadály** a maguk ellenszereivel.
+
+**A jelenségek:** az **öt halmaz** mint a tapasztalás szétszedése, a **hat érzékkapu** és a kontaktus szerkezete, a **hét ébredési tényező** a kiegyensúlyozás módszerével, végül **a négy nemes igazság mint gyakorlat** — nem tételként, hanem műveletként.
+
+A záró fejezetek teszik használhatóvá: **a gyakorlás rendszere** — napi rend, ülés, hétköznap — és **a nehézségek és buktatók**.
+
+Az első fejezet előre elrendezi, ami a legtöbb félreértést okozza: **mire nem való** a szatipatthána, mi a viszonya a **modern mindfulnesshez**, **amit a kutatás tud és amit nem**, a **szíla** mint előfeltétel, **mire számíts az első három hónapban**, és **amit a könyv nem tartalmaz**.
+
+432 oldal, tizenkilenc fejezet, kétszáz feletti kidolgozott gyakorlat.`,
+    descriptionEn: `Four hundred and thirty-two pages on a single sutta — and that is exactly what the text can carry. The Satipatthana Sutta is the most quoted and least read-through foundational text of Buddhist practice: everyone knows the names of the four foundations, and few know **what the refrain says** — the one the sutta repeats twenty-one times.
+
+That refrain is the book's spine. It is **not decoration but the method** — the same instruction in all twenty-one places, and whoever understands it can perform any of the exercises correctly. It gets a chapter of its own before the foundations are taken up.
+
+Two clarifications come first. **What sati actually is** — why "mindfulness" is not enough, what the **memory root** means, the **eight functions** of sati, and how it differs from attention. Alongside it **sampajañña**, clear comprehension, and **ātāpī**, unflagging effort. Then **the text**: the three recensions (MN 10, DN 22, MN 118), the structure, the difficulties of translation, the commentarial tradition — and, honestly, **what the sutta does not tell you**.
+
+From there the four foundations, each with its full material.
+
+**The body:** the **sixteen steps of breathing**, the **postures and clear comprehension**, the parts of the body, the **four elements**, and finally the **charnel-ground contemplations** — the contemplation of decay that popular literature routinely omits.
+
+**Feelings:** vedanānupassanā, telling pleasant, unpleasant and neutral apart, and the exact point at which feeling becomes craving.
+
+**Mind:** cittānupassanā, recognising states of mind — with the **five hindrances** and their antidotes.
+
+**Phenomena:** the **five aggregates** as the dismantling of experience, the **six sense doors** and the structure of contact, the **seven awakening factors** with the method of balancing them, and finally **the four noble truths as practice** — not as propositions but as operations.
+
+The closing chapters make it usable: **the system of practice** — daily order, sitting, ordinary life — and **the difficulties and pitfalls**.
+
+The first chapter settles in advance what causes most of the confusion: **what satipatthana is not for**, how it relates to **modern mindfulness**, **what the research knows and what it does not**, **sīla** as a precondition, **what to expect in the first three months**, and **what the book does not contain**.
+
+432 pages, nineteen chapters, over two hundred worked exercises.`,
+  },
+  {
     slug: "tibeti-bolcsessegek-nagykonyve",
     file: f("A TIBETI BÖLCSESSÉGEK ÉS MONDÁSOK NAGYKÖNYVE.pdf"),
     downloadName: "A-tibeti-bolcsessegek-nagykonyve.pdf",
