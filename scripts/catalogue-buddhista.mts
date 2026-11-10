@@ -47,15 +47,7 @@ Ez a kötet ezért minden tételhez **fogást** ad: mit csinálj vele. A harmadi
 
 Előtte viszont tisztáz valamit, ami nélkül az egész összekeveredik: **a hét műfajt**, és hogy **melyikkel mit szabad tenni**.
 
-| Műfaj | Mi |
-|---|---|
-| gtam dpe | közmondás |
-| legs bshad | aforizma |
-| mgur | megvalósítás-ének |
-| zhal gdams | szívbéli tanács |
-| blo sbyong | tudatedzés-jelszó |
-| bslab bya | tízes-lista |
-| rnam thar | életrajzi anekdota |
+A **gtam dpe** a közmondás, a **legs bshad** az aforizma, az **mgur** a megvalósítás-ének, a **zhal gdams** a szívbéli tanács, a **blo sbyong** a tudatedzés-jelszó, a **bslab bya** a tízes-lista, a **rnam thar** pedig az életrajzi anekdota.
 
 Ez nem tudományos finomkodás: egy közmondással és egy megvalósítás-énekkel **nem ugyanazt lehet kezdeni**. A fejezet végigveszi a műfajokat egymás ellen, és kimond **négy ütközést, amelyet a könyv nem old fel**.
 
@@ -74,15 +66,7 @@ So this volume gives every entry something **to do with it**. The third chapter 
 
 Before that it settles something without which the whole thing blurs: **the seven genres**, and **what may be done with each**.
 
-| Genre | What it is |
-|---|---|
-| gtam dpe | proverb |
-| legs bshad | aphorism |
-| mgur | song of realisation |
-| zhal gdams | heart advice |
-| blo sbyong | mind-training slogan |
-| bslab bya | list of tens |
-| rnam thar | biographical anecdote |
+**gtam dpe** is the proverb, **legs bshad** the aphorism, **mgur** the song of realisation, **zhal gdams** the heart advice, **blo sbyong** the mind-training slogan, **bslab bya** the list of tens, and **rnam thar** the biographical anecdote.
 
 This is not scholarly fussiness: a proverb and a song of realisation **cannot be used the same way**. The chapter sets the genres against each other and states **four conflicts the book does not resolve**.
 
