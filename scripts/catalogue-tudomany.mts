@@ -19,6 +19,68 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "ai-architekturak-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("ai_architekturak_nagykonyve/Az AI-architekturak nagykonyve.pdf"),
+    downloadName: "Az-AI-architekturak-nagykonyve.pdf",
+    pages: 230,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "lapis",
+    mark: "triple",
+
+    titleHu: "Az AI-architektúrák Nagykönyve",
+    titleEn: "The Great Book of AI Architecture",
+    subtitleHu: "Követelménytől a kompromisszumig — és hogyan vonjuk vissza",
+    subtitleEn: "From requirement to trade-off — and how to roll it back",
+    coverTitle: "Az AI-architektúrák Nagykönyve",
+    coverSubtitle: "Tervezés, kényszerek, üzem",
+
+    blurbHu:
+      "A tervezés módszere tizennégy lépésben, kapacitásbecslés, döntésnapló; modellhívás, átjáró, visszakeresés, ágensréteg, sor, állapot; hét alapminta, streamelés, többbérlősség, emberi jóváhagyás; késleltetés- és költségkényszer, adatszuverenitás, bizalmi határok; a négy tengely, hibatűrés, megfigyelhetőség. Négy végigtervezett rendszer, huszonhét fejezet.",
+    blurbEn:
+      "A design method in fourteen steps, capacity estimation, a decision log; model calls, gateway, retrieval, agent layer, queues, state; seven base patterns, streaming, multi-tenancy, human approval; latency and cost constraints, data sovereignty, trust boundaries; the four axes, fault tolerance, observability. Four systems designed end to end, twenty-seven chapters.",
+
+    descriptionHu: `Az alcím a lényeg: **követelménytől a kompromisszumig — és hogyan vonjuk vissza.** Ez a kötet nem diagramgyűjtemény és nem interjúfelkészítő. Azzal foglalkozik, ami a diagram megrajzolása után jön: mi történik, ha a rendszer felét sikerül, mibe kerül egy kérés belülről, és mit lehet belőle **visszacsinálni**.
+
+Az első fejezet kimondja, **miben más** egy AI-rendszer architektúrája. Hat tulajdonság tol el minden döntést, és négy közülük ritkán kerül elő tervezéskor: a **nemdeterminizmus** és ami belőle következik; hogy a **hibák szorzódnak és korreláltak**; hogy a **költség a kérés belsejében van**, nem a gépek számában; és hogy a **késleltetésnek alsó határa van**, amit semmilyen gyorsítótár nem visz a nulla felé. Van egy alfejezet **„A megtévesztő diagram"** címmel, és egy arról, **mit tudsz visszavonni**.
+
+**A tervezés módszere** nem elvi ajánlás, hanem tizennégy végigvitt lépés: a feladat, a használó, a siker; a **minőségi célérték** kimondása; a nemfunkcionális kényszerek; a **tiltólista** — mit nem csinál a rendszer —; a legegyszerűbb megoldás próbája; az adatút és a bizalmi határok; **mi történik, ha félig sikerül**; a mérési terv; mit cserélünk el mire; és a **visszavonási terv**. Mellette **kapacitásbecslés**: a hat szám, tokenköltségvetés kérésenként, csúcs és átlag négy külön számmal, és a **KV-gyorsítótár mint a tényleges korlát**.
+
+**Az építőelemek** rétegenként: a modellhívás mint architekturális elem, a **modellátjáró**, a visszakeresési réteg, az **ágensréteg**, a sor, a folyam és az **idempotencia**, végül az állapot négy fajtája — munkamenet, előzmény, feladat, memória.
+
+**A minták:** hét alapminta **és a határaik**, szinkron, aszinkron és streamelő működés, **többbérlősség**, és az **emberi jóváhagyás a rendszerben** — nem mint felületi elem, hanem mint architekturális döntés.
+
+**A kényszerek**, amelyekre a legtöbb terv ráfut: több modell és több szolgáltató, a **késleltetés költségvetése**, a **költség mint architektúra**, az adat szuverenitása, megőrzése és megfelelése, végül a **bizalmi határok és a hatáskör**.
+
+**Az üzem:** a négy tengely kiadással és visszagörgetéssel, **hibatűrés, leromlás, kiesés**, és a megfigyelhetőségi architektúra.
+
+Négy rendszer végig van tervezve a könyvben, a követelményektől a visszavonási tervig.
+
+230 oldal, huszonhét fejezet.`,
+    descriptionEn: `The subtitle is the point: **from requirement to trade-off — and how to roll it back.** This is not a diagram collection and not interview preparation. It deals with what comes after the diagram is drawn: what happens when half the system succeeds, what a request costs on the inside, and what can be **undone**.
+
+The first chapter states **what is different** about the architecture of an AI system. Six properties shift every decision, and four of them rarely come up at design time: **non-determinism** and what follows from it; that **errors multiply and are correlated**; that **cost sits inside the request**, not in the machine count; and that **latency has a floor** no cache will push toward zero. There is a section called **"The misleading diagram"**, and another on **what you can actually roll back**.
+
+**The design method** is not a set of principles but fourteen worked steps: the task, the user, success; stating the **quality target**; the non-functional constraints; the **do-not list** — what the system will not do; the test of the simplest solution; the data path and trust boundaries; **what happens when it half-succeeds**; the measurement plan; what is traded for what; and the **rollback plan**. Alongside it, **capacity estimation**: the six numbers, a token budget per request, peak and average as four separate figures, and **the KV cache as the real limit**.
+
+**The building blocks**, layer by layer: the model call as an architectural element, the **model gateway**, the retrieval layer, the **agent layer**, queues, streams and **idempotency**, and finally the four kinds of state — session, history, task, memory.
+
+**The patterns:** seven base patterns **and their limits**, synchronous, asynchronous and streaming operation, **multi-tenancy**, and **human approval inside the system** — as an architectural decision, not a UI element.
+
+**The constraints** most designs run into: multiple models and providers, the **latency budget**, **cost as architecture**, data sovereignty, retention and compliance, and finally **trust boundaries and scope**.
+
+**Operations:** the four axes with release and rollback, **fault tolerance, degradation, outage**, and observability architecture.
+
+Four systems are designed end to end in the book, from requirements to rollback plan.
+
+230 pages, twenty-seven chapters.`,
+  },
+  {
     slug: "langgraph-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
@@ -409,6 +471,122 @@ This volume starts with **the decision everything follows from**: if type hints 
 **V. Production.** The test pyramid, four database strategies in tests, schema-based testing; containers, worker counts, a Kubernetes manifest, a security checklist, migrating from a legacy system, and **a first-day-live** checklist.
 
 344 pages, eighteen chapters, three hundred sections. With measured numbers, runnable examples, and — where the documentation takes no position — **a reasoned recommendation**.`,
+  },
+  {
+    slug: "claude-code-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("claude_code_nagykonyve/A Claude Code nagykonyve.pdf"),
+    downloadName: "A-Claude-Code-nagykonyve.pdf",
+    pages: 316,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "copper",
+    mark: "triple",
+
+    titleHu: "A Claude Code Nagykönyve",
+    titleEn: "The Great Book of Claude Code",
+    subtitleHu: "A berendezés többet ér, mint az utasítgatás",
+    subtitleEn: "Setup beats instruction",
+    coverTitle: "A Claude Code Nagykönyve",
+    coverSubtitle: "Tizennyolc fejezet, 366 alfejezet",
+
+    blurbHu:
+      "Nem prompttechnika és nem funkciólista. Az ügynökhurok mechanizmusától a projekt berendezéséig: CLAUDE.md, jogosultságok, parancsok, horgok, alügynökök, MCP, képességek, CI. Tizennyolc fejezet, 316 oldal.",
+    blurbEn:
+      "Neither prompt tricks nor a feature list. From the mechanics of the agent loop to setting up a project: CLAUDE.md, permissions, commands, hooks, subagents, MCP, skills, CI. Eighteen chapters, 316 pages.",
+
+    descriptionHu: `A legtöbb anyag, amely a kódoló ügynökökről szól, ugyanazt a hibát követi el: **prompttechnikát tanít.** Mintha a jó eredmény azon múlna, hogyan fogalmazunk. A gyakorlat ennek az ellenkezőjét mutatja — ugyanaz a modell, ugyanaz a feladat, de **gyors tesztkörrel és szigorú típusellenőrzővel** más eredményt ad, mint egy olyan projektben, ahol semmit nem lehet gyorsan ellenőrizni.
+
+Ez a kötet végig erre az állításra épít: **a berendezés többet ér, mint az utasítgatás.**
+
+**I. Az ügynök természete.** Mi a Claude Code, és milyen döntésekből lett az; honnan jött ez az eszközosztály — a kódkiegészítőtől a csevegőablakon át az ügynökig —, és miben más a megfigyelés a feltételezésnél. Az ügynökhurok lépésről lépésre, egy valódi kör teljes nyomkövetésével; a hurok hat megállási feltétele, a párhuzamos eszközhívások, és **négy elfajulás** — a tágulás, az oszcilláció, a halmozódás, a hamis siker —, mindegyik felismerhető jellel. **A kontextus mint sodrószalag:** mi fogyasztja valójában (számokkal), hogyan szerkeszthető, mit veszít a tömörítés, és egy nagy feladat teljes kontextusterve. Az eszközkészlet: miért kevés és általános, mit nem tartalmaz szándékosan, és hogyan olvassuk az eszközhívások naplóját — két valódi napló, egy egészséges és egy beteg, soronkénti elemzéssel.
+
+**II. A munkamenet.** A kérés három rétege: mit, miért, hogyan ne; tíz megfogalmazás, amely megbízhatóan működik, és mindegyik mögött a mechanizmus. **Négy beszélgetés, négy kimenetel** — ugyanaz a feladat semmitmondó, túl részletes, jó, és mércével ellátott kéréssel. A megszakítás művészete: mikor azonnal, mikor várjunk, és mit mondjunk utána. Fájlok és keresés: a keresési stratégia négy módja, nagy és generált fájlok, többfájlos változtatások felmérés–szakaszolás–ellenőrzés menetben, halott kód, függőségfrissítés adapterréteggel. Git: a commitüzenet, a PR-leírás, **az átnézés három menete**, konfliktusfeloldás, a git mint felderítőeszköz. Hibakeresés és tesztelés: a hibajelentésből induló munka, villódzó tesztek, a gyors kör megépítése, és **egy nehéz hiba hét lépésben** — a bejelentéstől a CLAUDE.md-bejegyzésig.
+
+**III. A projekt berendezése.** A CLAUDE.md: háromszintű memória, a bejegyzések megfogalmazása, tíz dolog, amit sosem szabad beleírni, három kész fájl három projekttípusra, és négy próba arra, hogy jó-e. Jogosultságok: a mintaillesztés részletei, **a kockázat valódi térképe**, az engedélymódok, egy fenyegetési modell a mindennapokra, és mit tegyünk, ha mégis baj lesz. Beállítások: a \`.claude\` szerkezete, monorepó, a rétegek eredője, **egy teljes, átvehető projektberendezés**. Egyéni parancsok: hat parancs, amely majdnem mindenhol megéri, és hat, amely nem vált be — négy kérdéssel, amely előre megmondja, melyik lesz melyik.
+
+**IV. Kiterjesztés.** Alügynökök: a feladatleírás öt eleme, a költségük végigszámolva, négy átvehető definíció, és **egy felderítés elejétől végéig** — negyvenkétezer token helyett ötszáz. Horgok: hat, amely megéri, öt, amelyet ne írjunk meg, a hét szabály és egy sablon, amely mindet betartja; a blokkoló üzenet megfogalmazása. MCP: a protokoll logikája, mikor jobb a parancssor, egy teljes saját kiszolgáló, és a külső tartalom mint támadási felület. Képességek: a leírás, amely dönt, segédfájlok és ellenőrző szkriptek, és a kiterjesztések sorrendje megtérülés szerint.
+
+**V. Automatizálás és gyakorlat.** Fej nélküli mód, egy teljes CI-munkafolyamat, SDK-alapú kötegelt feldolgozás, költségkorlátok, és **mit ne automatizáljunk**. A végén a megbízhatósági térkép, a hat szokás, a négy antiminta, három teljes munkamenet időbélyegekkel, a négyhetes bevezetési terv, és egy diagnózis arra, ha mégsem működik.
+
+316 oldal, tizennyolc fejezet, 366 alfejezet, 738 kereszthivatkozással. Mechanizmusokra építve — mert a parancsnevek és a kapcsolók változnak, az ügynökhurok, a kontextusgazdálkodás és a kérés–kényszer különbsége nem.`,
+    descriptionEn: `Most material on coding agents makes the same mistake: **it teaches prompt technique**, as if good results depended on phrasing. Practice shows the opposite — the same model on the same task performs differently in a project with a ten-second test loop and a strict type checker than in one where nothing can be verified quickly.
+
+This volume builds on that claim throughout: **setup beats instruction.**
+
+**I. The nature of the agent.** What Claude Code is and the decisions that shaped it; where this class of tool came from — completion, chat window, agent — and why observation beats assumption. The agent loop step by step with a full trace of one real turn; the loop's six stopping conditions, parallel tool calls, and **four degenerations** — widening, oscillation, accumulation, false success — each with a recognisable sign. **Context as a conveyor belt:** what actually consumes it (with numbers), how to shape it, what compaction loses, and a full context plan for a large task. The tool set: why it is small and general, what it deliberately omits, and how to read the tool-call log — two real logs, one healthy and one sick, line by line.
+
+**II. The session.** The three layers of a request: what, why, how not; ten phrasings that reliably work, each with its mechanism. **Four conversations, four outcomes** — the same task asked vaguely, over-specified, well, and with a success metric. The art of interruption. Files and search: four search strategies, large and generated files, multi-file changes, dead code, dependency upgrades via an adapter layer. Git: commit messages, PR descriptions, **the three passes of review**, conflict resolution, git as a discovery tool. Debugging and testing: working from a bug report, flaky tests, building the fast loop, and **one hard bug in seven steps**.
+
+**III. Setting up the project.** CLAUDE.md: three-level memory, how to phrase entries, ten things never to put in it, three complete files for three project types, four tests of whether it is any good. Permissions: pattern matching, **the real risk map**, permission modes, a practical threat model, and what to do when something does go wrong. Settings: the \`.claude\` layout, monorepos, how the layers resolve, **one complete, adoptable project setup**. Custom commands: six that are almost always worth it, six that failed — with four questions that tell you which is which in advance.
+
+**IV. Extension.** Subagents: the five elements of a task description, their cost worked out, four adoptable definitions, and **one discovery run end to end** — five hundred tokens instead of forty-two thousand. Hooks: six worth writing, five not to write, seven rules and a template that follows all of them. MCP: the protocol's logic, when the command line is better, a complete custom server, and external content as attack surface. Skills: the description that decides, helper files and check scripts, and the order of extensions by return.
+
+**V. Automation and practice.** Headless mode, a complete CI workflow, SDK-based batch processing, cost limits, and **what not to automate**. Finally: the reliability map, six habits, four anti-patterns, three complete sessions with timestamps, a four-week adoption plan, and a diagnosis for when it still is not working.
+
+316 pages, eighteen chapters, 366 sections, 738 cross-references. Built on mechanisms — because command names and flags change, while the agent loop, context management, and the difference between asking and enforcing do not.`,
+  },
+  {
+    slug: "gpu-szerverek-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("gpu_szerverek_nagykonyve/A GPU-szerverek nagykonyve.pdf"),
+    downloadName: "A-GPU-szerverek-nagykonyve.pdf",
+    pages: 306,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "amethyst",
+    mark: "sun",
+
+    titleHu: "A GPU-szerverek Nagykönyve",
+    titleEn: "The Great Book of GPU Servers",
+    subtitleHu: "A VRAM-tól a számláig",
+    subtitleEn: "From VRAM to the invoice",
+    coverTitle: "A GPU-szerverek Nagykönyve",
+    coverSubtitle: "Tizennyolc fejezet, Modal és RunPod",
+
+    blurbHu:
+      "Mibe kerül, miért lassú, és miért nem fér el. A GPU architektúrájától a VRAM-képleteken és a konténereken át a Modal és a RunPod éles üzeméig. Tizennyolc fejezet, 306 oldal, végigszámolt példákkal.",
+    blurbEn:
+      "What it costs, why it is slow, and why it does not fit. From GPU architecture through VRAM formulas and containers to running Modal and RunPod in production. Eighteen chapters, 306 pages, with worked examples.",
+
+    descriptionHu: `A bérelt GPU-nál három kérdés jön elő újra és újra: **mibe kerül, miért lassú, és miért nem fér el.** Mindhárom megválaszolható — de nem katalógusadatból, hanem néhány képletből és egy méréssel.
+
+Ez a kötet ezekre a kérdésekre ad eszközt, és nem a felületi részletekre épít: a platformok parancsai változnak, a VRAM-számítás, a roofline-gondolat, a hidegindítás szerkezete és a költségmodell logikája nem.
+
+**I. A GPU mint erőforrás.** Mi a GPU-szerver, honnan jött ez az eszközosztály, és **mikor ne béreljünk** — öt eset, amikor a CPU vagy egy kész API olcsóbb. A nemzedékek, amelyek tényleg számítanak: VRAM, memóriasávszélesség, formátumok, összeköttetés. Az architektúra: a tömeges párhuzamosság, a memóriahierarchia, **a kernelindítás költsége** és a kis kötegek átka; tenzormagok és formátumok, és miért a FLOP-ok öt százaléka viszi az idő negyven százalékát; aszinkronitás, folyamok, és a PCIe mint harminc-százszoros szűkület. **A VRAM mint a legszűkebb erőforrás:** a tanítási és inferencia-képletek, a kulcs-érték gyorsítótár mérete végigszámolva, a töredezettség, hét megtakarítási eszköz növekvő ár szerint, a memóriahibák négy osztálya — és **négy teljes tervezési példa**, a paraméterszámtól a kártyaválasztásig.
+
+**II. Futtatás.** A szoftververem nyolc rétege, a kompatibilitás egyetlen igazi szabálya, a hibaüzenetek olvasása rétegenként, verziórögzítés és reprodukálhatóság, környezetkezelés és a verem frissítése füstpróbával. Konténerek: a képméret csökkentése, rétegsorrend és gyorsítótárazás, **egy teljes képfájl soronkénti indoklással**, képtárolók, és az indítási kapcsolók, amelyek hiánya jellegzetes hibákat okoz. Ütemezés és megosztás: MIG, MPS, időosztás és Kubernetes — **mikor melyik, négy valódi helyzeten**. Több GPU: a kommunikációs minták költségszámítással, mikor nem érdemes, a négy párhuzamosítási mód együtt, holtpontok és NCCL-hibák. **A költségmodell:** az effektív óradíj, vásárlás kontra bérlés fordulóponttal, megszakítható példányok, és három végigszámolt költségszámítás.
+
+**III. Modal.** A függvény mint felhő: a modell, a helyi fejlesztés viszonya, hibakezelés és újrapróbálkozás, osztályalapú függvények életciklussal, a képfájl kódból, és a modell korlátai. Tárolás: képek, kötetek, titkok, **a kép–kötet határ**, adatformátumok, gyorsítótárazás, és a kötetek karbantartása. GPU-munka: kötegelt feldolgozás, **a hidegindítás négy összetevője** és csökkentése, egy teljes finomhangolás, GPU-típus választása méréssel, többkártyás munka, költségfigyelés. Éles üzem: webes végpontok, verziózás, riasztás teendőkkel, ütemezett munkák, **egy éles végpont teljes kódja**, és a környezetek szétválasztása.
+
+**IV. RunPod.** A pod és a serverless modellje, a gépközeli munkamód következményei, a döntés a kettő között, kapacitás és elérhetőség, az első pod beállítása lépésről lépésre, több pod együtt, és a pod mint fejlesztői környezet. Tárolás: a négy réteg összevetése, adatmozgatás be és ki, **ellenőrzőpontok és helyreállítás**, az adatbetöltés mint szűk keresztmetszet, mentés, objektumtár-beállítás. Serverless: **a kezelőfüggvény felépítése**, aszinkron és folyamkimenet, a munkavégzők méretezése, hibakeresés, kiadás. Üzemeltetés: automatizálás és **az üresjárat-őr**, hálózat és biztonság, naplózás, és egy teljes életciklus-lista.
+
+**V. Éles üzem.** Inferencia-kiszolgálás: folyamatos kötegelés, PagedAttention, a kiszolgáló hangolása paraméterenként, kvantálás méréssel, **terhelésmérés és a telítési pont**, a késleltetés–átbocsátás csere, modellválasztás és útválasztás tizenkétszeres megtakarítással. Megfigyelés: a profilozás négy eszköze, egy nyolcpaneles műszerfal normális tartományokkal, **a költségoptimalizálás sorrendje megtérülés szerint**, és három gyakori panasz végigvezetett diagnózissal.
+
+306 oldal, tizennyolc fejezet, 309 alfejezet. Mechanizmusokra építve, végigszámolt példákkal — és azzal a visszatérő tanulsággal, hogy **a GPU-s rendszerek problémái ritkán ott vannak, ahol a figyelem.**`,
+    descriptionEn: `With rented GPUs, three questions keep coming back: **what does it cost, why is it slow, and why does it not fit.** All three are answerable — not from a datasheet, but from a few formulas and one measurement.
+
+This volume gives tools for those questions and does not build on surface detail: platform commands change; VRAM arithmetic, the roofline idea, the structure of cold starts and the logic of the cost model do not.
+
+**I. The GPU as a resource.** What a GPU server is, where this class of service came from, and **when not to rent one** — five cases where a CPU or an existing API is cheaper. The generation differences that actually matter: VRAM, memory bandwidth, formats, interconnect. Architecture: massive parallelism, the memory hierarchy, **the cost of launching a kernel** and the curse of small batches; tensor cores and formats, and why five per cent of the FLOPs take forty per cent of the time; asynchrony, streams, and PCIe as a thirty-to-hundredfold bottleneck. **VRAM as the tightest resource:** training and inference formulas, the KV cache sized out, fragmentation, seven savings tools ordered by cost, four classes of out-of-memory error — and **four complete sizing examples**, from parameter count to card choice.
+
+**II. Running it.** The eight layers of the software stack, the one real compatibility rule, reading error messages by layer, version pinning and reproducibility, environment management and stack upgrades with a smoke test. Containers: shrinking images, layer order and caching, **a complete Dockerfile justified line by line**, registries, and the run flags whose absence causes characteristic failures. Scheduling and sharing: MIG, MPS, time slicing and Kubernetes — **which one when, across four real situations**. Multi-GPU: communication patterns with cost arithmetic, when it is not worth it, the four parallelism modes together, deadlocks and NCCL errors. **The cost model:** effective hourly rate, buy versus rent with the break-even point, preemptible instances, and three worked cost calculations.
+
+**III. Modal.** The function as cloud: the model, its relationship to local development, error handling and retries, class-based functions with lifecycles, images from code, and the model's limits. Storage: images, volumes, secrets, **the image–volume boundary**, data formats, caching, and volume maintenance. GPU work: batch processing, **the four components of cold start** and how to cut them, a complete fine-tuning run, choosing a GPU type by measurement, multi-GPU work, cost tracking. Production: web endpoints, versioning, alerts with runbooks, scheduled jobs, **the complete code of a production endpoint**, and separating environments.
+
+**IV. RunPod.** The pod and serverless models, the consequences of machine-level work, choosing between them, capacity and availability, setting up the first pod step by step, running several pods, and the pod as a development environment. Storage: the four tiers compared, moving data in and out, **checkpoints and recovery**, data loading as a bottleneck, backups, object store setup. Serverless: **the structure of the handler**, async and streaming output, sizing workers, debugging, releases. Operations: automation and **the idle guard**, networking and security, logging, and a full lifecycle checklist.
+
+**V. Production.** Inference serving: continuous batching, PagedAttention, tuning the server parameter by parameter, quantisation with measurement, **load testing and the saturation point**, the latency–throughput trade-off, model selection and routing with a twelvefold saving. Observability: four profiling tools, an eight-panel dashboard with normal ranges, **the order of cost optimisation by return**, and three common complaints with worked diagnoses.
+
+306 pages, eighteen chapters, 309 sections. Built on mechanisms, with worked examples — and the recurring lesson that **the problems of GPU systems are rarely where the attention is.**`,
   },
   {
     slug: "production-ai-engineering",
