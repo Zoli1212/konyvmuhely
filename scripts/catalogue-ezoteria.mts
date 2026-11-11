@@ -19,6 +19,72 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "boszorkanykor",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("boszorkanykor/Boszorkanykor.pdf"),
+    downloadName: "Boszorkanykor.pdf",
+    pages: 192,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "amethyst",
+    mark: "wheel",
+
+    titleHu: "Boszorkánykör",
+    titleEn: "The Witches' Circle",
+    subtitleHu: "A kör megvonásától a feloszlatásig — együttes munkák",
+    subtitleEn: "From casting the circle to disbanding it — working together",
+    coverTitle: "Boszorkánykör",
+    coverSubtitle: "Együttes munkák",
+
+    blurbHu:
+      "A kör megvonása kilenc módon, a négy kapu és az őrzők, a kapuvágás és a megtört kör javítása; a kör összeállítása, eskü és kötés, a három fok; az erőkúp, láncmunkák, a kerék, a dob és a kántálás; együttes gyógyítás, védelem, kötés, levétel, jóslás, révülés, ős- és halottmunka; a nyolc kapu és a tizenhárom hold; amikor a kör nem fog, rontás a körön belül, kilépés, kizárás, feloszlatás. Huszonnyolc fejezet.",
+    blurbEn:
+      "Casting the circle nine ways, the four gates and their guardians, cutting a gate and repairing a broken circle; forming the circle, oath and binding, the three degrees; the cone of power, chain workings, the wheel, drum and chant; healing, protection, binding, uncrossing, divination, journeying and ancestor work done together; the eight gates and the thirteen moons; when the circle does not hold, harm from within, leaving, expulsion, disbanding. Twenty-eight chapters.",
+
+    descriptionHu: `A boszorkányságról szóló könyvek majdnem mind a **magányos gyakorlóhoz** szólnak. Ez a kötet a másik esetről: arról, ami akkor történik, amikor többen dolgoznak együtt — és arról, ami akkor romlik el.
+
+Az alcím őszinte: **a kör megvonásától a feloszlatásig**. A feloszlatás is benne van, mert a körök véget érnek, és a hagyomány erre is ad formát.
+
+**A kör mint munkaeszköz.** A megvonás **kilenc módon**, a kör mérete, alakja, közepe, a megvonás próbái és hibái. **A négy kapu és az őrzők**, a kapuállók, a kapuk munkái. A bezárás, a ki- és belépés, a **kapuvágás** — és a **félbehagyott kör**, amit sokan nem tudnak, hogy kezeljenek.
+
+Külön fejezet arról, **amikor a kör megtörik**: a jelek, az azonnali javítás, a **visszacsapás**, a megelőzés és a helyreállítás. És egy a körfajtákról: melyik munkához melyik kör való.
+
+**A kör megalapítása** a kötet emberi része: hogyan áll össze egy kör, az **eskü és a kötés**, a **három fok**, és a hely — a kör földje, háza, oltára.
+
+**Az együttes erő** a tulajdonképpeni technika: az **erőkúp** szerkezete és felvitele, a **láncmunkák**, a **kerék, a forgás, a tánc**, és a hang — **dob, kántálás, ének, csend**.
+
+**A kör munkái** egyenként: együttes gyógyítás, védelem (ház, föld, ember), kötés, **levétel és visszatérítés**, jóslás, révülés és álommunka, **ős- és halottmunka**, végül **igazságtétel és a kör ítélete**.
+
+**Az év és a hold a körben:** a nyolc kapu munkái és a tizenhárom hold.
+
+És amiért ez nem romantikus kép a boszorkányságról: **amikor a kör nem fog**, **rontás a körön belül**, a **kilépés**, a **kizárás** és a **feloszlatás** rendje. Meg a **távolsági kör** — amikor nem lehettek egy helyen.
+
+192 oldal, huszonnyolc fejezet. Munkák, nem művelődéstörténet.`,
+    descriptionEn: `Almost every book on witchcraft addresses the **solitary practitioner**. This one is about the other case: what happens when several people work together — and what goes wrong when they do.
+
+The subtitle is honest: **from casting the circle to disbanding it**. The disbanding is in there, because circles end, and the tradition has a form for that too.
+
+**The circle as a working tool.** Casting it **nine ways**, its size, shape and centre, the tests and faults of casting. **The four gates and the guardians**, the gatekeepers, the workings of the gates. Closing, going in and out, **cutting a gate** — and the **abandoned circle**, which many do not know how to handle.
+
+A chapter of its own on **when the circle breaks**: the signs, immediate repair, the **backlash**, prevention and restoration. And one on kinds of circle: which working calls for which.
+
+**Founding the circle** is the volume's human part: how a circle comes together, **oath and binding**, the **three degrees**, and the place — the circle's ground, house and altar.
+
+**Collective power** is the technique proper: the structure and raising of the **cone of power**, **chain workings**, the **wheel, the turning, the dance**, and sound — **drum, chant, song, silence**.
+
+**The circle's workings** one by one: healing together, protection (house, land, person), binding, **uncrossing and return**, divination, journeying and dream work, **ancestor and dead work**, and finally **judgement and the circle's verdict**.
+
+**The year and the moon in the circle:** the workings of the eight gates and the thirteen moons.
+
+And what keeps this from being a romantic picture of witchcraft: **when the circle does not hold**, **harm from within the circle**, and the order of **leaving**, **expulsion** and **disbanding**. Plus the **distance circle** — for when you cannot be in one place.
+
+192 pages, twenty-eight chapters. Workings, not cultural history.`,
+  },
+  {
     slug: "boszorkany-szombat",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
