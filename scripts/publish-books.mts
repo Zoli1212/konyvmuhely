@@ -40,6 +40,7 @@ for (const file of [".env.local", ".env"]) {
 
 const SITE = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 const DRY_RUN = process.argv.includes("--dry-run");
+const STATIC_COVER_DIR = path.join(process.cwd(), "public", "covers");
 const COVER_DIR = path.join(process.cwd(), ".covers");
 
 function need(name: string): string {
@@ -164,8 +165,14 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     mark: entry.mark as MarkName,
   });
 
+  // Covers are served as static files from the repo, not from Blob: they
+  // are 16 kB apiece and never change between builds, so paying a metered
+  // authenticated read for each one is waste — and when the store's quota
+  // ran out, every cover in the shop went dark at once.
   await mkdir(COVER_DIR, { recursive: true });
   await writeFile(path.join(COVER_DIR, `${entry.slug}.webp`), cover);
+  await mkdir(STATIC_COVER_DIR, { recursive: true });
+  await writeFile(path.join(STATIC_COVER_DIR, `${entry.slug}.webp`), cover);
 
   if (DRY_RUN) {
     console.log(`[dry-run] ${label} — cover written to .covers/${entry.slug}.webp`);
@@ -179,15 +186,6 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
 
   // Only pay for an upload when there is something new to upload.
   const alreadyHasFile = existing?.files.some((f) => f.sizeBytes === pdf.byteLength);
-
-  // Private like every other blob - the store forbids public ones - and
-  // reachable through our own /api/assets route.
-  const coverBlob = await uploadToBlob(
-    `covers/${entry.slug}-${sha(cover)}.webp`,
-    cover,
-    "private",
-    "image/webp",
-  );
 
   const pdfBlob = alreadyHasFile
     ? null
@@ -217,9 +215,9 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     ageRestricted: entry.ageRestricted ?? false,
     category: entry.category ?? "BUDDHIST",
     sortIndex: index,
-    coverUrl: `/api/assets/${coverBlob.pathname}`,
-    coverPathname: coverBlob.pathname,
-    coverStorage: "BLOB" as const,
+    coverUrl: `/covers/${entry.slug}.webp`,
+    coverPathname: null,
+    coverStorage: null,
   };
 
   const book = await prisma.book.upsert({
