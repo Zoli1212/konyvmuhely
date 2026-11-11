@@ -156,7 +156,7 @@ Every chapter ends with **"the saying you take with you today"**.
     // the next publish to carry the change.
     file: f("uresseg_nagykonyve/Az uresseg nagykonyve.pdf"),
     downloadName: "Az-uresseg-nagykonyve.pdf",
-    pages: 241,
+    pages: 250,
     priceHuf: 4990,
     author: AUTHOR,
     series: SERIES,
@@ -195,7 +195,7 @@ Majd a továbbélés: **Árjadéva, Buddhapálita, Bhávavivéka** és a szétv�
 
 A záró fejezetek: **az üresség mint gyakorlat** — mert ez nem pusztán filozófia —, az üresség és a nyugati filozófia (**Wittgenstein**, **Parfit**), és a logika mai olvasatai, köztük a **parakonzisztens** értelmezés.
 
-241 oldal, harminc fejezet.`,
+250 oldal, harminc fejezet.`,
     descriptionEn: `Emptiness is the most misunderstood concept in Buddhism, and the misunderstandings are not random: they come from the same mistake every time. So the book states exactly **what Madhyamaka denies** — **svabhava**, independent intrinsic existence — and **what it does not**: existence itself.
 
 That is why the volume closes with **forty-five misunderstandings** listed one by one, and why **the charge of nihilism** gets a chapter of its own: if nothing exists independently, what becomes of karma, of ethics, of anything working at all?
@@ -214,7 +214,7 @@ Then the afterlife: **Aryadeva, Buddhapalita, Bhavaviveka** and the parting of w
 
 The closing chapters: **emptiness as practice** — because this is not philosophy alone — emptiness and Western philosophy (**Wittgenstein**, **Parfit**), and today's logical readings, including the **paraconsistent** interpretation.
 
-241 pages, thirty chapters.`,
+250 pages, thirty chapters.`,
   },
   {
     slug: "buddhizmus-nagykonyve",

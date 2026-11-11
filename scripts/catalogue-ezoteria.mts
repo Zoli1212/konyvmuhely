@@ -19,6 +19,68 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "boszorkany-szombat",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("boszorkany_szombat/Boszorkany Szombat.pdf"),
+    downloadName: "Boszorkany-Szombat.pdf",
+    pages: 227,
+    priceHuf: 7990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "amethyst",
+    mark: "flame",
+
+    titleHu: "Boszorkány Szombat",
+    titleEn: "Witches' Sabbath",
+    subtitleHu: "Kötés és oldás, átok és levétel — a boszorkánymunka nagy tára",
+    subtitleEn: "Binding and loosing, curse and uncrossing — the great book of witchcraft",
+    coverTitle: "Boszorkány Szombat",
+    coverSubtitle: "A boszorkánymunka nagy tára",
+
+    blurbHu:
+      "Hetvenkét fejezet, tizenegy részben. Kötés szerelemre, nyelvre, kézre, pénzre, perre, helyre; oldás — saját, idegen, örökölt, halotti kötelék; gyertyaöntés, -olvasás és -fordítás; fekete tükör, pajzs, csapda, küldés; átok mérése, szóval, névvel, tárggyal, temetővel, nyommal; rontás ételen, ruhán, küszöbön, jószágon; levétel tojással, ólommal, sóval, fürdővel, füsttel, kilenceléssel; visszatérítés a vetőre; médiumság és az ősök asztala.",
+    blurbEn:
+      "Seventy-two chapters in eleven parts. Binding for love, tongue, hand, money, lawsuit, place; loosing — your own, another's, inherited, the tie to the dead; candle casting, reading and turning; black mirror, shield, trap, sending; cursing by measure, word, name, object, graveyard, track; crossing through food, clothing, threshold, livestock; uncrossing with egg, lead, salt, bath, smoke, the nine; returning it to the sender; mediumship and the ancestors' table.",
+
+    descriptionHu: `Ez a legnagyobb és a legnyersebb kötet a sorozatban, és az alcíme pontos: **a boszorkánymunka nagy tára**. Nem bevezető, nem művelődéstörténet, és nem óvatoskodik. Hetvenkét fejezet, tizenegy részben, apparátus nélkül.
+
+**A szombat műhelye** nyitja: a nyitás és a zárás rendje, a hold, a nap és az óra, a hely megválasztása. Utána a kelléktár — **a tűz és a vas tárgyai**, a fonál, a tű, a seprű, a tükör, a gyertya, a kés —, majd a receptek: **olajok** négy csoportban (kötő és vonzó, levevő és oldó, átok- és rontásolajok, látó és médiumolajok), **porok, reszelékek, hamvak**.
+
+**A kötések** részletesen: szerelemre, **nyelvre** — hogy ne beszéljen —, kézre, pénzre, perre és helyre. Mellettük az **oldások**, és itt a könyv négyféle köteléket különböztet meg: a sajátodat, az idegenét, az **örököltet**, és a **halotti köteléket** — azt, ami egy halotthoz fűz.
+
+**A gyertya** önálló rész: az öntés, az **olvasás** — mit mond a viasz, a láng, a korom —, a fordítás, és a kilenc napos munka rendje.
+
+**A tükör** szintén: a fekete tükör elkészítése, a pajzs, a **csapda**, és a küldés.
+
+Innen a nehéz anyag, négy részben. **Átok:** a mérés — hogy mekkorát és kinek —, a szó, a név, a tárgy, a temető és a nyom átkai. **Rontás:** ételen, ruhán, küszöbön, jószágon át, és a **rossz szem**. Azután a másik irány: **átoklevétel és rontáslevétel** — tojással, ólomöntéssel, sóval, fürdővel, füsttel, **kilenceléssel**. Végül a **visszatérítés a vetőre**, tételesen.
+
+A záró rész a **médiumság**: halottidézés, az **ősök asztala**, és a jelek olvasása.
+
+227 oldal, hetvenkét fejezet.
+
+**Felnőtt tartalom.** A kötet átkokat, rontásokat és temetői munkát tárgyal gyakorlati részletességgel, saját felelősségre.`,
+    descriptionEn: `This is the largest and rawest volume in the series, and its subtitle is exact: **the great book of witchcraft**. Not an introduction, not cultural history, and not cautious. Seventy-two chapters in eleven parts, with no apparatus.
+
+**The workshop of the sabbath** opens it: the order of opening and closing, the moon, the day and the hour, choosing the place. Then the equipment — **the objects of fire and iron**, thread, needle, broom, mirror, candle, knife — and then the recipes: **oils** in four groups (binding and drawing, lifting and loosing, curse and crossing oils, seeing and medium oils), **powders, filings, ashes**.
+
+**The bindings** in detail: for love, for the **tongue** — so it will not speak — for the hand, for money, for lawsuits and for a place. Beside them the **loosings**, and here the book distinguishes four kinds of tie: your own, another's, the **inherited**, and the **tie to the dead**.
+
+**The candle** gets a part of its own: casting, **reading** — what the wax, the flame and the soot say — turning, and the order of the nine-day working.
+
+**The mirror** likewise: making the black mirror, the shield, the **trap**, and sending.
+
+From there the hard material, in four parts. **Curse:** the measuring — how much and on whom — the curses of word, name, object, graveyard and track. **Crossing:** through food, clothing, threshold, livestock, and the **evil eye**. Then the other direction: **lifting curse and crossing** — with egg, poured lead, salt, bath, smoke, **the nine**. And finally **returning it to the sender**, item by item.
+
+The closing part is **mediumship**: calling the dead, the **ancestors' table**, and reading the signs.
+
+227 pages, seventy-two chapters.
+
+**Adult content.** The volume covers curses, crossings and graveyard work in practical detail, at the reader's own responsibility.`,
+  },
+  {
     slug: "magia-haladoknak",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.

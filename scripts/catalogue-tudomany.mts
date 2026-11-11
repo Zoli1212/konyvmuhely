@@ -19,6 +19,68 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "agentic-devops-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("agentic_devops_nagykonyve/Az agentic DevOps nagykonyve.pdf"),
+    downloadName: "Az-agentic-DevOps-nagykonyve.pdf",
+    pages: 228,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "jade",
+    mark: "wheel",
+
+    titleHu: "Az Agentic DevOps Nagykönyve",
+    titleEn: "The Great Book of Agentic DevOps",
+    subtitleHu: "A rekonciliációs hurok, a kívánt állapot és a hatósugár",
+    subtitleEn: "The reconciliation loop, desired state, and blast radius",
+    coverTitle: "Az Agentic DevOps Nagykönyve",
+    coverSubtitle: "Ágensek üzemeltetnek",
+
+    blurbHu:
+      "A hurok mint ágens, a kívánt állapot mint beavatkozási felület, a hatósugár; Docker, Kubernetes és Terraform ágensvezérelve; az ágenslánc — észlelő, diagnoszta, javaslattevő, végrehajtó, felülvizsgáló; kiadás, incidens, elsodródás, kapacitás, biztonsági javítás. A megtévesztő helyreállítás, amit tilos ágensre bízni, és a bizalom átadása. Harminc fejezet, három végigtervezett rendszer.",
+    blurbEn:
+      "The loop as agent, desired state as the surface for intervention, blast radius; Docker, Kubernetes and Terraform driven by agents; the agent chain — detector, diagnostician, proposer, executor, reviewer; release, incident, drift, capacity, security patching. The deceptive recovery, what must never be handed to an agent, and how trust is transferred. Thirty chapters, three systems designed end to end.",
+
+    descriptionHu: `A könyv a saját címlapján mondja ki, mitől más: **a láncban ágensek állnak, nem ágensek írják meg a hagyományos láncot.** Ez az a két dolog, amit a terület folyton összekever, és az első fejezet ezzel kezd.
+
+A különbség nem szóhasználat. Ha egy modell megírja a CI-konfigurációdat, akkor a lánc ugyanaz marad, csak gyorsabban készült el. Agentic DevOpsról akkor beszélünk, ha **a futó rendszerben** van olyan elem, amely észlel, dönt és beavatkozik — és akkor minden tervezési kérdés megváltozik.
+
+A könyv váza a **rekonciliációs hurok**, és a szerző érve az, hogy ez már ott van: a Kubernetes vezérlője pontosan ezt csinálja évek óta. Az ágens nem új paradigma, hanem **okosabb hurok** — és ebből következik a könyv minden gyakorlati tanácsa: a forduló anatómiája, a konvergencia és a stabilitás, mi történik, **amikor két hurok egymás ellen dolgozik**, az idempotencia, a beavatkozási napló, és **amikor a hurok nem konvergál**.
+
+**A kívánt állapot** nem konfiguráció, hanem beavatkozási felület: három réteg, három beavatkozási mód, a mezőengedély, a határok, az annotáció mint üzenőfal — és külön alfejezet arról, **amit az ágens nem láthat**.
+
+**Az eszközök** ágensvezérelve: a Docker-képlánc, a **Kubernetes mint operátor**, és a Terraform, ahol **a terv az érzékszerv** — nem a végrehajtás, hanem a plan kimenete az, amiből az ágens tájékozódik. Mellette a hitelesítés, a hatáskör és a rövid életű jogosultságok.
+
+**Az ágenslánc** öt szerepre bontva: **észlelő**, **diagnoszta**, **javaslattevő**, **végrehajtó** — és egy fejezetcím, ami önmagában megér egy könyvet: **„A végrehajtó — és miért nem ágens"** —, végül a **felülvizsgáló**.
+
+**A munkafolyamatok** egyenként: kiadás és visszagörgetés, az incidens, az elsodródás, kapacitás és költség, biztonsági javítás és függőségfrissítés, a platform és a fejlesztő viszonya.
+
+És az, amiért ez nem marketinganyag: **a megtévesztő helyreállítás** — amikor a rendszer visszaáll zöldre, miközben a hiba megmaradt —, **amit tilos ágensre bízni**, és **a bizalom átadásának** menete: hogyan jut el egy ágens a javaslattételtől a beavatkozásig, lépésenként, visszavonható módon.
+
+228 oldal, harminc fejezet.`,
+    descriptionEn: `The book states on its own cover what sets it apart: **the chain has agents standing in it; agents do not merely write the traditional chain.** These are the two things the field keeps conflating, and the first chapter starts there.
+
+The difference is not terminology. If a model writes your CI configuration, the chain stays the same — it was just produced faster. Agentic DevOps means something in **the running system** detects, decides and intervenes — and from that point every design question changes.
+
+The book's frame is the **reconciliation loop**, and the argument is that it is already there: a Kubernetes controller has been doing exactly this for years. The agent is not a new paradigm but **a smarter loop** — and every practical point follows from that: the anatomy of a turn, convergence and stability, what happens **when two loops work against each other**, idempotency, the intervention log, and **when the loop does not converge**.
+
+**Desired state** is not configuration but an intervention surface: three layers, three modes of intervention, field ownership, boundaries, annotations as a message board — and a section of its own on **what the agent must not see**.
+
+**The tools** driven by agents: the Docker image chain, **Kubernetes as operator**, and Terraform, where **the plan is the sense organ** — it is the plan output, not the apply, that the agent reads. Alongside them authentication, scope and short-lived credentials.
+
+**The agent chain** broken into five roles: **detector**, **diagnostician**, **proposer**, **executor** — with a chapter title worth a book on its own, **"The executor — and why it is not an agent"** — and finally the **reviewer**.
+
+**The workflows** one by one: release and rollback, the incident, drift, capacity and cost, security patching and dependency updates, and the relationship between platform and developer.
+
+And what keeps this from being marketing material: **the deceptive recovery** — when the system goes green again while the fault remains — **what must never be handed to an agent**, and the procedure for **transferring trust**: how an agent moves from proposing to acting, step by step, reversibly.
+
+228 pages, thirty chapters.`,
+  },
+  {
     slug: "ai-architekturak-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
@@ -86,7 +148,7 @@ Four systems are designed end to end in the book, from requirements to rollback 
     // the next publish to carry the change.
     file: nk("langgraph_nagykonyve/A LangGraph nagykonyve.pdf"),
     downloadName: "A-LangGraph-nagykonyve.pdf",
-    pages: 201,
+    pages: 232,
     priceHuf: 4990,
     author: AUTHOR,
     series: "Tudományos nagykönyvek",
@@ -125,7 +187,7 @@ Az utolsó rész a tisztesség próbája: **amit a LangGraph nem old meg**, és 
 
 Minden fejezet **„a mai álláspont"** alfejezettel zárul.
 
-201 oldal, harminchárom fejezet, 332 alfejezet. Nem referencia és nem gyorstalpaló: minden szabály abból, amiért így döntöttek.`,
+232 oldal, harminchárom fejezet, 332 alfejezet. Nem referencia és nem gyorstalpaló: minden szabály abból, amiért így döntöttek.`,
     descriptionEn: `The subtitle says what it is after: **what comes after the tutorial**. LangGraph's introductions end with a ten-line ReAct agent, and from there the reader is on their own with what happens when the loop will not stop, when a run breaks off halfway, or when someone has to approve a step.
 
 The book starts at the **first decision**: why a graph and **why not a chain**. The cycle is what a DAG cannot do, and everything else follows from it. It also states up front **what the graph costs** — and **when LangGraph is not needed**.
@@ -144,7 +206,7 @@ The closing part is the test of honesty: **what LangGraph does not solve**, and 
 
 Every chapter closes with a section called **"the current position"**.
 
-201 pages, thirty-three chapters, 332 sections. Neither a reference nor a crash course: every rule derived from the decision behind it.`,
+232 pages, thirty-three chapters, 332 sections. Neither a reference nor a crash course: every rule derived from the decision behind it.`,
   },
   {
     slug: "robotika-nagykonyve",
