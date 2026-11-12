@@ -122,7 +122,7 @@ function parsePriceToMinor(
  * would produce a book with a download that 404s.
  */
 async function verifyUpload(file: {
-  storage: "BLOB" | "LOCAL";
+  storage: "BLOB" | "LOCAL" | "R2";
   url: string;
   pathname: string;
   sizeBytes: number;
@@ -232,7 +232,7 @@ export async function createBook(
   const bookFiles: {
     fileLocale: "HU" | "EN";
     format: "PDF" | "EPUB";
-    storage: "BLOB" | "LOCAL";
+    storage: "BLOB" | "LOCAL" | "R2";
     url: string;
     pathname: string;
     fileName: string;
@@ -372,7 +372,7 @@ export async function updateBook(
   const newFiles: {
     fileLocale: "HU" | "EN";
     format: "PDF" | "EPUB";
-    storage: "BLOB" | "LOCAL";
+    storage: "BLOB" | "LOCAL" | "R2";
     url: string;
     pathname: string;
     fileName: string;

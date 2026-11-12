@@ -180,6 +180,35 @@ function withRandomSuffix(pathname: string): string {
   return `${dir}${name.slice(0, lastDot)}-${token}${name.slice(lastDot)}`;
 }
 
+/**
+ * A short-lived URL the browser can PUT a file to directly.
+ *
+ * Uploads must not travel through a serverless function: the request body
+ * limit is a few megabytes and the books are far bigger. Blob solves this
+ * with its own client-upload flow; for R2 it is a presigned PUT.
+ *
+ * Fifteen minutes is long enough for a slow connection to finish a large
+ * book and short enough that a leaked URL is worthless by the time anyone
+ * finds it. The key is fixed here, not chosen by the caller, so a stolen
+ * URL can only write the one object it was issued for.
+ */
+export async function presignUpload(
+  pathname: string,
+  contentType: string,
+): Promise<{ uploadUrl: string; pathname: string }> {
+  const key = withRandomSuffix(pathname);
+  const uploadUrl = await getSignedUrl(
+    r2Client(),
+    new PutObjectCommand({
+      Bucket: env.r2Bucket!,
+      Key: key,
+      ContentType: contentType,
+    }),
+    { expiresIn: 15 * 60 },
+  );
+  return { uploadUrl, pathname: key };
+}
+
 // --- Reading ---
 
 export type ReadResult = {
