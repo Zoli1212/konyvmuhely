@@ -24,7 +24,7 @@ export const ESOTERIC_BOOKS: CatalogueEntry[] = [
     // the next publish to carry the change.
     file: f("boszorkanykor/Boszorkanykor.pdf"),
     downloadName: "Boszorkanykor.pdf",
-    pages: 192,
+    pages: 197,
     priceHuf: 4990,
     author: AUTHOR,
     series: SERIES,
@@ -63,7 +63,7 @@ Külön fejezet arról, **amikor a kör megtörik**: a jelek, az azonnali javít
 
 És amiért ez nem romantikus kép a boszorkányságról: **amikor a kör nem fog**, **rontás a körön belül**, a **kilépés**, a **kizárás** és a **feloszlatás** rendje. Meg a **távolsági kör** — amikor nem lehettek egy helyen.
 
-192 oldal, huszonnyolc fejezet. Munkák, nem művelődéstörténet.`,
+197 oldal, huszonnyolc fejezet. Munkák, nem művelődéstörténet.`,
     descriptionEn: `Almost every book on witchcraft addresses the **solitary practitioner**. This one is about the other case: what happens when several people work together — and what goes wrong when they do.
 
 The subtitle is honest: **from casting the circle to disbanding it**. The disbanding is in there, because circles end, and the tradition has a form for that too.
@@ -82,7 +82,7 @@ A chapter of its own on **when the circle breaks**: the signs, immediate repair,
 
 And what keeps this from being a romantic picture of witchcraft: **when the circle does not hold**, **harm from within the circle**, and the order of **leaving**, **expulsion** and **disbanding**. Plus the **distance circle** — for when you cannot be in one place.
 
-192 pages, twenty-eight chapters. Workings, not cultural history.`,
+197 pages, twenty-eight chapters. Workings, not cultural history.`,
   },
   {
     slug: "boszorkany-szombat",

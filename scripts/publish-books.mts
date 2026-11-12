@@ -21,7 +21,6 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 
-import { upload } from "@vercel/blob/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 import { PrismaClient } from "../src/generated/prisma/client.ts";
@@ -29,6 +28,7 @@ import { renderCover, type AccentName, type MarkName } from "./make-cover.mts";
 import { CATALOGUE, type CatalogueEntry } from "./catalogue.mts";
 import { BOOKLET_MAX_PAGES } from "../src/lib/book-kind.ts";
 import { pdfPageCount } from "./pdf-pages.mts";
+import { storeFile } from "../src/lib/storage.ts";
 
 for (const file of [".env.local", ".env"]) {
   try {
@@ -112,20 +112,26 @@ async function signIn(email: string, password: string): Promise<void> {
 
 // --- uploading ---
 
-async function uploadToBlob(
+/**
+ * Writes a book file to wherever the app is configured to store things.
+ *
+ * This used to call Vercel Blob directly through the browser-upload route.
+ * It now goes through the same storage layer the running app uses, so the
+ * script cannot write to one store while the site reads from another —
+ * which is exactly what happened when Blob was suspended mid-migration.
+ */
+async function uploadFile(
   pathname: string,
   bytes: Buffer,
   visibility: "public" | "private",
   contentType: string,
-): Promise<{ url: string; pathname: string }> {
-  const result = await upload(pathname, bytes, {
-    access: visibility,
-    contentType,
-    handleUploadUrl: `${SITE}/api/admin/blob-upload`,
-    headers: { cookie: cookieHeader() },
-    multipart: bytes.byteLength > 20 * 1024 * 1024,
-  });
-  return { url: result.url, pathname: result.pathname };
+): Promise<{ storage: "BLOB" | "LOCAL" | "R2"; url: string; pathname: string }> {
+  const stored = await storeFile(pathname, bytes, { visibility, contentType });
+  return {
+    storage: stored.storage,
+    url: stored.url,
+    pathname: stored.pathname,
+  };
 }
 
 function sha(bytes: Buffer): string {
@@ -189,7 +195,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
 
   const pdfBlob = alreadyHasFile
     ? null
-    : await uploadToBlob(
+    : await uploadFile(
         `books/${entry.slug}/${entry.slug}-hu.pdf`,
         pdf,
         "private",
@@ -237,7 +243,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
         },
       },
       update: {
-        storage: "BLOB",
+        storage: pdfBlob.storage,
         url: pdfBlob.url,
         pathname: pdfBlob.pathname,
         fileName: entry.downloadName,
@@ -247,7 +253,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
         bookId: book.id,
         format: "PDF",
         fileLocale: "HU",
-        storage: "BLOB",
+        storage: pdfBlob.storage,
         url: pdfBlob.url,
         pathname: pdfBlob.pathname,
         fileName: entry.downloadName,
@@ -271,7 +277,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     const blob =
       stored?.sizeBytes === bytes.byteLength
         ? null
-        : await uploadToBlob(
+        : await uploadFile(
             `books/${entry.slug}/${entry.slug}-${extra.locale.toLowerCase()}.${extension}`,
             bytes,
             "private",
@@ -284,7 +290,7 @@ async function publish(entry: CatalogueEntry, index: number): Promise<void> {
     }
 
     const fileData = {
-      storage: "BLOB" as const,
+      storage: blob.storage,
       url: blob.url,
       pathname: blob.pathname,
       fileName: extra.downloadName,

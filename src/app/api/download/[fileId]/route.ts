@@ -71,6 +71,55 @@ export async function GET(
     }
   }
 
+  // Logged before delivery, not after: on the R2 path the response is a
+  // redirect and the function is gone long before the download finishes, so
+  // there is no later moment at which to record it.
+  //
+  // Best effort either way - a logging failure must not cost the buyer their
+  // download.
+  try {
+    await prisma.downloadLog.create({
+      data: {
+        userId: user.id,
+        bookFileId: file.id,
+        ip:
+          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+        userAgent: request.headers.get("user-agent")?.slice(0, 500) ?? null,
+      },
+    });
+  } catch {
+    // Ignored on purpose.
+  }
+
+  // The R2 path: hand the browser a signed URL and stay out of the data path.
+  try {
+    const signed = await signedDownloadUrl({
+      storage: file.storage,
+      pathname: file.pathname,
+      fileName: file.fileName,
+      contentType: CONTENT_TYPE[file.format],
+    });
+
+    if (signed) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: signed,
+          // The redirect itself carries an entitlement decision and a URL
+          // that expires. Neither may be cached by anything.
+          "Cache-Control": "private, no-store, max-age=0",
+        },
+      });
+    }
+  } catch (error) {
+    // Signing failed - fall through to streaming rather than failing the
+    // download. Worth knowing about, since it means paying for egress.
+    console.error("download: presigning failed, streaming instead", {
+      fileId: file.id,
+      detail: error instanceof Error ? error.message : String(error),
+    });
+  }
+
   // A storage failure used to surface as an opaque 500. Buyers still get a
   // neutral message, but the reason is logged, and an admin - who is the only
   // person who can act on it - sees it in the response.
@@ -100,21 +149,6 @@ export async function GET(
 
   if (!stored) {
     return new Response("The file is missing from storage.", { status: 404 });
-  }
-
-  // Best effort: a logging failure must not cost the buyer their download.
-  try {
-    await prisma.downloadLog.create({
-      data: {
-        userId: user.id,
-        bookFileId: file.id,
-        ip:
-          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
-        userAgent: request.headers.get("user-agent")?.slice(0, 500) ?? null,
-      },
-    });
-  } catch {
-    // Ignored on purpose.
   }
 
   const headers = new Headers({
