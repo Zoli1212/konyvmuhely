@@ -69,6 +69,7 @@ enum BookCategory {
 enum StorageKind {
   BLOB
   LOCAL
+  R2
 }
 
 // --- Models required by Auth.js ---

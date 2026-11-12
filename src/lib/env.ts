@@ -33,6 +33,38 @@ export const env = {
     return optional("STRIPE_WEBHOOK_SECRET");
   },
 
+  /**
+   * Cloudflare R2, reached over the S3 API. Preferred over Blob when set:
+   * R2 meters stored bytes and requests rather than "advanced operations",
+   * and charges nothing for egress — which is most of what a shop full of
+   * PDFs does all day.
+   */
+  get r2AccountId() {
+    return optional("R2_ACCOUNT_ID");
+  },
+  get r2AccessKeyId() {
+    return optional("R2_ACCESS_KEY_ID");
+  },
+  get r2SecretAccessKey() {
+    return optional("R2_SECRET_ACCESS_KEY");
+  },
+  get r2Bucket() {
+    return optional("R2_BUCKET");
+  },
+  /**
+   * How long a presigned download link stays valid, in seconds.
+   *
+   * Short on purpose. The link is a bearer token for a paid file: anyone
+   * holding it within the window can fetch the book. A download begins within
+   * seconds of the redirect, so five minutes is generous for a slow phone and
+   * still dead long before a forwarded link gets opened.
+   */
+  get r2SignedUrlTtl() {
+    const raw = optional("R2_SIGNED_URL_TTL");
+    const parsed = raw ? Number.parseInt(raw, 10) : Number.NaN;
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 300;
+  },
+
   get blobToken() {
     return optional("BLOB_READ_WRITE_TOKEN");
   },
@@ -116,6 +148,20 @@ export function company(): Company {
  */
 export function blobConfigured(): boolean {
   return Boolean(env.blobToken || env.blobStoreId);
+}
+
+/**
+ * True when R2 has everything it needs. All four are required: a partial
+ * configuration would silently fall back to Blob and write new files to a
+ * store we are trying to move off.
+ */
+export function r2Configured(): boolean {
+  return Boolean(
+    env.r2AccountId &&
+      env.r2AccessKeyId &&
+      env.r2SecretAccessKey &&
+      env.r2Bucket,
+  );
 }
 
 /** Which credential the Blob SDK will end up using. For diagnostics. */

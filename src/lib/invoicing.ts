@@ -141,7 +141,7 @@ export async function processInvoice(orderId: string): Promise<InvoiceOutcome> {
 
   // --- store the PDF ---
   let pdfFields: {
-    pdfStorage?: "BLOB" | "LOCAL";
+    pdfStorage?: "BLOB" | "LOCAL" | "R2";
     pdfUrl?: string;
     pdfPathname?: string;
   } = {};

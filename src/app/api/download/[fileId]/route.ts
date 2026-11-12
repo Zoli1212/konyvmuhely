@@ -1,13 +1,26 @@
 import { currentUser } from "@/lib/auth-guard";
 import { prisma } from "@/lib/prisma";
-import { readStoredFile } from "@/lib/storage";
+import {
+  contentDisposition,
+  readStoredFile,
+  signedDownloadUrl,
+} from "@/lib/storage";
 
 /**
  * The only way a book file reaches a buyer.
  *
- * Book files are stored as *private* blobs, so their URLs are useless on their
- * own; this route is the gate. It checks the entitlement, then streams the
- * bytes through without buffering them, so a 150 MB PDF costs almost no heap.
+ * Book files are stored privately, so their locations are useless on their
+ * own; this route is the gate. It checks the entitlement, then delivers the
+ * file one of two ways:
+ *
+ *  - R2: a 302 to a short-lived signed URL. The bytes go R2 -> buyer, which
+ *        keeps 240 MB of books off the platform's metered egress. This is the
+ *        whole reason for preferring R2.
+ *  - everything else: streamed through without buffering, so a 150 MB PDF
+ *        costs the function almost no heap.
+ *
+ * The entitlement check and the download log happen before either path, so
+ * the redirect is never issued to someone who has not bought the book.
  */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,18 +29,6 @@ const CONTENT_TYPE: Record<"PDF" | "EPUB", string> = {
   PDF: "application/pdf",
   EPUB: "application/epub+zip",
 };
-
-/**
- * Content-Disposition with a non-ASCII file name needs both forms: a stripped
- * ASCII `filename` for old clients and an RFC 5987 `filename*` for the rest.
- * Without this, "Gyertya és tükörmágia.pdf" either breaks the header or
- * arrives mangled.
- */
-function contentDisposition(fileName: string): string {
-  const ascii = fileName.replace(/[^\x20-\x7e]/g, "_").replace(/["\\]/g, "_");
-  const encoded = encodeURIComponent(fileName);
-  return `attachment; filename="${ascii}"; filename*=UTF-8''${encoded}`;
-}
 
 export async function GET(
   request: Request,

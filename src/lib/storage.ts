@@ -4,13 +4,24 @@ import { mkdir, stat, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
 
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { del, get, put } from "@vercel/blob";
 
-import { blobConfigured, env } from "./env";
+import { blobConfigured, env, r2Configured } from "./env";
 
 /**
  * Two storage drivers behind one interface.
  *
+ *  - `r2`    - Cloudflare R2 over the S3 API. The preferred driver: it
+ *              meters stored bytes and requests, not "advanced operations",
+ *              and charges nothing for egress. Objects are private and
+ *              reached only through our own routes.
  *  - `blob`  - Vercel Blob. Everything is written as a *private* blob: a
  *              Blob store created with private access refuses public ones
  *              outright, and defaulting to private works on either kind of
@@ -26,7 +37,7 @@ import { blobConfigured, env } from "./env";
  * (`StorageKind`), so switching drivers never orphans existing files.
  */
 
-export type StorageDriver = "blob" | "local";
+export type StorageDriver = "r2" | "blob" | "local";
 export type Visibility = "public" | "private";
 
 export const LOCAL_ROOT = path.join(process.cwd(), ".storage");
@@ -37,6 +48,10 @@ export const MAX_BOOK_FILE_MB = 200;
 export const MAX_COVER_MB = 8;
 
 export function storageDriver(): StorageDriver {
+  // R2 wins when configured. Blob stays wired up underneath: rows written
+  // before the move still say BLOB and keep reading from there, and
+  // unsetting the R2 variables puts everything back as it was.
+  if (r2Configured()) return "r2";
   return blobConfigured() ? "blob" : "local";
 }
 
@@ -45,8 +60,22 @@ export function storageMisconfigured(): boolean {
   return storageDriver() === "local" && Boolean(process.env.VERCEL);
 }
 
+let r2: S3Client | null = null;
+
+function r2Client(): S3Client {
+  r2 ??= new S3Client({
+    region: "auto",
+    endpoint: `https://${env.r2AccountId}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId: env.r2AccessKeyId!,
+      secretAccessKey: env.r2SecretAccessKey!,
+    },
+  });
+  return r2;
+}
+
 export type StoredFile = {
-  storage: "BLOB" | "LOCAL";
+  storage: "BLOB" | "LOCAL" | "R2";
   url: string;
   pathname: string;
 };
@@ -78,6 +107,28 @@ export async function storeFile(
   body: Buffer,
   options: { visibility: Visibility; contentType?: string },
 ): Promise<StoredFile> {
+  if (storageDriver() === "r2") {
+    // Suffixed for the same reason the other drivers do it: replacing a
+    // file must not overwrite the old key, which is deleted afterwards.
+    const key = withRandomSuffix(pathname);
+    await r2Client().send(
+      new PutObjectCommand({
+        Bucket: env.r2Bucket!,
+        Key: key,
+        Body: body,
+        ContentType: options.contentType,
+      }),
+    );
+
+    return {
+      storage: "R2",
+      // The bucket is private, so there is no browser-reachable URL; both
+      // kinds go through our routes, which is already true of Blob.
+      url: options.visibility === "public" ? `/api/assets/${key}` : "",
+      pathname: key,
+    };
+  }
+
   if (storageDriver() === "blob") {
     const result = await put(pathname, body, {
       // Always private - see the note at the top of this file.
@@ -142,10 +193,27 @@ export type ReadResult = {
  * memory, so a 150 MB PDF costs the function almost no heap.
  */
 export async function readStoredFile(ref: {
-  storage: "BLOB" | "LOCAL";
+  storage: "BLOB" | "LOCAL" | "R2";
   pathname: string;
   visibility: Visibility;
 }): Promise<ReadResult | null> {
+  if (ref.storage === "R2") {
+    try {
+      const out = await r2Client().send(
+        new GetObjectCommand({ Bucket: env.r2Bucket!, Key: ref.pathname }),
+      );
+      if (!out.Body) return null;
+
+      return {
+        stream: out.Body.transformToWebStream(),
+        size: out.ContentLength ?? null,
+        contentType: out.ContentType ?? null,
+      };
+    } catch {
+      return null;
+    }
+  }
+
   if (ref.storage === "BLOB") {
     const result = await get(ref.pathname, {
       access: ref.visibility,
@@ -179,15 +247,72 @@ export async function readStoredFile(ref: {
   };
 }
 
+/**
+ * A short-lived URL the buyer's browser can fetch straight from R2.
+ *
+ * This is the reason R2 is worth the move. `readStoredFile` works for R2 too,
+ * but streaming through our own route means every paid megabyte leaves via the
+ * platform's egress - 240 MB of books served that way is exactly the bill we
+ * are trying to stop paying. Handing the browser a signed URL instead takes
+ * the bytes R2 -> buyer and the function out of the data path entirely.
+ *
+ * The trade-off is that the URL is a bearer token for as long as it lives, so
+ * it lives briefly (see `env.r2SignedUrlTtl`) and is only ever issued to a
+ * request that already proved its entitlement.
+ *
+ * Returns null for any other driver, so the caller falls back to streaming.
+ */
+export async function signedDownloadUrl(ref: {
+  storage: "BLOB" | "LOCAL" | "R2";
+  pathname: string;
+  fileName: string;
+  contentType?: string;
+}): Promise<string | null> {
+  if (ref.storage !== "R2" || !r2Configured()) return null;
+
+  // Asking R2 to set the download headers on the response means the browser
+  // saves "Gyertya és tükörmágia.pdf" rather than a random key, even though
+  // our route is no longer in the way to set them itself.
+  const command = new GetObjectCommand({
+    Bucket: env.r2Bucket!,
+    Key: ref.pathname,
+    ResponseContentDisposition: contentDisposition(ref.fileName),
+    ResponseContentType: ref.contentType,
+    ResponseCacheControl: "private, no-store, max-age=0",
+  });
+
+  return getSignedUrl(r2Client(), command, {
+    expiresIn: env.r2SignedUrlTtl,
+  });
+}
+
+/**
+ * Content-Disposition with a non-ASCII file name needs both forms: a stripped
+ * ASCII `filename` for old clients and an RFC 5987 `filename*` for the rest.
+ * Without this, "Gyertya és tükörmágia.pdf" either breaks the header or
+ * arrives mangled.
+ */
+export function contentDisposition(fileName: string): string {
+  const ascii = fileName.replace(/[^\x20-\x7e]/g, "_").replace(/["\\]/g, "_");
+  const encoded = encodeURIComponent(fileName);
+  return `attachment; filename="${ascii}"; filename*=UTF-8''${encoded}`;
+}
+
 // --- Deleting ---
 
 /** Best-effort delete. A missing file is not an error worth surfacing. */
 export async function deleteStoredFile(ref: {
-  storage: "BLOB" | "LOCAL";
+  storage: "BLOB" | "LOCAL" | "R2";
   pathname: string;
   url?: string | null;
 }): Promise<void> {
   try {
+    if (ref.storage === "R2") {
+      await r2Client().send(
+        new DeleteObjectCommand({ Bucket: env.r2Bucket!, Key: ref.pathname }),
+      );
+      return;
+    }
     if (ref.storage === "BLOB") {
       await del(ref.url || ref.pathname, { token: env.blobToken });
       return;
