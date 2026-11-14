@@ -19,6 +19,68 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "kubernetes-felhoben-es-gepeden",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("kubernetes_aws_minikube/A Kubernetes a felhoben es a gepeden.pdf"),
+    downloadName: "A-Kubernetes-a-felhoben-es-a-gepeden.pdf",
+    pages: 166,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "jade",
+    mark: "knot",
+
+    titleHu: "A Kubernetes a Felhőben és a Gépeden",
+    titleEn: "Kubernetes in the Cloud and on Your Machine",
+    subtitleHu: "Minikube-tól az EKS-ig: ugyanaz az API, három környezet",
+    subtitleEn: "From Minikube to EKS: the same API, three environments",
+    coverTitle: "A Kubernetes a Felhőben",
+    coverSubtitle: "Minikube, EKS, és ami közöttük van",
+
+    blurbHu:
+      "Ugyanaz a YAML, három nagyon különböző viselkedés. A helyi fürt határai: képút, NodePort és tunnel, hostPath, addonok. Az EKS felépítése, csomópontok és skálázás, ECR, verziófrissítés. IAM és Kubernetes találkozása, IRSA, KMS. A VPC CNI és a kifogyó IP-címek, ALB, ExternalDNS. EBS, EFS, megfigyelhetőség, és a számla anatómiája. Harminc fejezet, végigvitt példával és hibakeresési térképpel.",
+    blurbEn:
+      "The same YAML, three very different behaviours. The limits of a local cluster: the image path, NodePort and tunnel, hostPath, addons. How EKS is built, nodes and scaling, ECR, version upgrades. Where IAM meets Kubernetes, IRSA, KMS. The VPC CNI and running out of IP addresses, ALB, ExternalDNS. EBS, EFS, observability, and the anatomy of the bill. Thirty chapters, with a worked example and a debugging map.",
+
+    descriptionHu: `A Kubernetes-könyvek rendszerint egy fürtöt feltételeznek, és nem mondják meg, melyiket. Pedig a három környezet — a gépeden, a saját szervereden, a felhőben — **ugyanazt az API-t adja, és nagyon különbözően viselkedik.** Ez a kötet erről a különbségről szól.
+
+Az első fejezet címe a tétel: **ugyanaz a YAML, három nagyon különböző viselkedés.** A második pedig azt kérdezi, **hol ér véget a Kubernetes, és hol kezdődik a felhő** — mert a legtöbb „miért nem működik" kérdés pontosan ezen a határon áll.
+
+**A gépeden.** A Minikube határai tételesen: **a konténerkép útja** — miért nem látja a fürt azt, amit az imént építettél —, a hálózat (**NodePort, tunnel, port-forward**, és melyik mikor), a **hostPath** és a csatolt mappák, az addonok, a profilok és a többcsomópontos helyi fürt. Plusz a **kubeconfig és a kontextusok**, vagyis a rossz fürtre küldött parancs megelőzése.
+
+**Az EKS felépítése.** Hogy ez valójában **két AWS-fiók találkozása**: a tiéd és az Amazoné, amely a vezérlősíkot üzemelteti. Csomópontok háromféleképpen — **Managed Node Group, saját, Fargate** —, a **Cluster Autoscaler és a Karpenter** szembeállítva, az **ECR** hitelesítése, és a **verziófrissítés** életciklusa.
+
+**Az identitás, ami a felhős Kubernetes legnehezebb része.** Két jogosultságrendszer találkozik: az AWS IAM és a Kubernetes RBAC. Hogyan kap egy pod AWS-jogot — **IRSA** és az újabb pod-identitás —, és hogyan kerülnek a titkok a helyükre: **KMS-titkosítás**, Secrets Manager.
+
+**A hálózat:** a **VPC CNI** és a **kifogyó IP-címek** — a legtöbb EKS-fürt első komoly üzemzavara —, a Service a klasszikus ELB-től az NLB-ig, az **AWS Load Balancer Controller** és az ALB, végül **ExternalDNS**, ACM-tanúsítványok és biztonsági csoportok.
+
+**Tárolás és költség:** az **EBS CSI Driver**, a megosztott fájlrendszer (**EFS**) és az objektumtár, a megfigyelhetőség — vezérlősík-naplók, Flow Logs —, és **a számla anatómiája**: ami az EKS-ben ténylegesen pénzbe kerül.
+
+A záró rész az, amiért a könyv összeáll: **ugyanaz az alkalmazás Minikube-on és EKS-en**, végigvíve; egy **hibakeresési térkép** arra az esetre, amikor helyben ment és a felhőben nem; a **reprodukálható fürt váza kódból**; és egy tételes összevetés a három környezetről.
+
+166 oldal, harminc fejezet.`,
+    descriptionEn: `Books on Kubernetes usually assume a cluster and never say which one. Yet the three environments — your machine, your own servers, the cloud — **offer the same API and behave very differently.** This volume is about that difference.
+
+The first chapter title states the claim: **the same YAML, three very different behaviours.** The second asks **where Kubernetes ends and the cloud begins** — because most "why doesn't this work" questions sit exactly on that boundary.
+
+**On your machine.** The limits of Minikube, item by item: **the path an image takes** — why the cluster cannot see what you just built — networking (**NodePort, tunnel, port-forward**, and when to use which), **hostPath** and mounted folders, addons, profiles, and multi-node local clusters. Plus **kubeconfig and contexts**, which is to say: how not to send a command to the wrong cluster.
+
+**How EKS is built.** That it is really **two AWS accounts meeting**: yours, and Amazon's, which runs the control plane. Nodes three ways — **Managed Node Groups, self-managed, Fargate** — the **Cluster Autoscaler and Karpenter** set against each other, **ECR** authentication, and the lifecycle of a **version upgrade**.
+
+**Identity, the hardest part of cloud Kubernetes.** Two authorisation systems meet: AWS IAM and Kubernetes RBAC. How a pod gets AWS permissions — **IRSA** and the newer pod identity — and how secrets reach their place: **KMS encryption**, Secrets Manager.
+
+**Networking:** the **VPC CNI** and **running out of IP addresses** — the first serious outage most EKS clusters have — Services from the classic ELB to the NLB, the **AWS Load Balancer Controller** and the ALB, and finally **ExternalDNS**, ACM certificates and security groups.
+
+**Storage and cost:** the **EBS CSI Driver**, shared filesystems (**EFS**) and object storage, observability — control-plane logs, Flow Logs — and **the anatomy of the bill**: what actually costs money in EKS.
+
+The closing part is what makes the book cohere: **the same application on Minikube and on EKS**, carried through; a **debugging map** for when it worked locally and not in the cloud; the **skeleton of a reproducible cluster from code**; and an item-by-item comparison of the three environments.
+
+166 pages, thirty chapters.`,
+  },
+  {
     slug: "agentic-devops-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
