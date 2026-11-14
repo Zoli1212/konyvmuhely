@@ -19,6 +19,68 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "ot-test-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("ot_test_nagykonyve/Az ot test nagykonyve.pdf"),
+    downloadName: "Az-ot-test-nagykonyve.pdf",
+    pages: 266,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "jade",
+    mark: "triple",
+
+    titleHu: "Az Öt Test Nagykönyve",
+    titleEn: "The Great Book of the Five Bodies",
+    subtitleHu: "Térkép, diagnosztika, tisztítás — rétegenként",
+    subtitleEn: "Map, diagnosis, cleansing — layer by layer",
+    coverTitle: "Az Öt Test Nagykönyve",
+    coverSubtitle: "Fizikai, éteri, asztrális, mentális, kauzális",
+
+    blurbHu:
+      "Két térkép egymásra fektetve: a pancsa-kósa és a nyugati öttest. Melyik testben van a baj — a diagnosztika. A fizikai test satkarmával és alvással; az éteri prána, váju, nádík, szivárgás és feltöltés, pránájáma, bandha, mudrá; az aura érzékelése, fésülése, zárása; asztrális higiénia, paraziták, kötelékek elvágása, a hely tisztítása; a mentális test pratjáhárával; a kauzális vivékával és a tanúval. Húsz fejezet, 228 gyakorlat.",
+    blurbEn:
+      "Two maps laid over each other: the pancha-kosha and the Western five bodies. Which body the trouble is in — the diagnostics. The physical body with shatkarma and sleep; the etheric with prana, vayus, nadis, leakage and recharging, pranayama, bandha, mudra; sensing, combing and sealing the aura; astral hygiene, parasites, cutting cords, clearing a place; the mental body with pratyahara; the causal with viveka and the witness. Twenty chapters, 228 exercises.",
+
+    descriptionHu: `A finomtestről szóló irodalom nagy része vagy hagyományos szöveg magyarázat nélkül, vagy újkori aurakönyv, amelynek nincs forrása. Ez a kötet **két térképet fektet egymásra** — a jógikus **pancsa-kósát** és a nyugati **öttestet** —, és kimondja, hol fedik egymást, és hol nem.
+
+De a könyv valódi tétje nem a térkép, hanem az, amire a térkép **való**: a **címzés**. A második fejezetcím ezt mondja ki — **„a tipikus hiba: rossz rétegben dolgozni."** Aki alvászavarra vizualizál, étrendi eredetű fáradtságra energiamunkát végez, vagy egy mentális szokást aurafésüléssel akar javítani, az nem keveset ér el, hanem **semmit** — és utána a módszert hibáztatja.
+
+Ebből következik a kötet szerkezete, és a legtöbbet érő eleme: **a rétegek időállandói**. Egy táblázat arról, melyik réteg milyen tempóban mozdul — a fizikai hetekben, az éteri napokban, az asztrális órákban, a mentális hónapokban, a kauzális években. Ha a várt idő és a réteg nem egyezik, a gyakorlás reménytelennek tűnik, pedig csak rosszul van címezve.
+
+**A források** fejezete végigveszi, melyik fogás honnan való: a **Taittiríja-upanisad** és hogy **mi nincs benne**, a szánkhja, Patandzsali — **ahol a burkok nem szerepelnek** —, a hatha-jóga, a tantra, a tibeti szelek és csatornák, a hermetikus finomtest, **Mesmer**, ahol az „energia" szó bejött, a **teozófia**, ahol a mai aurakép megszületett, és a modern boszorkányság praktikus higiéniája.
+
+Azután rétegenként a munka. **A fizikai test:** tartás, mozgás, **satkarma**, étel, alvás. **Az éteri:** a prána, az öt váju, a nádík, a **szivárgás és a lerakódás**, a feltöltés, majd **pránájáma, bandha, mudrá**.
+
+**Az aura** négy fejezetben: szerkezet és érzékelés, **fésülés, tömörítés, zárás, pajzsok**, **asztrális higiénia** — idegen energia és lerakódás —, **paraziták** felismerése és leválasztása, végül **kötelékek és energiaszálak** elvágása, és a hely és a tárgyak tisztítása.
+
+**A mentális test:** pratjáhára, dháraná, és a szokásrendszer. **A kauzális:** vivéka, vicsára, **a tanú** — és külön alfejezet az **örömburok csapdájáról**, ami a haladó gyakorlók jellegzetes megállója.
+
+A záró rész a **napi, heti és éves rend**, és **a hibák rétegenként**.
+
+266 oldal, húsz fejezet, kétszázhuszonnyolc kidolgozott gyakorlat. Az első fejezetben ott az **ellenjavallat** és a határ, ahol nem ez a könyv kell.`,
+    descriptionEn: `Most of the literature on the subtle body is either a traditional text without explanation, or a modern aura book with no sources. This volume lays **two maps over each other** — the yogic **pancha-kosha** and the Western **five bodies** — and says where they coincide and where they do not.
+
+But the book's real subject is not the map; it is what the map is **for**: **addressing**. One chapter title states it — **"the typical mistake: working in the wrong layer."** Someone who visualises for a sleep disorder, does energy work for dietary fatigue, or tries to fix a mental habit by combing the aura achieves not a little but **nothing** — and then blames the method.
+
+From this follows the book's structure and its most valuable single element: **the time constants of the layers**. A table of how fast each layer moves — the physical in weeks, the etheric in days, the astral in hours, the mental in months, the causal in years. When the expected time and the layer do not match, practice looks hopeless while it is merely misaddressed.
+
+**The sources** chapter traces where each technique comes from: the **Taittiriya Upanishad** and **what is not in it**, Samkhya, Patanjali — **where the sheaths do not appear** — hatha yoga, tantra, the Tibetan winds and channels, the Hermetic subtle body, **Mesmer**, where the word "energy" entered, **Theosophy**, where today's picture of the aura was born, and the practical hygiene of modern witchcraft.
+
+Then the work, layer by layer. **The physical body:** posture, movement, **shatkarma**, food, sleep. **The etheric:** prana, the five vayus, the nadis, **leakage and deposit**, recharging, then **pranayama, bandha, mudra**.
+
+**The aura** in four chapters: structure and sensing; **combing, condensing, sealing, shields**; **astral hygiene** — foreign energy and deposits; **parasites**, recognising and detaching them; and finally **cords and energy threads**, and clearing places and objects.
+
+**The mental body:** pratyahara, dharana, and the system of habits. **The causal:** viveka, vichara, **the witness** — with a section of its own on **the trap of the bliss sheath**, the characteristic stopping place of advanced practitioners.
+
+The closing part is the **daily, weekly and yearly order**, and **the faults layer by layer**.
+
+266 pages, twenty chapters, two hundred and twenty-eight worked exercises. The first chapter carries the **contraindications** and the line beyond which this is not the book you need.`,
+  },
+  {
     slug: "boszorkanykor",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
