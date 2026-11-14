@@ -19,6 +19,68 @@ const SERIES = "Ezoterikus nagykönyvek";
 
 export const ESOTERIC_BOOKS: CatalogueEntry[] = [
   {
+    slug: "joslas-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("joslas_nagykonyve/A joslas nagykonyve.pdf"),
+    downloadName: "A-joslas-nagykonyve.pdf",
+    pages: 275,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "ESOTERIC",
+    featured: true,
+    accent: "amethyst",
+    mark: "sun",
+
+    titleHu: "A Jóslás Nagykönyve",
+    titleEn: "The Great Book of Divination",
+    subtitleHu: "Cigánykártya, tarot, inga, tükör, ólomöntés, előjelek",
+    subtitleEn: "Cards, pendulum, mirror, lead casting, omens",
+    coverTitle: "A Jóslás Nagykönyve",
+    coverSubtitle: "Boszorkányjóslás a gyakorlatban",
+
+    blurbHu:
+      "A kérdés megmunkálása, a nyitás és a zárás, ahogy lapokból mondat lesz. A tarot teljes jelentéstára — huszonkét nagy arkánum, ötvenhat kis lap, udvar —, a cigánykártya mind a harminchat lapja párosítással és nagy tablóval, Lenormand, magyar és francia kártya. Tükör, víz, kristály, inga, vessző, láng, füst; ólom- és viaszöntés, tojásvetés, kávézacc. Előjelek, tenyér, arc, álomszótár, a magyar jósnapok. Negyvenkét fejezet, 221 eljárás.",
+    blurbEn:
+      "Working the question, opening and closing, how cards become a sentence. The full tarot lexicon — twenty-two major arcana, fifty-six minor, the court — all thirty-six cards of the Hungarian gypsy deck with pairings and the grand tableau, Lenormand, Hungarian and French decks. Mirror, water, crystal, pendulum, rod, flame, smoke; lead and wax casting, egg scrying, coffee grounds. Omens, palm, face, a dream lexicon, the Hungarian divining days. Forty-two chapters, 221 procedures.",
+
+    descriptionHu: `A jóskönyvek többsége jelentéslista: ez a lap ezt jelenti, az azt. A jelentéseket meg lehet tanulni, és attól még senki nem tud olvasni — mert a mesterség nem a jelentésekben van, hanem abban, **ami előttük és utánuk történik**.
+
+A kötet ezért a vázzal kezd, és az első fejezet kimondja a tételt: **a jóslás mesterség, nem tehetség.**
+
+**A kérdés: a mesterség fele.** Önálló fejezet arról, hogyan kell egy kérdést megmunkálni, mielőtt bármit kivetnél. A rosszul feltett kérdésre nincs jó válasz — és a jóslások nagy része itt dől el, nem a lapoknál.
+
+**A nyitás és a zárás**, **az olvasás** — ahogy jelekből mondat lesz —, és három fejezet arról, amit a jóskönyvek rendre kihagynak: **az idő** (a legnehezebb kérdés), **az igen és a nem**, és **a füzet és a kalibráció** — hogy utólag visszamérd, mennyire voltál pontos. Végül: **mikor ne jósolj**.
+
+**A lapok** teljes jelentéstárral. A **tarot** szerkezete, a **huszonkét nagy arkánum**, az **udvari lapok**, a kis arkánum negyven lapja, és a kivetések. **Lenormand** harminchat lappal. **Magyar és francia kártya.**
+
+**A cigánykártya** saját résszel: mind a harminchat lap, **párosítással** és **nagy tablóval** — ez a magyar gyakorlat legelterjedtebb rendszere, és a legritkábban dolgozzák fel rendesen. Mellé a **boszorkány saját jelkészlete**: hogyan építsd fel a magadét.
+
+**A látás eszközei:** tükör, víz, kristály; az **inga** és a vessző; láng, füst, parázs; **ólom- és viaszöntés**, tojásvetés; kávézacc és tealevél.
+
+**A jelek világa:** előjelek, testjelek, tenyér, arc; **álomjóslás és álomszótár**; só, tű, kulcs, rosta; szerelmi jóslás; **elveszett dolgok megkeresése**; a hold rendje; **a magyar jósnapok**; a holtak megkérdezése; rúnák.
+
+275 oldal, negyvenkét fejezet, kétszázhuszonegy kidolgozott eljárás.`,
+    descriptionEn: `Most books on divination are lists of meanings: this card means this, that one means that. The meanings can be memorised, and the reader still cannot read — because the craft is not in the meanings but in **what happens before and after them**.
+
+So this volume starts with the frame, and the first chapter states the claim: **divination is a craft, not a gift.**
+
+**The question: half the craft.** A chapter of its own on how to work a question before anything is laid out. A badly posed question has no good answer — and most readings are decided here, not at the cards.
+
+**Opening and closing**, **reading** — how signs become a sentence — and three chapters on what books of this kind routinely omit: **time** (the hardest question), **yes and no**, and **the notebook and calibration** — measuring afterwards how accurate you actually were. And finally: **when not to divine**.
+
+**The cards** with a full lexicon. The structure of the **tarot**, the **twenty-two major arcana**, the **court cards**, the forty minor cards, and the spreads. **Lenormand** with thirty-six. **Hungarian and French decks.**
+
+**The Hungarian gypsy deck** gets a part of its own: all thirty-six cards, with **pairings** and the **grand tableau** — the most widely used system in Hungarian practice, and the one most rarely treated properly. Beside it, **the witch's own set of signs**: how to build your own.
+
+**The instruments of seeing:** mirror, water, crystal; the **pendulum** and the rod; flame, smoke, ember; **lead and wax casting**, egg scrying; coffee grounds and tea leaves.
+
+**The world of signs:** omens, bodily signs, palm, face; **dream divination and a dream lexicon**; salt, needle, key, sieve; love divination; **finding lost things**; the order of the moon; **the Hungarian divining days**; questioning the dead; runes.
+
+275 pages, forty-two chapters, two hundred and twenty-one worked procedures.`,
+  },
+  {
     slug: "ot-test-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
