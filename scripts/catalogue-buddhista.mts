@@ -17,6 +17,68 @@ const SERIES = "Buddhista nagykönyvek";
 
 export const BUDDHIST_BOOKS: CatalogueEntry[] = [
   {
+    slug: "alomjoga-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: f("alomjoga_nagykonyve/Az alomjoga nagykonyve.pdf"),
+    downloadName: "Az-alomjoga-nagykonyve.pdf",
+    pages: 238,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: SERIES,
+    category: "BUDDHIST",
+    featured: true,
+    accent: "lapis",
+    mark: "flame",
+
+    titleHu: "Az Álomjóga Nagykönyve",
+    titleEn: "The Great Book of Dream Yoga",
+    subtitleHu: "A tibeti milam: felkészülés, felismerés, munka, fényálom",
+    subtitleEn: "Tibetan milam: preparation, recognition, work, clear light",
+    coverTitle: "Az Álomjóga Nagykönyve",
+    coverSubtitle: "A tibeti milam és a tudatos álom",
+
+    blurbHu:
+      "Az alvás szerkezete és a hajnali munkaidő, az álomemlékezet felépítése, Náropa hat tana, Nigúma, a bön és a Karma Lingpa-ciklus; a felismerés technikái — valóságpróba, MILD, WILD, WBTB, SSILD —, a tibeti út a torok A szótagjával és a kilenc légzéssel; stabilizálás, álomtest, átalakítás, a félelem és a lidércnyomás munkája, végül a fényálom. Negyvenkét fejezet, 219 kidolgozott gyakorlat.",
+    blurbEn:
+      "The architecture of sleep and the hours that matter, building dream recall, the Six Yogas of Naropa, Niguma, the Bön tradition and the Karma Lingpa cycle; the techniques of recognition — reality checks, MILD, WILD, WBTB, SSILD — and the Tibetan path with the throat syllable A and the nine breaths; stabilising, the dream body, transformation, working with fear and nightmare, and finally the clear light of sleep. Forty-two chapters, 219 worked exercises.",
+
+    descriptionHu: `Az álomjógáról két fajta könyv szokott megjelenni: hagyományos szöveg magyarázat nélkül, vagy nyugati „tudatos álom" kézikönyv, amely a hagyományt díszítésnek használja. Ez a kötet **mindkettőt komolyan veszi**, és kimondja, hol térnek el.
+
+A legfontosabb megkülönböztetés mindjárt az első fejezetben: **a tudatos álom és az álomjóga ugyanaz a jelenség, két különböző céllal.** A tudatos álom célja az élmény; az álomjógáé az, hogy a felismerést átvigye az ébrenlétbe és a halálba. Ebből következik minden technikai eltérés, és enélkül a két irodalom összekeverhetetlenül összekeveredik.
+
+**A nulladik gyakorlat** nem a felismerés, hanem az **álomemlékezet**. Amíg nem emlékszel, nincs mivel dolgozni — a könyv ezt külön fejezetben kezeli, négyhetes programmal annak, aki alacsonyan kezd.
+
+**A hagyomány** négy forrásból: hol áll az álom **Náropa hat tanában**, mit ad **Nigúma**, mit a **bön**, és mit a **Karma Lingpa-ciklus**. Mindegyiknél az szerepel, mit ad **gyakorlatilag** — és külön alfejezet arról, **amit a hagyomány nem ad**.
+
+**A labor** fejezete az, ami a kötetet elkülöníti: mit tudunk ténylegesen a jelzéses álmokból és a kétirányú kommunikációs kísérletekből, és mi az, ami nem bizonyított.
+
+**A felismerés technikái** egyenként: valóságpróba, álomjeltábla, **MILD, WILD, WBTB, SSILD**, az éjszakai felkelés időzítése, az érzékelés körei. Mellettük **a tibeti út**: a torok **A szótagja**, a fény, a **kilenc légzés**, az **oroszlánfekvés**, a hely és a hő. Plusz egy fejezet arról, **amikor hetekig nem jön** — tizenkét elakadás, egyenként.
+
+**A munka a felismert álomban:** az **első harminc másodperc**, a felébredés elkerülése, az **álomtest** — mozgás, repülés, áthatolás —, az **átalakítás** mint a hagyomány második feladata, a **félelem munkája**, a lidércnyomás és az ismétlődő álmok, végül **a nyolc buktató: amit ne tegyél az álomban**.
+
+A záró rész a **fényálom** (od szal): az álomtól az alvás fényéig, és egy **kilencven napos rend**, amely az egészet használható gyakorlássá fűzi.
+
+238 oldal, negyvenkét fejezet, kétszáztizenkilenc kidolgozott gyakorlat.`,
+    descriptionEn: `Two kinds of book tend to appear on dream yoga: a traditional text without explanation, or a Western lucid-dreaming manual that uses the tradition as decoration. This volume takes **both seriously**, and states where they part company.
+
+The key distinction comes in the first chapter: **lucid dreaming and dream yoga are the same phenomenon with two different aims.** Lucid dreaming is after the experience; dream yoga is after carrying the recognition into waking life and into death. Every technical difference follows from that, and without it the two literatures blur inextricably.
+
+**The zeroth practice** is not recognition but **dream recall**. Until you remember, there is nothing to work with — the book gives it a chapter of its own, with a four-week programme for those starting from little.
+
+**The tradition** from four sources: where dream sits in the **Six Yogas of Naropa**, what **Niguma** adds, what the **Bön** tradition gives, and what the **Karma Lingpa cycle**. Each is covered for what it offers **in practice** — with a section of its own on **what the tradition does not give**.
+
+**The laboratory** chapter is what sets the volume apart: what we actually know from signalled dreams and two-way communication experiments, and what remains unproven.
+
+**The techniques of recognition** one by one: reality checks, a dream-sign table, **MILD, WILD, WBTB, SSILD**, the timing of waking in the night, the circles of perception. Alongside them **the Tibetan path**: the throat syllable **A**, the light, the **nine breaths**, the **lion posture**, place and warmth. Plus a chapter on **when nothing comes for weeks** — twelve kinds of impasse, each addressed.
+
+**Work inside the recognised dream:** the **first thirty seconds**, avoiding waking, the **dream body** — moving, flying, passing through — **transformation** as the tradition's second task, **working with fear**, nightmare and recurring dreams, and finally **the eight pitfalls: what not to do in a dream**.
+
+The closing part is the **clear light** (od szal): from dream to the luminosity of sleep, and a **ninety-day order** that binds the whole into usable practice.
+
+238 pages, forty-two chapters, two hundred and nineteen worked exercises.`,
+  },
+  {
     slug: "szatipatthana-nagykonyve",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
