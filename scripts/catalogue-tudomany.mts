@@ -19,6 +19,68 @@ const nk = (name: string) => path.join(NAGY_KONYVEK, name);
 
 export const SCIENCE_BOOKS: CatalogueEntry[] = [
   {
+    slug: "llm-agensbiztonsag-nagykonyve",
+    // The builder's own output, so rebuilding the book is all it takes for
+    // the next publish to carry the change.
+    file: nk("biztonsag_nagykonyve/Az LLM- es agensbiztonsag nagykonyve.pdf"),
+    downloadName: "Az-LLM-es-agensbiztonsag-nagykonyve.pdf",
+    pages: 233,
+    priceHuf: 4990,
+    author: AUTHOR,
+    series: "Tudományos nagykönyvek",
+    category: "SCIENCE",
+    featured: true,
+    accent: "copper",
+    mark: "triple",
+
+    titleHu: "Az LLM- és Ágensbiztonság Nagykönyve",
+    titleEn: "The Great Book of LLM and Agent Security",
+    subtitleHu: "Prompt injection, jailbreak, ágenselbitorlás — és a védelem",
+    subtitleEn: "Prompt injection, jailbreak, agent hijacking — and the defence",
+    coverTitle: "Az LLM- és Ágensbiztonság",
+    coverSubtitle: "Támadási felületek és védelem",
+
+    blurbHu:
+      "Bizalmi határok, fenyegetésmodell, a támadási felület térképe. Közvetlen és közvetett prompt injection, adatkiszivárgás, eszközhívás-eltérítés, RAG- és memóriamérgezés. Jailbreak-családok, sokfordulós és fokozatos támadás, kódolás, nyelvváltás, multimodális támadás. Az ágens elbitorlása, eszközjogosultság, MCP, számítógép-használó ágens. Rétegzett védelem, determinisztikus váz, észlelés, red team. Harminchárom fejezet.",
+    blurbEn:
+      "Trust boundaries, threat modelling, a map of the attack surface. Direct and indirect prompt injection, data exfiltration, tool-call hijacking, RAG and memory poisoning. Jailbreak families, multi-turn and gradual attacks, encoding, language switching, multimodal attacks. Agent hijacking, tool permissions and scope, MCP, computer-using agents. Layered defence, the deterministic frame, detection, red teaming. Thirty-three chapters.",
+
+    descriptionHu: `A kötet a saját címlapján mondja ki, mire készült: **védekezésre írva.** A támadásokat azért tárgyalja részletesen, mert amit nem ismersz, az ellen nem tudsz védekezni — de a szerkezete végig a védelemé.
+
+Az első fejezet azzal kezd, **miért más egy LLM-rendszer biztonsága**: négy különbség, és két fogalom, amelyet szét kell választani. Mellé rögtön az, **amit a modellszolgáltató véd — és amit nem**, mert a legtöbb hamis biztonságérzet innen ered.
+
+**A bizalmi határok** fejezete a könyv tartógerendája. Négy bizalmi szint, a **félig megbízható felhasználó**, a határátlépés pontjai, és egy mondat, amit érdemes megjegyezni: **a rendszerutasítás nem titok.**
+
+**Prompt injection** öt fejezetben: a **közvetlen** és a **közvetett** változat, a csatornák, az **adatkiszivárgás**, az **eszközhívás eltérítése**, a **RAG-mérgezés** és a **memóriamérgezés**. Az utolsó kettő az, ami a legtöbb rendszerben kezeletlen: a támadó nem a kérésbe ír, hanem abba, amit a rendszer **később** olvas be.
+
+**Jailbreak** hat fejezetben, a támadó szemszögéből: mi a jailbreak és **miért működik**, a családok, a **sokfordulós és fokozatos** támadás — ahol egyetlen kérés sem gyanús —, kódolás, obfuszkáció, nyelvváltás, multimodális támadás, és az **automatizált támadásgenerálás**.
+
+**Az ágensek elbitorlása** ott kezd, ahol a tét megnő: az ágens nemcsak beszél, hanem **cselekszik**. Az eszközök jogosultsága és hatóköre, az elbitorlás menete, a többágenses felület, az **MCP**, és a **számítógép-használó ágens** — ahol a támadási felület az egész képernyő. Plusz az **ellátási lánc**.
+
+**A védelem** nem egyetlen fogás, hanem réteg: bemeneti és kimeneti szűrés, **szerkezeti védelem a determinisztikus vázzal**, észlelés, **biztonsági kiértékelés és red team**, az **incidens** kezelése, és a szabályozási megfelelés.
+
+A záró fejezet a tisztesség próbája: **amit nem lehet megoldani.** A könyv álláspontja, hogy a prompt injection a jelenlegi architektúrával nem szüntethető meg — csak a kár korlátozható, és ehhez a rétegek közül **kettő kizáró**, a többi valószínűséget javít.
+
+233 oldal, harminchárom fejezet és függelék. Minden fejezet **„a mai álláspont"** alfejezettel zárul.`,
+    descriptionEn: `The volume states on its cover what it is for: **written for defence.** It treats the attacks in detail because you cannot defend against what you do not know — but its structure is defensive throughout.
+
+The first chapter starts with **why the security of an LLM system is different**: four differences, and two concepts that must be told apart. Alongside them, immediately, **what the model provider protects — and what it does not**, because that is where most false confidence comes from.
+
+**Trust boundaries** is the book's load-bearing chapter. Four levels of trust, the **semi-trusted user**, the points where boundaries are crossed, and one sentence worth remembering: **the system prompt is not a secret.**
+
+**Prompt injection** across five chapters: the **direct** and **indirect** forms, the channels, **data exfiltration**, **tool-call hijacking**, **RAG poisoning** and **memory poisoning**. The last two are what most systems leave unhandled: the attacker does not write into the request but into what the system reads **later**.
+
+**Jailbreak** in six chapters, from the attacker's side: what it is and **why it works**, the families, **multi-turn and gradual** attacks — where no single request looks suspicious — encoding, obfuscation, language switching, multimodal attacks, and **automated attack generation**.
+
+**Agent hijacking** begins where the stakes rise: an agent does not merely speak, it **acts**. Tool permissions and scope, how hijacking proceeds, the multi-agent surface, **MCP**, and the **computer-using agent** — where the attack surface is the whole screen. Plus the **supply chain**.
+
+**Defence** is not one technique but a stack: input and output filtering, **structural defence with a deterministic frame**, detection, **security evaluation and red teaming**, handling an **incident**, and regulatory compliance.
+
+The closing chapter is the test of honesty: **what cannot be solved.** The book's position is that prompt injection cannot be eliminated in the current architecture — only the damage can be bounded, and of the defensive layers **two are decisive**, while the rest improve the odds.
+
+233 pages, thirty-three chapters and appendix. Every chapter closes with a section called **"the current position"**.`,
+  },
+  {
     slug: "kubernetes-felhoben-es-gepeden",
     // The builder's own output, so rebuilding the book is all it takes for
     // the next publish to carry the change.
